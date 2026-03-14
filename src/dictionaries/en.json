@@ -1,0 +1,81 @@
+{
+  "nav": {
+    "cleaning": "Cleaning",
+    "login": "Login",
+    "location": "Warsaw",
+    "more": "More services",
+    "window_cleaning": "Window cleaning",
+    "upholstery": "Upholstery",
+    "account": "Account"
+  },
+  "hero": {
+    "title": "Cleaning services in Warsaw",
+    "subtitle": "The service includes a kitchen, bathroom, rooms and a hallway",
+    "calculate_btn": "Calculate the cost"
+  },
+  "features": {
+    "fixed_price": {
+      "title": "Fixed price",
+      "desc": "The cleaning cost depends on the number of rooms, and not on the area of the apartment"
+    },
+    "payment": {
+      "title": "Card or cash",
+      "desc": "You choose how you prefer to pay - by credit card or cash"
+    },
+    "insured": {
+      "title": "Our services are insured",
+      "desc": "Your home is in safe hands. We take full responsibility for our work."
+    },
+    "supplies": {
+      "title": "We bring all supplies",
+      "desc": "For each order, we have the necessary professional supplies"
+    }
+  },
+  "included": {
+    "title": "What cleaning consists of",
+    "tabs": {
+      "room": "In the room",
+      "hallway": "In the hallway",
+      "kitchen": "Kitchen",
+      "bathroom": "Bathroom"
+    }
+  },
+  "faq": {
+    "title": "Common Questions",
+    "q1": {
+      "q": "Can I try and cancel my subscription at any moment?",
+      "a": "We do not sign a long-term contract - only one for each specific order. Therefore, the subscription can be canceled and quickly renewed."
+    },
+    "q2": {
+      "q": "Can dates be changed?",
+      "a": "Yes, all dates and time are flexible. You will receive a confirmation SMS with a link to edit the date, time and cleaning parameters."
+    },
+    "q3": {
+      "q": "Is it possible to choose one cleaner?",
+      "a": "Yes, we assume that the same person will always come to your cleanings. After the first order and a positive assessment, the cleaner will be automatically assigned."
+    }
+  },
+  "services": {
+    "title": "Professional Services",
+    "subtitle": "Choose the perfect Cleaning Plan"
+  },
+  "calculator": {
+    "title": "Calculate the Cleaning Cost",
+    "subtitle": "Select your cleaning parameters and get an instant quote. No hidden fees.",
+    "rooms": "Rooms",
+    "bathrooms": "Bathrooms",
+    "extras": "Additional services",
+    "frequency": "Cleaning frequency",
+    "summary": "Order Summary",
+    "book_now": "Book cleaning now"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Professional cleaning services with a personal touch",
+    "description": "We are a team of dedicated professionals committed to providing exceptional cleaning services. With years of experience, we ensure your home or office is spotless and welcoming. Our eco-friendly products and trained staff guarantee the highest quality results.",
+    "mission": "Our Mission",
+    "mission_desc": "To make every space shine while caring for the environment and our community.",
+    "team": "Our Team",
+    "team_desc": "Experienced cleaners who take pride in their work and treat your home with respect."
+  }
+}

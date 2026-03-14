@@ -1,0 +1,108 @@
+{
+  "nav": {
+    "cleaning": "Sprzątanie",
+    "login": "Zaloguj się",
+    "location": "Warszawa",
+    "more": "Więcej usług",
+    "window_cleaning": "Mycie okien",
+    "upholstery": "Tapicerka",
+    "account": "Konto"
+  },
+  "hero": {
+    "title": "Usługi sprzątania w Warszawie",
+    "subtitle": "Usługa obejmuje kuchnię, łazienkę, pokoje i przedpokój",
+    "calculate_btn": "Oblicz koszt"
+  },
+  "features": {
+    "fixed_price": {
+      "title": "Stała cena",
+      "desc": "Koszt sprzątania zależy od liczby pokoi, a nie od powierzchni mieszkania"
+    },
+    "payment": {
+      "title": "Karta lub gotówka",
+      "desc": "Wybierasz, jak chcesz zapłacić - kartą lub gotówką"
+    },
+    "insured": {
+      "title": "Nasze usługi są ubezpieczone",
+      "desc": "Twoje mieszkanie jest w bezpiecznych rękach. Bierzemy pełną odpowiedzialność za naszą pracę."
+    },
+    "supplies": {
+      "title": "Przywozimy wszystkie środki",
+      "desc": "Każde zamówienie realizujemy z profesjonalnymi środkami czystości"
+    }
+  },
+  "included": {
+    "title": "Z czego składa się sprzątanie",
+    "tabs": {
+      "room": "W pokoju",
+      "hallway": "W przedpokoju",
+      "kitchen": "Kuchnia",
+      "bathroom": "Łazienka"
+    }
+  },
+  "faq": {
+    "title": "Częste pytania",
+    "q1": {
+      "q": "Czy mogę wypróbować i zrezygnować z subskrypcji w dowolnym momencie?",
+      "a": "Nie podpisujemy długoterminowej umowy - tylko jedną dla każdego konkretnego zlecenia. Dlatego subskrypcję można w każdej chwili anulować i szybko wznowić."
+    },
+    "q2": {
+      "q": "Czy można zmienić daty?",
+      "a": "Tak, wszystkie daty i godziny są elastyczne. Otrzymasz SMS z potwierdzeniem i linkiem do edycji daty, godziny i parametrów sprzątania."
+    },
+    "q3": {
+      "q": "Czy można wybrać jednego sprzątacza?",
+      "a": "Tak, zakładamy, że ta sama osoba będzie zawsze przychodzić do Twojego sprzątania. Po pierwszym zamówieniu i pozytywnej ocenie, sprzątacz zostanie automatycznie przypisany."
+    }
+  },
+  "services": {
+    "title": "Profesjonalne usługi",
+    "subtitle": "Wybierz idealny plan sprzątania"
+  },
+  "calculator": {
+    "title": "Oblicz koszt sprzątania",
+    "subtitle": "Wybierz parametry sprzątania i otrzymaj natychmiastową wycenę. Bez ukrytych opłat.",
+    "rooms": "Pokoje",
+    "bathrooms": "Łazienki",
+    "extras": "Dodatkowe usługi",
+    "frequency": "Częstotliwość sprzątania",
+    "summary": "Podsumowanie zamówienia",
+    "book_now": "Zamów sprzątanie"
+  },
+  "about": {
+    "title": "O nas",
+    "subtitle": "Profesjonalne usługi sprzątania z osobistym podejściem",
+    "description": "Jesteśmy zespołem oddanych profesjonalistów związanych z dostarczaniem wyjątkowych usług sprzątania. Z latami doświadczenia zapewniamy, że Twój dom lub biuro będzie nieskazitelnie czysty i przytulny. Nasze przyjazne dla środowiska produkty i przeszkolony personel gwarantują najwyższą jakość.",
+    "mission": "Nasza misja",
+    "mission_desc": "Sprawić, by każda przestrzeń błyszczała, jednocześnie dbając o środowisko i naszą społeczność.",
+    "team": "Nasz zespół",
+    "team_desc": "Doświadczeni sprzątacze, którzy są dumni ze swojej pracy i traktują Twój dom z szacunkiem."
+  },
+  "payment": {
+    "title": "Wybierz metodę płatności",
+    "subtitle": "Do zapłaty",
+    "cash": {
+      "title": "Płatność gotówką",
+      "desc": "Zapłać, gdy przyjdzie sprzątacz"
+    },
+    "card": {
+      "title": "Płatność kartą",
+      "desc": "Bezpieczna płatność przez Przelew24"
+    },
+    "processing": "Przetwarzanie...",
+    "confirm": "Potwierdź rezerwację",
+    "pay": "Zapłać"
+  },
+  "success": {
+    "title": "Rezerwacja potwierdzona!",
+    "subtitle": "Twoje sprzątanie jest zaplanowane na",
+    "receipt": "Paragon",
+    "print": "Drukuj",
+    "send_receipt": "Wyślij paragon na email",
+    "email_placeholder": "twoj@email.com",
+    "send": "Wyślij",
+    "receipt_sent": "Paragon wysłany na",
+    "back_home": "Wróć do strony głównej",
+    "book_again": "Zamów kolejne sprzątanie"
+  }
+}
