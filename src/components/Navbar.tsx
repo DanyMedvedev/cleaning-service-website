@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { Globe, User, ChevronDown, Sparkles } from 'lucide-react';
+import { Globe, User, ChevronDown, Sparkles, Home, Building2, Square } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from '@/lib/i18n';
 
@@ -13,10 +13,45 @@ const languages = [
   { code: 'ua', label: 'Ukrainian', flag: '🇺🇦' },
 ];
 
+const servicesMenu = [
+  {
+    id: 'apartment',
+    title: 'Уборка квартир',
+    href: '/services/apartment',
+  },
+  {
+    id: 'airbnb',
+    title: 'Airbnb / Квартиры',
+    href: '/services/airbnb',
+  },
+  {
+    id: 'office',
+    title: 'Офисы',
+    href: '/services/office',
+  },
+  {
+    id: 'extras',
+    title: 'Дополнительные',
+    href: '/services/extras',
+  },
+];
+
 export default function Navbar() {
   const [isLangOpen, setIsLangOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const servicesRef = useRef<HTMLDivElement>(null);
   const { lang: currentLangCode, setLang, t } = useTranslation();
   const currentLang = languages.find((l) => l.code === currentLangCode) || languages[0];
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (servicesRef.current && !servicesRef.current.contains(event.target as Node)) {
+        setIsServicesOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-blue-50">
@@ -52,6 +87,19 @@ export default function Navbar() {
 
         {/* Right side: Navigation Links */}
         <div className="flex items-center gap-2 md:gap-4 overflow-x-auto no-scrollbar text-text">
+          {/* Services - Horizontal inline */}
+          <div className="flex items-center gap-1">
+            {servicesMenu.map((service) => (
+              <Link
+                key={service.id}
+                href={service.href}
+                className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-blue-50 transition-all text-sm font-medium whitespace-nowrap"
+              >
+                <span>{service.title}</span>
+              </Link>
+            ))}
+          </div>
+
           <Link
             href="/order"
             className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-white shadow-md shadow-blue-200/60 hover:bg-primary/90 hover:shadow-lg transition-all text-xs md:text-sm font-bold whitespace-nowrap"
@@ -73,11 +121,6 @@ export default function Navbar() {
           </Link>
 
           <div className="h-6 w-px bg-blue-100 hidden md:block" />
-
-          <button className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-100 bg-white/70 hover:border-primary/50 hover:bg-white text-text transition-all">
-            <User className="w-4 h-4 text-primary" />
-            <span className="text-sm font-semibold">{t('nav.account')}</span>
-          </button>
         </div>
       </div>
 

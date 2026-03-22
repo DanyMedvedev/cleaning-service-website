@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { 
   Home, 
@@ -28,7 +29,7 @@ const services = [
     icon: Sparkle,
     price: 'From 249 PLN',
     features: ['Steam cleaning carpets', 'Deep grout scrubbing', 'Inside cabinets & appliances'],
-    image: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&q=80&w=600'
+    image: '/images/deep-cleaning-card.png'
   },
   {
     id: 'move',
@@ -37,7 +38,7 @@ const services = [
     icon: Truck,
     price: 'From 349 PLN',
     features: ['Full disinfection', 'Inside all cupboards', 'Window washing included'],
-    image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&q=80&w=600'
+    image: '/images/move-out-cleaning.png'
   },
   {
     id: 'office',
@@ -58,7 +59,7 @@ export default function Services() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
           <div className="max-w-2xl">
-            <motion.span 
+            <motion.span
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -66,7 +67,7 @@ export default function Services() {
             >
               {t('services.title')}
             </motion.span>
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -75,7 +76,7 @@ export default function Services() {
               {t('services.subtitle')}
             </motion.h2>
           </div>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -96,8 +97,8 @@ export default function Services() {
               className="group bg-background rounded-3xl border border-blue-50 hover:border-primary/25 hover:shadow-xl hover:shadow-blue-100/60 transition-all duration-300 flex flex-col overflow-hidden"
             >
               <div className="relative h-40 overflow-hidden">
-                <img 
-                  src={service.image} 
+                <img
+                  src={service.image}
                   alt={service.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -113,7 +114,7 @@ export default function Services() {
                 <p className="text-sm text-text/60 font-medium leading-relaxed mb-8 flex-grow">
                   {service.description}
                 </p>
-                
+
                 <ul className="space-y-3 mb-8">
                   {service.features.map((feature, idx) => (
                     <li key={idx} className="flex items-center gap-2 text-xs font-bold text-text/80">
@@ -125,9 +126,9 @@ export default function Services() {
 
                 <div className="pt-6 border-t border-blue-100 flex items-center justify-between">
                   <span className="text-sm font-bold text-primary">{service.price}</span>
-                  <button className="text-xs font-black uppercase tracking-widest text-text hover:text-primary transition-colors">
+                  <Link href={`/services/${service.id}`} className="text-xs font-black uppercase tracking-widest text-text hover:text-primary transition-colors">
                     Details →
-                  </button>
+                  </Link>
                 </div>
               </div>
             </motion.div>

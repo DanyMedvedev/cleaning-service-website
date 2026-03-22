@@ -69,6 +69,27 @@
     "summary": "Podsumowanie zamówienia",
     "book_now": "Zamów sprzątanie"
   },
+  "contact_form": {
+    "title": "Skontaktuj się z nami",
+    "subtitle": "Zostaw swoje dane, a skontaktujemy się z Tobą wkrótce",
+    "name_label": "Twoje imię",
+    "name_placeholder": "Wpisz swoje imię i nazwisko",
+    "phone_label": "Numer telefonu",
+    "phone_placeholder": "123 456 789",
+    "services_label": "Wybierz usługi",
+    "submit": "Wyślij zgłoszenie",
+    "privacy": "Skontaktujemy się z Tobą w ciągu 24 godzin",
+    "errors": {
+      "name_required": "Proszę wpisać imię",
+      "phone_required": "Proszę wpisać numer telefonu",
+      "phone_invalid": "Proszę wpisać prawidłowy numer telefonu",
+      "services_required": "Proszę wybrać przynajmniej jedną usługę"
+    },
+    "success": {
+      "title": "Dziękujemy!",
+      "message": "Skontaktujemy się z Tobą wkrótce. Dziękujemy, że wybrałeś/aś nas!"
+    }
+  },
   "about": {
     "title": "O nas",
     "subtitle": "Profesjonalne usługi sprzątania z osobistym podejściem",

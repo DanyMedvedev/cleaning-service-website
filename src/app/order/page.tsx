@@ -6,14 +6,18 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import {
-  Calendar,
   Check,
   ChevronLeft,
   ChevronRight,
-  Info,
+  Home,
+  Building2,
+  Building,
+  Sparkles,
+  ChefHat,
+  Archive,
+  Square,
   Minus,
   Plus,
-  Sparkles,
 } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -22,32 +26,40 @@ function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-type Frequency = { id: string; label: string; discount: number; badge: string | null };
+// New pricing structure
+type PropertyType = "apartment" | "office" | "airbnb";
+type CleaningType = "standard" | "deep";
 
 const PRICING = {
-  room: 100,
-  bathroom: 50,
-  extras: {
-    fridge: { label: "Refrigerator (inside)", price: 40 },
-    oven: { label: "Oven (inside)", price: 40 },
-    cabinets: { label: "Kitchen cabinets (inside)", price: 65 },
-    windows: { label: "Window cleaning", price: 40 },
-    ironing: { label: "Ironing", price: 50 },
-    balcony: { label: "Balcony", price: 35 },
-    extraHour: { label: "Extra hours", price: 45 },
-    litterBox: { label: "Litter box cleaning", price: 10 },
+  apartment: {
+    standard: {
+      1: 170,  // 1-room
+      2: 250,  // 2-room
+      3: 300,  // 3-room
+      4: 400,  // 4-room
+    },
+    deep: {
+      1: 510,  // 1-room
+      2: 620,  // 2-room
+      3: 770,  // 3-room
+      4: 900,  // 4-room
+    },
   },
-  frequencies: [
-    { id: "weekly", label: "Once a week", discount: 20, badge: "-20%" },
-    { id: "biweekly", label: "Twice a month", discount: 15, badge: "-15%" },
-    { id: "monthly", label: "Once a month", discount: 10, badge: "-10%" },
-    { id: "once", label: "One-time cleaning", discount: 0, badge: null },
-  ] satisfies Frequency[],
-};
-
-const PROMOS: Record<string, { label: string; discountPercent: number }> = {
-  start: { label: "START", discountPercent: 15 },
-  cleanly10: { label: "CLEANLY10", discountPercent: 10 },
+  office: {
+    standardRate: { min: 5, max: 7 }, // per m²
+    deepRate: { min: 11, max: 14 },   // per m²
+  },
+  airbnb: {
+    studio: { min: 120, max: 180 },
+    "1bedroom": { min: 150, max: 220 },
+    "2bedroom": { min: 200, max: 300 },
+  },
+  extras: {
+    oven: { label: "Oven (inside)", price: 45 },
+    fridge: { label: "Refrigerator (inside)", price: 40 },
+    windows: { label: "Window cleaning", price: 40 },
+    balcony: { label: "Balcony", price: 35 },
+  } as Record<string, { label: string; price: number }>,
 };
 
 function startOfDay(d: Date) {
@@ -95,49 +107,143 @@ const TIME_SLOTS = [
 
 function OrderPageContent() {
   const searchParams = useSearchParams();
+  const serviceParam = searchParams?.get("service");
+  
+  // Property type selection
+  const [propertyType, setPropertyType] = useState<PropertyType>("apartment");
+  
+  // For apartments: number of rooms
   const [rooms, setRooms] = useState(1);
-  const [bathrooms, setBathrooms] = useState(1);
+  
+  // For apartments: cleaning type (standard or deep)
+  const [cleaningType, setCleaningType] = useState<CleaningType>("standard");
+  
+  // For offices: square meters
+  const [squareMeters, setSquareMeters] = useState(50);
+  
+  // For airbnb: bedroom type
+  const [airbnbType, setAirbnbType] = useState<"studio" | "1bedroom" | "2bedroom">("1bedroom");
+  
+  // Selected extras
   const [selectedExtras, setSelectedExtras] = useState<Record<string, number>>({
-    fridge: 0,
     oven: 0,
-    cabinets: 0,
+    fridge: 0,
     windows: 0,
-    ironing: 0,
     balcony: 0,
-    extraHour: 0,
-    litterBox: 0,
   });
-  const [frequency, setFrequency] = useState<Frequency>(PRICING.frequencies[0]);
 
-  const [promoInput, setPromoInput] = useState("");
-  const [appliedPromo, setAppliedPromo] = useState<{ code: string; discountPercent: number } | null>(
-    null
-  );
-
+  // Date and time
   const [weekOffset, setWeekOffset] = useState(0);
   const [selectedDate, setSelectedDate] = useState<Date>(() => startOfDay(addDays(new Date(), 1)));
   const [selectedTime, setSelectedTime] = useState<string>(TIME_SLOTS[4]);
 
+  // Address and contact
   const [city, setCity] = useState("Warsaw");
   const [street, setStreet] = useState("");
   const [postcode, setPostcode] = useState("");
   const [houseNumber, setHouseNumber] = useState("");
   const [apartmentNumber, setApartmentNumber] = useState("");
-  const [propertyType, setPropertyType] = useState<"apartment" | "house">("apartment");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [notes, setNotes] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  // Service info data
+  const serviceInfo: Record<string, {
+    title: string;
+    description: string;
+    image: string;
+    features: string[];
+  }> = {
+    apartment: {
+      title: "Уборка квартир",
+      description: "Профессиональная уборка квартир в Варшаве. Стандартная и генеральная уборка для комфортного проживания.",
+      image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800",
+      features: [
+        "Протирание пыли с мебели и поверхностей",
+        "Протирание подоконников",
+        "Уборка столов и тумбочек",
+        "Пылесос ковров и пола",
+        "Мытьё пола",
+        "Вынос мусора",
+        "Кухня: столешница, раковина, фасады, техника, плита",
+        "Ванная: унитаз, раковина, ванна/душ, зеркала"
+      ]
+    },
+    airbnb: {
+      title: "Клининг для апартаментов / Airbnb",
+      description: "Уборка для сдачи в аренду. Быстрая и качественная подготовка помещений к заселению гостей.",
+      image: "https://images.unsplash.com/photo-1520637836862-4d197d17c155?auto=format&fit=crop&q=80&w=800",
+      features: [
+        "Полная дезинфекция всех поверхностей",
+        "Уборка всех комнат",
+        "Смена постельного белья",
+        "Полотенца для гостей",
+        "Подготовка к заселению гостей",
+        "Уборка кухни и ванной"
+      ]
+    },
+    office: {
+      title: "Уборка офисов",
+      description: "Поддержание чистоты в рабочих пространствах. Регулярная и после ремонта уборка.",
+      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800",
+      features: [
+        "Уборка рабочих мест",
+        "Дезинфекция общих зон",
+        "Вывоз мусора",
+        "Мытьё полов и ковров",
+        "Чистка санузлов",
+        "Кухня/зона отдыха"
+      ]
+    },
+    extras: {
+      title: "Дополнительные услуги",
+      description: "Дополните основную уборку специальными услугами для полного комфорта.",
+      image: "/images/deep-cleaning-card.png",
+      features: [
+        "Чистка духовки внутри - 45 zł",
+        "Чистка холодильника внутри - 40 zł",
+        "Мытьё окон - 40 zł/окно",
+        "Уборка балкона - 35 zł"
+      ]
+    }
+  };
+
+  const currentServiceInfo = serviceInfo[serviceParam || ''];
+
   useEffect(() => {
     if (!searchParams) return;
     const r = Number(searchParams.get("rooms"));
-    const b = Number(searchParams.get("bathrooms"));
-    if (Number.isFinite(r) && r > 0) setRooms(Math.min(10, Math.max(1, Math.floor(r))));
-    if (Number.isFinite(b) && b > 0) setBathrooms(Math.min(10, Math.max(1, Math.floor(b))));
+    if (Number.isFinite(r) && r > 0) setRooms(Math.min(4, Math.max(1, Math.floor(r))));
+    
+    // Set property type based on service parameter
+    const service = searchParams.get("service");
+    if (service === "apartment") setPropertyType("apartment");
+    else if (service === "airbnb") setPropertyType("airbnb");
+    else if (service === "office") setPropertyType("office");
   }, [searchParams]);
 
+  // Calculate base price
+  const basePrice = useMemo(() => {
+    if (propertyType === "apartment") {
+      const prices = PRICING.apartment[cleaningType];
+      return prices[rooms as keyof typeof prices] || prices[1];
+    } else if (propertyType === "office") {
+      const rate = cleaningType === "deep" 
+        ? PRICING.office.deepRate 
+        : PRICING.office.standardRate;
+      // Use average rate
+      return Math.round(squareMeters * ((rate.min + rate.max) / 2));
+    } else if (propertyType === "airbnb") {
+      const prices = PRICING.airbnb[airbnbType];
+      // Use average price
+      return Math.round((prices.min + prices.max) / 2);
+    }
+    return 0;
+  }, [propertyType, rooms, cleaningType, squareMeters, airbnbType]);
+
+  // Calculate extras total
   const extrasTotal = useMemo(() => {
     return Object.entries(selectedExtras).reduce((sum, [id, qty]) => {
       const price = PRICING.extras[id as keyof typeof PRICING.extras]?.price ?? 0;
@@ -145,28 +251,8 @@ function OrderPageContent() {
     }, 0);
   }, [selectedExtras]);
 
-  const baseTotal = useMemo(
-    () => {
-      const houseMultiplier = propertyType === "house" ? 1.5 : 1;
-      return Math.round((rooms * PRICING.room + bathrooms * PRICING.bathroom) * houseMultiplier);
-    },
-    [rooms, bathrooms, propertyType]
-  );
-
-  const frequencyDiscountValue = useMemo(() => {
-    if (frequency.discount <= 0) return 0;
-    return Math.round((baseTotal + extrasTotal) * (frequency.discount / 100));
-  }, [frequency, baseTotal, extrasTotal]);
-
-  const promoDiscountValue = useMemo(() => {
-    if (!appliedPromo) return 0;
-    const afterFrequency = Math.max(0, baseTotal + extrasTotal - frequencyDiscountValue);
-    return Math.round(afterFrequency * (appliedPromo.discountPercent / 100));
-  }, [appliedPromo, baseTotal, extrasTotal, frequencyDiscountValue]);
-
-  const total = useMemo(() => {
-    return Math.max(0, Math.round(baseTotal + extrasTotal - frequencyDiscountValue - promoDiscountValue));
-  }, [baseTotal, extrasTotal, frequencyDiscountValue, promoDiscountValue]);
+  // Total price
+  const total = basePrice + extrasTotal;
 
   const weekDays = useMemo(() => {
     const start = startOfDay(addDays(new Date(), 1 + weekOffset * 7));
@@ -177,614 +263,634 @@ function OrderPageContent() {
     setSelectedExtras((prev) => ({ ...prev, [id]: prev[id] ? 0 : 1 }));
   };
 
-  const adjustExtraQty = (id: string, delta: number) => {
-    setSelectedExtras((prev) => ({ ...prev, [id]: Math.max(0, (prev[id] ?? 0) + delta) }));
-  };
-
-  const applyPromo = () => {
-    const code = promoInput.trim().toLowerCase();
-    const promo = PROMOS[code];
-    if (!promo) {
-      setAppliedPromo(null);
-      return;
-    }
-    setAppliedPromo({ code: promo.label, discountPercent: promo.discountPercent });
-  };
-
-  const clearPromo = () => {
-    setPromoInput("");
-    setAppliedPromo(null);
-  };
-
   return (
-    <main className="min-h-screen">
-      <Navbar />
+    <>
+      <main className="min-h-screen">
+        <Navbar />
 
-      <section className="pt-24 pb-12 bg-background">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
-            <div className="max-w-2xl">
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary/80 mb-3">
-                Order constructor
-              </p>
-              <h1 className="text-4xl md:text-5xl font-black text-text">
-                Home cleaning in <span className="text-primary">{city}</span>
-              </h1>
-              <p className="text-text/60 font-medium mt-4">
-                Configure your cleaning, choose a convenient date and time, and see the estimated cost instantly.
-              </p>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <div className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/80 border border-blue-50 shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-accent" />
-                <span className="text-sm font-semibold text-text">Supplies included</span>
-              </div>
-              <div className="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/60 border border-blue-50">
-                <span className="text-sm font-semibold text-text/70">No prepayment</span>
+        {/* Service Info Banner */}
+        {currentServiceInfo && (
+          <div className="pt-20 relative h-64">
+            <img 
+              src={currentServiceInfo.image} 
+              alt={currentServiceInfo.title}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30" />
+            <div className="absolute inset-0 flex items-center">
+              <div className="max-w-7xl mx-auto px-4 w-full">
+                <div className="max-w-2xl">
+                  <motion.h1 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-4xl md:text-5xl font-black text-white mb-4"
+                  >
+                    {currentServiceInfo.title}
+                  </motion.h1>
+                  <motion.p 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                    className="text-white/80 font-medium text-lg mb-6"
+                  >
+                    {currentServiceInfo.description}
+                  </motion.p>
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="flex flex-wrap gap-3"
+                  >
+                    {currentServiceInfo.features.slice(0, 4).map((feature, idx) => (
+                      <div key={idx} className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                        <Check className="w-4 h-4 text-accent" />
+                        <span className="text-white text-sm font-medium">{feature}</span>
+                      </div>
+                    ))}
+                  </motion.div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        )}
 
-      <section className="pb-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            <div className="lg:col-span-8 space-y-8">
-              <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
-                <h2 className="text-xl font-bold text-text mb-8 flex items-center gap-2">
-                  <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
-                    1
-                  </span>
-                  Your apartment
-                </h2>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-text/80">Rooms</span>
-                    <div className="flex items-center gap-4 bg-blue-50/50 p-2 rounded-2xl border border-blue-50">
-                      <button
-                        onClick={() => setRooms((v) => Math.max(1, v - 1))}
-                        className="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all disabled:opacity-50"
-                        disabled={rooms <= 1}
-                      >
-                        <Minus className="w-5 h-5" />
-                      </button>
-                      <span className="w-8 text-center font-bold text-lg text-text">{rooms}</span>
-                      <button
-                        onClick={() => setRooms((v) => v + 1)}
-                        className="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all"
-                      >
-                        <Plus className="w-5 h-5" />
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-text/80">Bathrooms</span>
-                    <div className="flex items-center gap-4 bg-blue-50/50 p-2 rounded-2xl border border-blue-50">
-                      <button
-                        onClick={() => setBathrooms((v) => Math.max(1, v - 1))}
-                        className="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all disabled:opacity-50"
-                        disabled={bathrooms <= 1}
-                      >
-                        <Minus className="w-5 h-5" />
-                      </button>
-                      <span className="w-8 text-center font-bold text-lg text-text">{bathrooms}</span>
-                      <button
-                        onClick={() => setBathrooms((v) => v + 1)}
-                        className="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all"
-                      >
-                        <Plus className="w-5 h-5" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-8">
-                  <span className="font-bold text-text/80 mb-4 block">Property type</span>
-                  <div className="grid grid-cols-2 gap-4">
-                    <button
-                      onClick={() => setPropertyType("apartment")}
-                      className={`p-4 rounded-2xl border-2 transition-all ${
-                        propertyType === "apartment"
-                          ? "border-primary bg-primary/5 text-primary"
-                          : "border-blue-100 hover:border-primary/30"
-                      }`}
-                    >
-                      <span className="block font-bold text-lg">Apartment</span>
-                      <span className="text-xs opacity-60">Standard pricing</span>
-                    </button>
-                    <button
-                      onClick={() => setPropertyType("house")}
-                      className={`p-4 rounded-2xl border-2 transition-all ${
-                        propertyType === "house"
-                          ? "border-primary bg-primary/5 text-primary"
-                          : "border-blue-100 hover:border-primary/30"
-                      }`}
-                    >
-                      <span className="block font-bold text-lg">House</span>
-                      <span className="text-xs opacity-60">+50% multiplier</span>
-                    </button>
-                  </div>
-                </div>
-
-                <div className="mt-8 flex items-start gap-3 p-4 bg-blue-50/50 rounded-2xl border border-blue-50">
-                  <Info className="w-5 h-5 text-primary shrink-0" />
-                  <p className="text-xs text-text/60 leading-relaxed">
-                    Estimated service time and final price depend on extra options and apartment condition.
-                  </p>
-                </div>
+        {!currentServiceInfo && (
+        <section className="pt-24 pb-12 bg-background">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+              <div className="max-w-2xl">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary/80 mb-3">
+                  Order constructor
+                </p>
+                <h1 className="text-4xl md:text-5xl font-black text-text">
+                  Cleaning in <span className="text-primary">{city}</span>
+                </h1>
+                <p className="text-text/60 font-medium mt-4">
+                  Configure your cleaning, choose a convenient date and time, and see the estimated cost instantly.
+                </p>
               </div>
 
-              <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
-                <h2 className="text-xl font-bold text-text mb-8 flex items-center gap-2">
-                  <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
-                    2
-                  </span>
-                  Choose a convenient date and time
-                </h2>
-
-                <div className="flex items-center justify-between mb-4">
-                  <button
-                    onClick={() => setWeekOffset((v) => v - 1)}
-                    className="w-10 h-10 rounded-xl border border-blue-100 bg-white hover:bg-blue-50 transition-colors flex items-center justify-center text-text"
-                  >
-                    <ChevronLeft className="w-5 h-5" />
-                  </button>
-                  <div className="text-sm font-bold text-text/70 uppercase tracking-widest">
-                    {formatFullDate(weekDays[0])} — {formatFullDate(weekDays[6])}
-                  </div>
-                  <button
-                    onClick={() => setWeekOffset((v) => v + 1)}
-                    className="w-10 h-10 rounded-xl border border-blue-100 bg-white hover:bg-blue-50 transition-colors flex items-center justify-center text-text"
-                  >
-                    <ChevronRight className="w-5 h-5" />
-                  </button>
+              <div className="flex items-center gap-3">
+                <div className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/80 border border-blue-50 shadow-sm">
+                  <span className="w-2 h-2 rounded-full bg-accent" />
+                  <span className="text-sm font-semibold text-text">Supplies included</span>
                 </div>
-
-                <div className="grid grid-cols-7 gap-2">
-                  {weekDays.map((d) => {
-                    const active = startOfDay(d).getTime() === startOfDay(selectedDate).getTime();
-                    return (
-                      <button
-                        key={d.toISOString()}
-                        onClick={() => setSelectedDate(d)}
-                        className={cn(
-                          "p-3 rounded-2xl border text-center transition-all",
-                          active
-                            ? "bg-primary text-white border-primary shadow-md shadow-blue-200/60"
-                            : "bg-white border-blue-50 hover:border-primary/30 hover:bg-blue-50/40 text-text"
-                        )}
-                      >
-                        <div
-                          className={cn(
-                            "text-[10px] font-bold uppercase tracking-widest",
-                            active ? "text-white/80" : "text-text/40"
-                          )}
-                        >
-                          {d.toLocaleDateString("en-US", { weekday: "short" })}
-                        </div>
-                        <div className={cn("text-sm font-black mt-1", active ? "text-white" : "text-text")}>
-                          {d.getDate().toString().padStart(2, "0")}
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-
-                <div className="mt-6 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
-                  {TIME_SLOTS.map((slot) => {
-                    const active = slot === selectedTime;
-                    return (
-                      <button
-                        key={slot}
-                        onClick={() => setSelectedTime(slot)}
-                        className={cn(
-                          "px-3 py-2 rounded-xl border text-xs font-bold transition-all",
-                          active
-                            ? "bg-primary text-white border-primary"
-                            : "bg-white border-blue-50 hover:border-primary/30 text-text/70"
-                        )}
-                      >
-                        {slot}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
-                <h2 className="text-xl font-bold text-text mb-8 flex items-center gap-2">
-                  <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
-                    3
-                  </span>
-                  Frequency
-                </h2>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                  {PRICING.frequencies.map((freq) => (
-                    <button
-                      key={freq.id}
-                      onClick={() => setFrequency(freq)}
-                      className={cn(
-                        "relative p-4 rounded-2xl border transition-all duration-300 text-left",
-                        frequency.id === freq.id
-                          ? "bg-primary/5 border-primary shadow-sm"
-                          : "bg-white border-blue-50 hover:border-primary/30"
-                      )}
-                    >
-                      <div className="flex flex-col gap-1">
-                        <span
-                          className={cn("text-sm font-bold", frequency.id === freq.id ? "text-primary" : "text-text")}
-                        >
-                          {freq.label}
-                        </span>
-                        {freq.badge && (
-                          <span className="inline-block w-fit px-2 py-0.5 rounded-full bg-accent text-white text-[10px] font-bold">
-                            {freq.badge} discount
-                          </span>
-                        )}
-                      </div>
-                      {frequency.id === freq.id && (
-                        <div className="absolute top-4 right-4 w-5 h-5 bg-primary rounded-full flex items-center justify-center">
-                          <Check className="w-3 h-3 text-white stroke-[3]" />
-                        </div>
-                      )}
-                    </button>
-                  ))}
-                </div>
-
-                <div className="mt-6 text-xs text-text/60 font-medium">
-                  More frequent cleaning — higher discount. You can cancel or reschedule anytime.
-                </div>
-              </div>
-
-              <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
-                <h2 className="text-xl font-bold text-text mb-8 flex items-center gap-2">
-                  <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
-                    4
-                  </span>
-                  Extra options
-                </h2>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {Object.entries(PRICING.extras).map(([id, extra]) => {
-                    const qty = selectedExtras[id] ?? 0;
-                    const isCounter = ["windows", "ironing", "balcony", "extraHour", "litterBox"].includes(id);
-                    return (
-                      <div
-                        key={id}
-                        className={cn(
-                          "rounded-2xl border p-4 flex items-center justify-between gap-4 transition-colors",
-                          qty > 0 ? "bg-primary/5 border-primary/20" : "bg-white border-blue-50 hover:border-primary/20"
-                        )}
-                      >
-                        <div className="min-w-0">
-                          <div className="text-sm font-bold text-text truncate">{extra.label}</div>
-                          <div className="text-xs font-bold text-primary mt-1">{extra.price} PLN</div>
-                        </div>
-
-                        {isCounter ? (
-                          <div className="flex items-center gap-2">
-                            <button
-                              onClick={() => adjustExtraQty(id, -1)}
-                              className="w-9 h-9 rounded-xl bg-white border border-blue-100 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all disabled:opacity-40"
-                              disabled={qty <= 0}
-                            >
-                              <Minus className="w-4 h-4" />
-                            </button>
-                            <span className="w-6 text-center font-bold text-text">{qty}</span>
-                            <button
-                              onClick={() => adjustExtraQty(id, +1)}
-                              className="w-9 h-9 rounded-xl bg-white border border-blue-100 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all"
-                            >
-                              <Plus className="w-4 h-4" />
-                            </button>
-                          </div>
-                        ) : (
-                          <button
-                            onClick={() => toggleExtraCheck(id)}
-                            className={cn(
-                              "px-4 py-2 rounded-xl border text-xs font-bold transition-all whitespace-nowrap",
-                              qty > 0
-                                ? "bg-primary text-white border-primary"
-                                : "bg-white border-blue-100 text-text/70 hover:border-primary/30"
-                            )}
-                          >
-                            {qty > 0 ? "Added" : "Add"}
-                          </button>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
-                <h2 className="text-xl font-bold text-text mb-8 flex items-center gap-2">
-                  <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
-                    5
-                  </span>
-                  Promocode
-                </h2>
-
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <input
-                    value={promoInput}
-                    onChange={(e) => setPromoInput(e.target.value)}
-                    placeholder="Enter promo code"
-                    className="flex-1 px-4 py-3 rounded-2xl border border-blue-100 bg-white focus:outline-none focus:ring-2 focus:ring-primary/20"
-                  />
-                  <button
-                    onClick={applyPromo}
-                    className="px-6 py-3 rounded-2xl bg-primary text-white font-bold hover:bg-primary/90 transition-colors"
-                  >
-                    Apply
-                  </button>
-                  <button
-                    onClick={clearPromo}
-                    className="px-6 py-3 rounded-2xl border border-blue-100 bg-white font-bold text-text/70 hover:bg-blue-50 transition-colors"
-                  >
-                    Clear
-                  </button>
-                </div>
-
-                <div className="mt-4 text-xs text-text/60 font-medium">
-                  Try: <span className="font-bold text-text">START</span> (15%) or{" "}
-                  <span className="font-bold text-text">CLEANLY10</span> (10%).
-                </div>
-              </div>
-
-              <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
-                <h2 className="text-xl font-bold text-text mb-8 flex items-center gap-2">
-                  <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
-                    6
-                  </span>
-                  Address and contact details
-                </h2>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-xs font-bold uppercase tracking-widest text-text/50">City</label>
-                    <select
-                      value={city}
-                      onChange={(e) => setCity(e.target.value)}
-                      className="w-full px-4 py-3 rounded-2xl border border-blue-100 bg-white focus:outline-none focus:ring-2 focus:ring-primary/20"
-                    >
-                      <option>Warsaw</option>
-                      <option>Krakow</option>
-                      <option>Wroclaw</option>
-                      <option>Gdansk</option>
-                    </select>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-xs font-bold uppercase tracking-widest text-text/50">Street</label>
-                    <input
-                      value={street}
-                      onChange={(e) => {
-                        setStreet(e.target.value);
-                        if (errors.street) setErrors({...errors, street: ''});
-                      }}
-                      className={`w-full px-4 py-3 rounded-2xl border bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 ${errors.street ? 'border-red-400' : 'border-blue-100'}`}
-                    />
-                    {errors.street && <p className="text-xs text-red-500">{errors.street}</p>}
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-xs font-bold uppercase tracking-widest text-text/50">Postcode</label>
-                    <input
-                      value={postcode}
-                      onChange={(e) => {
-                        setPostcode(e.target.value);
-                        if (errors.postcode) setErrors({...errors, postcode: ''});
-                      }}
-                      className={`w-full px-4 py-3 rounded-2xl border bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 ${errors.postcode ? 'border-red-400' : 'border-blue-100'}`}
-                    />
-                    {errors.postcode && <p className="text-xs text-red-500">{errors.postcode}</p>}
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold uppercase tracking-widest text-text/50">House</label>
-                      <input
-                        value={houseNumber}
-                        onChange={(e) => {
-                          setHouseNumber(e.target.value);
-                          if (errors.houseNumber) setErrors({...errors, houseNumber: ''});
-                        }}
-                        className={`w-full px-4 py-3 rounded-2xl border bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 ${errors.houseNumber ? 'border-red-400' : 'border-blue-100'}`}
-                      />
-                      {errors.houseNumber && <p className="text-xs text-red-500">{errors.houseNumber}</p>}
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold uppercase tracking-widest text-text/50">Apt</label>
-                      <input
-                        value={apartmentNumber}
-                        onChange={(e) => setApartmentNumber(e.target.value)}
-                        className="w-full px-4 py-3 rounded-2xl border border-blue-100 bg-white focus:outline-none focus:ring-2 focus:ring-primary/20"
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-xs font-bold uppercase tracking-widest text-text/50">Your name</label>
-                    <input
-                      value={name}
-                      onChange={(e) => {
-                        setName(e.target.value);
-                        if (errors.name) setErrors({...errors, name: ''});
-                      }}
-                      className={`w-full px-4 py-3 rounded-2xl border bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 ${errors.name ? 'border-red-400' : 'border-blue-100'}`}
-                    />
-                    {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-xs font-bold uppercase tracking-widest text-text/50">Phone</label>
-                    <input
-                      value={phone}
-                      onChange={(e) => {
-                        setPhone(e.target.value);
-                        if (errors.phone) setErrors({...errors, phone: ''});
-                      }}
-                      className={`w-full px-4 py-3 rounded-2xl border bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 ${errors.phone ? 'border-red-400' : 'border-blue-100'}`}
-                    />
-                    {errors.phone && <p className="text-xs text-red-500">{errors.phone}</p>}
-                  </div>
-                  <div className="space-y-2 md:col-span-2">
-                    <label className="text-xs font-bold uppercase tracking-widest text-text/50">Email</label>
-                    <input
-                      value={email}
-                      onChange={(e) => {
-                        setEmail(e.target.value);
-                        if (errors.email) setErrors({...errors, email: ''});
-                      }}
-                      className={`w-full px-4 py-3 rounded-2xl border bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 ${errors.email ? 'border-red-400' : 'border-blue-100'}`}
-                    />
-                    {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
-                  </div>
-                  <div className="space-y-2 md:col-span-2">
-                    <label className="text-xs font-bold uppercase tracking-widest text-text/50">
-                      Additional order information
-                    </label>
-                    <textarea
-                      value={notes}
-                      onChange={(e) => setNotes(e.target.value)}
-                      rows={4}
-                      className="w-full px-4 py-3 rounded-2xl border border-blue-100 bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 resize-none"
-                    />
-                  </div>
+                <div className="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/60 border border-blue-50">
+                  <span className="text-sm font-semibold text-text/70">No prepayment</span>
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+        )}
 
-            <div className="lg:col-span-4 sticky top-28">
-              <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl shadow-blue-200/60 border border-blue-50 overflow-hidden">
-                <div className="p-8 bg-primary text-white">
-                  <div className="flex items-center gap-3 mb-2 opacity-80">
-                    <Calendar className="w-5 h-5" />
-                    <span className="text-sm font-semibold uppercase tracking-widest">Summary</span>
-                  </div>
-                  <div className="flex items-baseline gap-2">
-                    <motion.span
-                      key={total}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.25 }}
-                      className="text-5xl font-black"
+        <section className="pb-24 bg-background">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+              {/* Left column - Configuration */}
+              <div className="lg:col-span-8 space-y-8">
+                {/* Property Type Selection */}
+                <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
+                  <h2 className="text-xl font-bold text-text mb-6 flex items-center gap-2">
+                    <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
+                      1
+                    </span>
+                    Property type
+                  </h2>
+
+                  <div className="grid grid-cols-3 gap-4">
+                    <button
+                      onClick={() => setPropertyType("apartment")}
+                      className={cn(
+                        "p-6 rounded-2xl border-2 transition-all flex flex-col items-center gap-3",
+                        propertyType === "apartment"
+                          ? "border-primary bg-primary/5"
+                          : "border-blue-100 hover:border-primary/30"
+                      )}
                     >
-                      {total}
-                    </motion.span>
-                    <span className="text-xl font-bold opacity-80 uppercase">PLN</span>
+                      <Home className={cn("w-8 h-8", propertyType === "apartment" ? "text-primary" : "text-text/50")} />
+                      <span className={cn("font-bold", propertyType === "apartment" ? "text-primary" : "text-text")}>
+                        Apartment
+                      </span>
+                    </button>
+                    <button
+                      onClick={() => setPropertyType("office")}
+                      className={cn(
+                        "p-6 rounded-2xl border-2 transition-all flex flex-col items-center gap-3",
+                        propertyType === "office"
+                          ? "border-primary bg-primary/5"
+                          : "border-blue-100 hover:border-primary/30"
+                      )}
+                    >
+                      <Building2 className={cn("w-8 h-8", propertyType === "office" ? "text-primary" : "text-text/50")} />
+                      <span className={cn("font-bold", propertyType === "office" ? "text-primary" : "text-text")}>
+                        Office
+                      </span>
+                    </button>
+                    <button
+                      onClick={() => setPropertyType("airbnb")}
+                      className={cn(
+                        "p-6 rounded-2xl border-2 transition-all flex flex-col items-center gap-3",
+                        propertyType === "airbnb"
+                          ? "border-primary bg-primary/5"
+                          : "border-blue-100 hover:border-primary/30"
+                      )}
+                    >
+                      <Building className={cn("w-8 h-8", propertyType === "airbnb" ? "text-primary" : "text-text/50")} />
+                      <span className={cn("font-bold", propertyType === "airbnb" ? "text-primary" : "text-text")}>
+                        Airbnb
+                      </span>
+                    </button>
                   </div>
-                  <p className="text-sm mt-2 font-medium opacity-80">
-                    {formatFullDate(selectedDate)} · {selectedTime}
-                  </p>
                 </div>
 
-                <div className="p-8 space-y-6">
-                  <div className="space-y-4">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-text/60 font-medium">
-                        {rooms} rooms + {bathrooms} bathrooms
+                {/* Apartment Options */}
+                {propertyType === "apartment" && (
+                  <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
+                    <h2 className="text-xl font-bold text-text mb-6 flex items-center gap-2">
+                      <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
+                        2
                       </span>
-                      <span className="text-text font-bold">{baseTotal} PLN</span>
+                      Apartment details
+                    </h2>
+
+                    {/* Number of Rooms */}
+                    <div className="mb-8">
+                      <span className="font-bold text-text/80 mb-4 block">Number of rooms</span>
+                      <div className="grid grid-cols-4 gap-3">
+                        {[1, 2, 3, 4].map((room) => (
+                          <button
+                            key={room}
+                            onClick={() => setRooms(room)}
+                            className={cn(
+                              "p-4 rounded-2xl border-2 transition-all",
+                              rooms === room
+                                ? "border-primary bg-primary/5"
+                                : "border-blue-100 hover:border-primary/30"
+                            )}
+                          >
+                            <span className={cn("block text-lg font-bold", rooms === room ? "text-primary" : "text-text")}>
+                              {room}
+                            </span>
+                            <span className="text-xs text-text/50">rooms</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Cleaning Type */}
+                    <div>
+                      <span className="font-bold text-text/80 mb-4 block">Type of cleaning</span>
+                      <div className="grid grid-cols-2 gap-4">
+                        <button
+                          onClick={() => setCleaningType("standard")}
+                          className={cn(
+                            "p-6 rounded-2xl border-2 transition-all text-left",
+                            cleaningType === "standard"
+                              ? "border-primary bg-primary/5"
+                              : "border-blue-100 hover:border-primary/30"
+                          )}
+                        >
+                          <div className="flex items-center gap-2 mb-2">
+                            <Check className={cn("w-5 h-5", cleaningType === "standard" ? "text-primary" : "text-text/30")} />
+                            <span className={cn("font-bold text-lg", cleaningType === "standard" ? "text-primary" : "text-text")}>
+                              Standard
+                            </span>
+                          </div>
+                          <div className="text-2xl font-black text-text">
+                            {PRICING.apartment.standard[rooms as keyof typeof PRICING.apartment.standard]} zł
+                          </div>
+                          <p className="text-xs text-text/50 mt-2">
+                            Dusting, vacuuming, mopping, kitchen & bathroom
+                          </p>
+                        </button>
+                        <button
+                          onClick={() => setCleaningType("deep")}
+                          className={cn(
+                            "p-6 rounded-2xl border-2 transition-all text-left",
+                            cleaningType === "deep"
+                              ? "border-primary bg-primary/5"
+                              : "border-blue-100 hover:border-primary/30"
+                          )}
+                        >
+                          <div className="flex items-center gap-2 mb-2">
+                            <Sparkles className={cn("w-5 h-5", cleaningType === "deep" ? "text-primary" : "text-text/30")} />
+                            <span className={cn("font-bold text-lg", cleaningType === "deep" ? "text-primary" : "text-text")}>
+                              Deep
+                            </span>
+                          </div>
+                          <div className="text-2xl font-black text-text">
+                            {PRICING.apartment.deep[rooms as keyof typeof PRICING.apartment.deep]} zł
+                          </div>
+                          <p className="text-xs text-text/50 mt-2">
+                            Full kitchen, oven, fridge, bathroom tiles, baseboards
+                          </p>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Office Options */}
+                {propertyType === "office" && (
+                  <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
+                    <h2 className="text-xl font-bold text-text mb-6 flex items-center gap-2">
+                      <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
+                        2
+                      </span>
+                      Office details
+                    </h2>
+
+                    {/* Square Meters */}
+                    <div className="mb-8">
+                      <span className="font-bold text-text/80 mb-4 block">Office area (m²)</span>
+                      <div className="flex items-center gap-4 bg-blue-50/50 p-2 rounded-2xl border border-blue-50 w-fit">
+                        <button
+                          onClick={() => setSquareMeters((v) => Math.max(10, v - 10))}
+                          className="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all"
+                        >
+                          <Minus className="w-5 h-5"/>
+                        </button>
+                        <span className="w-20 text-center font-bold text-2xl text-text">{squareMeters}</span>
+                        <button
+                          onClick={() => setSquareMeters((v) => v + 5)}
+                          className="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all"
+                        >
+                          +5
+                        </button>
+                        <button
+                          onClick={() => setSquareMeters((v) => v + 10)}
+                          className="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all"
+                        >
+                          +10
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Cleaning Type */}
+                    <div>
+                      <span className="font-bold text-text/80 mb-4 block">Type of cleaning</span>
+                      <div className="grid grid-cols-2 gap-4">
+                        <button
+                          onClick={() => setCleaningType("standard")}
+                          className={cn(
+                            "p-6 rounded-2xl border-2 transition-all text-left",
+                            cleaningType === "standard"
+                              ? "border-primary bg-primary/5"
+                              : "border-blue-100 hover:border-primary/30"
+                          )}
+                        >
+                          <div className="flex items-center gap-2 mb-2">
+                            <Check className={cn("w-5 h-5", cleaningType === "standard" ? "text-primary" : "text-text/30")} />
+                            <span className={cn("font-bold text-lg", cleaningType === "standard" ? "text-primary" : "text-text")}>
+                              Standard
+                            </span>
+                          </div>
+                          <div className="text-2xl font-black text-text">
+                            {PRICING.office.standardRate.min}-{PRICING.office.standardRate.max} zł/m²
+                          </div>
+                          <p className="text-xs text-text/50 mt-2">
+                            Regular office cleaning
+                          </p>
+                        </button>
+                        <button
+                          onClick={() => setCleaningType("deep")}
+                          className={cn(
+                            "p-6 rounded-2xl border-2 transition-all text-left",
+                            cleaningType === "deep"
+                              ? "border-primary bg-primary/5"
+                              : "border-blue-100 hover:border-primary/30"
+                          )}
+                        >
+                          <div className="flex items-center gap-2 mb-2">
+                            <Sparkles className={cn("w-5 h-5", cleaningType === "deep" ? "text-primary" : "text-text/30")} />
+                            <span className={cn("font-bold text-lg", cleaningType === "deep" ? "text-primary" : "text-text")}>
+                              After renovation
+                            </span>
+                          </div>
+                          <div className="text-2xl font-black text-text">
+                            {PRICING.office.deepRate.min}-{PRICING.office.deepRate.max} zł/m²
+                          </div>
+                          <p className="text-xs text-text/50 mt-2">
+                            Deep cleaning after renovation
+                          </p>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Airbnb Options */}
+                {propertyType === "airbnb" && (
+                  <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
+                    <h2 className="text-xl font-bold text-text mb-6 flex items-center gap-2">
+                      <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
+                        2
+                      </span>
+                      Airbnb / Apartment details
+                    </h2>
+
+                    {/* Bedroom Type */}
+                    <div>
+                      <span className="font-bold text-text/80 mb-4 block">Number of rooms</span>
+                      <div className="grid grid-cols-3 gap-4">
+                        <button
+                          onClick={() => setAirbnbType("studio")}
+                          className={cn(
+                            "p-6 rounded-2xl border-2 transition-all",
+                            airbnbType === "studio"
+                              ? "border-primary bg-primary/5"
+                              : "border-blue-100 hover:border-primary/30"
+                          )}
+                        >
+                          <span className={cn("block font-bold text-lg", airbnbType === "studio" ? "text-primary" : "text-text")}>
+                            Studio
+                          </span>
+                          <div className="text-xl font-black text-text mt-2">
+                            {PRICING.airbnb.studio.min}-{PRICING.airbnb.studio.max} zł
+                          </div>
+                        </button>
+                        <button
+                          onClick={() => setAirbnbType("1bedroom")}
+                          className={cn(
+                            "p-6 rounded-2xl border-2 transition-all",
+                            airbnbType === "1bedroom"
+                              ? "border-primary bg-primary/5"
+                              : "border-blue-100 hover:border-primary/30"
+                          )}
+                        >
+                          <span className={cn("block font-bold text-lg", airbnbType === "1bedroom" ? "text-primary" : "text-text")}>
+                            1 Bedroom
+                          </span>
+                          <div className="text-xl font-black text-text mt-2">
+                            {PRICING.airbnb[airbnbType].min}-{PRICING.airbnb[airbnbType].max} zł
+                          </div>
+                        </button>
+                        <button
+                          onClick={() => setAirbnbType("2bedroom")}
+                          className={cn(
+                            "p-6 rounded-2xl border-2 transition-all",
+                            airbnbType === "2bedroom"
+                              ? "border-primary bg-primary/5"
+                              : "border-blue-100 hover:border-primary/30"
+                          )}
+                        >
+                          <span className={cn("block font-bold text-lg", airbnbType === "2bedroom" ? "text-primary" : "text-text")}>
+                            2 Bedrooms
+                          </span>
+                          <div className="text-xl font-black text-text mt-2">
+                            {PRICING.airbnb[airbnbType].min}-{PRICING.airbnb[airbnbType].max} zł
+                          </div>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Additional Services */}
+                <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
+                  <h2 className="text-xl font-bold text-text mb-6 flex items-center gap-2">
+                    <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
+                      {propertyType === "apartment" ? 3 : propertyType === "office" ? 3 : 3}
+                    </span>
+                    Additional services
+                  </h2>
+
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <button
+                      onClick={() => toggleExtraCheck("oven")}
+                      className={cn(
+                        "p-4 rounded-2xl border-2 transition-all flex flex-col items-center gap-2",
+                        selectedExtras.oven > 0
+                          ? "border-primary bg-primary/5"
+                          : "border-blue-100 hover:border-primary/30"
+                      )}
+                    >
+                      <ChefHat className={cn("w-6 h-6", selectedExtras.oven > 0 ? "text-primary" : "text-text/50")} />
+                      <span className={cn("font-bold text-sm", selectedExtras.oven > 0 ? "text-primary" : "text-text")}>
+                        Oven
+                      </span>
+                      <span className="text-xs font-bold text-text/50">
+                        +{PRICING.extras.oven.price} zł
+                      </span>
+                    </button>
+                    <button
+                      onClick={() => toggleExtraCheck("fridge")}
+                      className={cn(
+                        "p-4 rounded-2xl border-2 transition-all flex flex-col items-center gap-2",
+                        selectedExtras.fridge > 0
+                          ? "border-primary bg-primary/5"
+                          : "border-blue-100 hover:border-primary/30"
+                      )}
+                    >
+                      <Archive className={cn("w-6 h-6", selectedExtras.fridge > 0 ? "text-primary" : "text-text/50")} />
+                      <span className={cn("font-bold text-sm", selectedExtras.fridge > 0 ? "text-primary" : "text-text")}>
+                        Fridge
+                      </span>
+                      <span className="text-xs font-bold text-text/50">
+                        +{PRICING.extras.fridge.price} zł
+                      </span>
+                    </button>
+                    <button
+                      onClick={() => setSelectedExtras((prev) => ({ ...prev, windows: prev.windows > 0 ? 0 : 1 }))}
+                      className={cn(
+                        "p-4 rounded-2xl border-2 transition-all flex flex-col items-center gap-2",
+                        selectedExtras.windows > 0
+                          ? "border-primary bg-primary/5"
+                          : "border-blue-100 hover:border-primary/30"
+                      )}
+                    >
+                      <Square className={cn("w-6 h-6", selectedExtras.windows > 0 ? "text-primary" : "text-text/50")} />
+                      <span className={cn("font-bold text-sm", selectedExtras.windows > 0 ? "text-primary" : "text-text")}>
+                        Windows
+                      </span>
+                      <div className="flex items-center gap-1">
+                        <button
+                          onClick={(e) => { e.stopPropagation(); setSelectedExtras((prev) => ({ ...prev, windows: Math.max(0, prev.windows - 1) })); }}
+                          className="w-6 h-6 rounded-full bg-blue-100 hover:bg-primary/20 flex items-center justify-center text-text"
+                          disabled={selectedExtras.windows === 0}
+                        >
+                          <Minus className="w-3 h-3" />
+                        </button>
+                        <span className="text-xs font-bold text-text w-4 text-center">{selectedExtras.windows}</span>
+                        <button
+                          onClick={(e) => { e.stopPropagation(); setSelectedExtras((prev) => ({ ...prev, windows: prev.windows + 1 })); }}
+                          className="w-6 h-6 rounded-full bg-blue-100 hover:bg-primary/20 flex items-center justify-center text-text"
+                        >
+                          <Plus className="w-3 h-3" />
+                        </button>
+                      </div>
+                      <span className="text-xs font-bold text-text/50">
+                        {selectedExtras.windows > 0 ? `${PRICING.extras.windows.price * selectedExtras.windows} zł` : `+${PRICING.extras.windows.price} zł/window`}
+                      </span>
+                    </button>
+                    <button
+                      onClick={() => toggleExtraCheck("balcony")}
+                      className={cn(
+                        "p-4 rounded-2xl border-2 transition-all flex flex-col items-center gap-2",
+                        selectedExtras.balcony > 0
+                          ? "border-primary bg-primary/5"
+                          : "border-blue-100 hover:border-primary/30"
+                      )}
+                    >
+                      <Home className={cn("w-6 h-6", selectedExtras.balcony > 0 ? "text-primary" : "text-text/50")} />
+                      <span className={cn("font-bold text-sm", selectedExtras.balcony > 0 ? "text-primary" : "text-text")}>
+                        Balcony
+                      </span>
+                      <span className="text-xs font-bold text-text/50">
+                        +{PRICING.extras.balcony.price} zł
+                      </span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Date and Time Selection */}
+                <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
+                  <h2 className="text-xl font-bold text-text mb-6 flex items-center gap-2">
+                    <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
+                      {propertyType === "apartment" ? 4 : propertyType === "office" ? 4 : 4}
+                    </span>
+                    Choose date and time
+                  </h2>
+
+                  <div className="flex items-center justify-between mb-4">
+                    <button
+                      onClick={() => setWeekOffset((v) => v - 1)}
+                      className="w-10 h-10 rounded-xl border border-blue-100 bg-white hover:bg-blue-50 transition-colors flex items-center justify-center text-text"
+                    >
+                      <ChevronLeft className="w-5 h-5" />
+                    </button>
+                    <div className="text-sm font-bold text-text/70 uppercase tracking-widest">
+                      {formatFullDate(weekDays[0])} — {formatFullDate(weekDays[6])}
+                    </div>
+                    <button
+                      onClick={() => setWeekOffset((v) => v + 1)}
+                      className="w-10 h-10 rounded-xl border border-blue-100 bg-white hover:bg-blue-50 transition-colors flex items-center justify-center text-text"
+                    >
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-7 gap-2 mb-6">
+                    {weekDays.map((d) => {
+                      const active = startOfDay(d).getTime() === startOfDay(selectedDate).getTime();
+                      return (
+                        <button
+                          key={d.toISOString()}
+                          onClick={() => setSelectedDate(d)}
+                          className={cn(
+                            "p-3 rounded-2xl border text-center transition-all",
+                            active
+                              ? "bg-primary text-white border-primary shadow-md shadow-blue-200/60"
+                              : "bg-white border-blue-50 hover:border-primary/30 hover:bg-blue-50/40 text-text"
+                          )}
+                        >
+                          <div className={cn("text-[10px] font-bold uppercase tracking-widest", active ? "text-white/80" : "text-text/40")}>
+                            {d.toLocaleDateString("en-US", { weekday: "short" })}
+                          </div>
+                          <div className={cn("text-sm font-black mt-1", active ? "text-white" : "text-text")}>
+                            {d.getDate().toString().padStart(2, "0")}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2 mb-6">
+                    {TIME_SLOTS.map((slot) => {
+                      const active = slot === selectedTime;
+                      return (
+                        <button
+                          key={slot}
+                          onClick={() => setSelectedTime(slot)}
+                          className={cn(
+                            "px-3 py-2 rounded-xl border text-xs font-bold transition-all",
+                            active
+                              ? "bg-primary text-white border-primary"
+                              : "bg-white border-blue-50 hover:border-primary/30 text-text/70"
+                          )}
+                        >
+                          {slot}
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  <button className="w-full py-4 bg-primary hover:bg-primary/90 text-white font-bold rounded-2xl transition-all shadow-lg shadow-blue-200/60">
+                    Book Cleaning
+                  </button>
+                </div>
+              </div>
+
+              {/* Right column - Order Summary */}
+              <div className="lg:col-span-4">
+                <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl shadow-blue-50/70 border border-blue-50 sticky top-32">
+                  <h2 className="text-xl font-bold text-text mb-6">Order Summary</h2>
+
+                  <div className="space-y-4 mb-6">
+                    <div className="flex justify-between items-center pb-4 border-b border-blue-50">
+                      <div>
+                        <span className="font-bold text-text block">
+                          {propertyType === "apartment" && `${rooms}-room ${cleaningType} cleaning`}
+                          {propertyType === "office" && `${squareMeters}m² ${cleaningType} cleaning`}
+                          {propertyType === "airbnb" && `${airbnbType} cleaning`}
+                        </span>
+                        <span className="text-xs text-text/50">
+                          {propertyType === "apartment" && (cleaningType === "standard" ? "Standard cleaning" : "Deep cleaning")}
+                          {propertyType === "office" && (cleaningType === "standard" ? "Standard office cleaning" : "After renovation")}
+                          {propertyType === "airbnb" && "Airbnb turn-over cleaning"}
+                        </span>
+                      </div>
+                      <span className="font-bold text-lg text-text">{basePrice} zł</span>
                     </div>
 
                     {extrasTotal > 0 && (
-                      <div className="flex justify-between text-sm">
-                        <span className="text-text/60 font-medium">Extra options</span>
-                        <span className="text-text font-bold">{extrasTotal} PLN</span>
+                      <div className="pb-4 border-b border-blue-50">
+                        <span className="font-bold text-text block mb-2">Additional services</span>
+                        <div className="space-y-1">
+                          {Object.entries(selectedExtras).map(([id, qty]) => {
+                            if (!qty) return null;
+                            const extra = PRICING.extras[id as keyof typeof PRICING.extras];
+                            return (
+                              <div key={id} className="flex justify-between items-center text-sm">
+                                <span className="text-text/70">{extra?.label}</span>
+                                <span className="font-bold text-text">+{extra?.price * qty} zł</span>
+                              </div>
+                            );
+                          })}
+                        </div>
                       </div>
                     )}
 
-                    {frequencyDiscountValue > 0 && (
-                      <div className="flex justify-between text-sm">
-                        <span className="text-accent font-bold">
-                          Frequency discount ({frequency.badge})
-                        </span>
-                        <span className="text-accent font-bold">-{frequencyDiscountValue} PLN</span>
-                      </div>
-                    )}
-
-                    {promoDiscountValue > 0 && appliedPromo && (
-                      <div className="flex justify-between text-sm">
-                        <span className="text-accent font-bold">
-                          Promocode {appliedPromo.code} (-{appliedPromo.discountPercent}%)
-                        </span>
-                        <span className="text-accent font-bold">-{promoDiscountValue} PLN</span>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="pt-6 border-t border-blue-50">
-                    <div className="flex items-start gap-3 p-4 bg-blue-50/50 rounded-2xl border border-blue-50 mb-6">
-                      <Info className="w-5 h-5 text-primary shrink-0" />
-                      <p className="text-xs text-text/60 leading-relaxed">
-                        This is an estimate. In MVP mode we don’t collect payments — the button is a UI preview.
-                      </p>
+                    <div className="flex justify-between items-center pt-2">
+                      <span className="font-bold text-xl text-text">Total</span>
+                      <span className="font-black text-3xl text-primary">{total} zł</span>
                     </div>
-
-                    <button 
-                      onClick={() => {
-                        // Validation
-                        const newErrors: Record<string, string> = {};
-                        
-                        if (!street.trim()) newErrors.street = 'Street is required';
-                        if (!postcode.trim()) newErrors.postcode = 'Post code is required';
-                        if (!houseNumber.trim()) newErrors.houseNumber = 'House number is required';
-                        if (!name.trim()) newErrors.name = 'Name is required';
-                        if (!phone.trim()) newErrors.phone = 'Phone is required';
-                        if (!email.trim()) {
-                          newErrors.email = 'Email is required';
-                        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                          newErrors.email = 'Please enter a valid email';
-                        }
-                        
-                        if (Object.keys(newErrors).length > 0) {
-                          setErrors(newErrors);
-                          return;
-                        }
-                        
-                        setErrors({});
-                        const orderInfo = {
-                          rooms,
-                          bathrooms,
-                          selectedDate: formatFullDate(selectedDate),
-                          selectedTime,
-                          extras: selectedExtras,
-                          frequency: frequency.id,
-                          total,
-                          baseTotal,
-                          extrasTotal
-                        };
-                        const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(orderInfo))));
-                        window.location.href = `/order/payment?data=${encoded}`;
-                      }}
-                      className="w-full py-4 bg-accent hover:bg-accent/90 text-white font-bold rounded-2xl transition-all shadow-lg shadow-accent/20 flex items-center justify-center gap-2 group">
-                      Place order
-                      <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                    </button>
                   </div>
+
+                  <button className="w-full py-4 bg-primary hover:bg-primary/90 text-white font-bold rounded-2xl transition-all shadow-lg shadow-blue-200/60">
+                    Book Cleaning
+                  </button>
+
+                  <p className="text-xs text-text/50 text-center mt-4">
+                    No prepayment required • You can cancel or reschedule
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <Footer />
-    </main>
+        <Footer />
+      </main>
+    </>
   );
 }
 
-export default function OrderPageWithSuspense() {
+export default function OrderPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full" />
-      </div>
-    }>
+    <Suspense fallback={<div>Loading...</div>}>
       <OrderPageContent />
     </Suspense>
   );
 }
-

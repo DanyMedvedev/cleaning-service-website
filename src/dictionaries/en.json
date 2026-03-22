@@ -69,6 +69,27 @@
     "summary": "Order Summary",
     "book_now": "Book cleaning now"
   },
+  "contact_form": {
+    "title": "Contact Us",
+    "subtitle": "Leave your details and we'll get back to you shortly",
+    "name_label": "Your Name",
+    "name_placeholder": "Enter your full name",
+    "phone_label": "Phone Number",
+    "phone_placeholder": "123 456 789",
+    "services_label": "Select Services",
+    "submit": "Send Request",
+    "privacy": "We will contact you within 24 hours",
+    "errors": {
+      "name_required": "Please enter your name",
+      "phone_required": "Please enter your phone number",
+      "phone_invalid": "Please enter a valid phone number",
+      "services_required": "Please select at least one service"
+    },
+    "success": {
+      "title": "Thank you!",
+      "message": "We will contact you shortly. Thank you for choosing us!"
+    }
+  },
   "about": {
     "title": "About Us",
     "subtitle": "Professional cleaning services with a personal touch",
