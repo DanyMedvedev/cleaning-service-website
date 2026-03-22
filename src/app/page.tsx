@@ -81,7 +81,7 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ delay: 0.25, duration: 0.5 }}
-              className="w-full lg:w-5/12 lg:mt-4 -mb-40"
+              className="w-full lg:w-5/12 lg:mt-4 lg:-mb-40"
             >
               <ContactForm />
             </motion.div>
