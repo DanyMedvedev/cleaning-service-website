@@ -116,7 +116,7 @@ const TIME_SLOTS = [
 function OrderPageContent() {
   const searchParams = useSearchParams();
   const serviceParam = searchParams?.get("service");
-  
+
   // Property type selection
   const [propertyType, setPropertyType] = useState<PropertyType>("apartment");
   
@@ -301,6 +301,12 @@ function OrderPageContent() {
           visitDate:   selectedDate.toISOString().split("T")[0],
           visitTime:   selectedTime,
           price:       total,
+          city:        city,
+          street:      street,
+          postcode:    postcode,
+          houseNumber: houseNumber,
+          apartmentNumber: apartmentNumber,
+          notes:       notes,
         }),
       });
 
@@ -972,15 +978,96 @@ function OrderPageContent() {
                       );
                     })}
                   </div>
-
-                  <button
-                    onClick={handleSubmit}
-                    disabled={isLoading}
-                    className="w-full py-4 bg-primary hover:bg-primary/90 text-white font-bold rounded-2xl transition-all shadow-lg shadow-blue-200/60 disabled:opacity-50"
-                  >
-                    {isLoading ? "Sending..." : "Book Cleaning"}
-                  </button>
                 </div>
+
+                {/* Address Section */}
+                <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-4 md:p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
+                  <h2 className="text-xl font-bold text-text mb-6 flex items-center gap-2">
+                    <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
+                      {propertyType === "apartment" ? 5 : propertyType === "office" ? 5 : 5}
+                    </span>
+                    Address
+                  </h2>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-text/70 mb-2">City</label>
+                      <input
+                        type="text"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        placeholder="Warsaw"
+                        className="w-full px-4 py-3 rounded-xl border border-blue-100 bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                        suppressHydrationWarning
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-text/70 mb-2">Street</label>
+                      <input
+                        type="text"
+                        value={street}
+                        onChange={(e) => setStreet(e.target.value)}
+                        placeholder="Street name"
+                        className="w-full px-4 py-3 rounded-xl border border-blue-100 bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                        suppressHydrationWarning
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-text/70 mb-2">Postcode</label>
+                      <input
+                        type="text"
+                        value={postcode}
+                        onChange={(e) => setPostcode(e.target.value)}
+                        placeholder="00-001"
+                        className="w-full px-4 py-3 rounded-xl border border-blue-100 bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                        suppressHydrationWarning
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-text/70 mb-2">House number</label>
+                      <input
+                        type="text"
+                        value={houseNumber}
+                        onChange={(e) => setHouseNumber(e.target.value)}
+                        placeholder="12"
+                        className="w-full px-4 py-3 rounded-xl border border-blue-100 bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                        suppressHydrationWarning
+                      />
+                    </div>
+                  </div>
+
+                  <div className="mt-4">
+                    <label className="block text-sm font-medium text-text/70 mb-2">Apartment number (optional)</label>
+                    <input
+                      type="text"
+                      value={apartmentNumber}
+                      onChange={(e) => setApartmentNumber(e.target.value)}
+                      placeholder="5"
+                      className="w-full px-4 py-3 rounded-xl border border-blue-100 bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all md:w-1/2"
+                      suppressHydrationWarning
+                    />
+                  </div>
+
+                  <div className="mt-4">
+                    <label className="block text-sm font-medium text-text/70 mb-2">Comments (optional)</label>
+                    <textarea
+                      value={notes}
+                      onChange={(e) => setNotes(e.target.value)}
+                      placeholder="Any special instructions or notes..."
+                      rows={3}
+                      className="w-full px-4 py-3 rounded-xl border border-blue-100 bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none"
+                      suppressHydrationWarning
+                    />
+                  </div>
+                </div>
+
+                <button
+                  onClick={handleSubmit}
+                  disabled={isLoading}
+                  className="w-full py-4 bg-primary hover:bg-primary/90 text-white font-bold rounded-2xl transition-all shadow-lg shadow-blue-200/60 disabled:opacity-50"
+                >
+                  {isLoading ? "Sending..." : "Book Cleaning"}
+                </button>
               </div>
 
               {/* Right column - Order Summary */}
