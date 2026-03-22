@@ -105,8 +105,45 @@ export default function ExtrasServicePage() {
           </div>
         </div>
 
-        {/* Extras Section */}
+        {/* What's Included Section */}
         <section className="py-20 bg-background">
+          <div className="max-w-7xl mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-text mb-4">
+                Что входит в дополнительные услуги
+              </h2>
+              <p className="text-text/60 max-w-2xl mx-auto">
+                Детальная уборка каждого элемента
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {extras.flatMap((extra) =>
+                extra.features.map((feature, fIdx) => (
+                  <motion.div
+                    key={`${extra.id}-${fIdx}`}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: fIdx * 0.05 }}
+                    className="bg-white rounded-2xl p-5 flex items-center gap-3 shadow-sm border border-blue-50"
+                  >
+                    <Check className="w-5 h-5 text-accent flex-shrink-0" />
+                    <span className="text-text font-medium">{feature}</span>
+                  </motion.div>
+                ))
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* Extras Section */}
+        <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

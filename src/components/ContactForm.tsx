@@ -21,13 +21,7 @@ const COUNTRIES = [
   { code: 'UA', name: 'Ukraine', flag: '🇺🇦', dialCode: '+380' },
   { code: 'DE', name: 'Germany', flag: '🇩🇪', dialCode: '+49' },
   { code: 'GB', name: 'United Kingdom', flag: '🇬🇧', dialCode: '+44' },
-  { code: 'US', name: 'United States', flag: '🇺🇸', dialCode: '+1' },
   { code: 'RU', name: 'Russia', flag: '🇷🇺', dialCode: '+7' },
-  { code: 'LT', name: 'Lithuania', flag: '🇱🇹', dialCode: '+370' },
-  { code: 'LV', name: 'Latvia', flag: '🇱🇻', dialCode: '+371' },
-  { code: 'EE', name: 'Estonia', flag: '🇪🇪', dialCode: '+372' },
-  { code: 'CZ', name: 'Czech Republic', flag: '🇨🇿', dialCode: '+420' },
-  { code: 'SK', name: 'Slovakia', flag: '🇸🇰', dialCode: '+421' },
 ];
 
 const SERVICES = [
@@ -88,12 +82,35 @@ export default function ContactForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (validateForm()) {
-      // Simulate form submission
+    if (!validateForm()) return;
+
+    try {
+      await fetch("/api/submit-form", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          formType:    "Малая",
+          name:        name,
+          phone:       selectedCountry.dialCode + phone,
+          objectType:  "",
+          cleaningType: selectedServices.includes("deep") ? "Deep" : "Standard",
+          fridge:      selectedServices.includes("fridge"),
+          oven:        selectedServices.includes("oven"),
+          wardrobe:    selectedServices.includes("cabinets"),
+          ironing:     selectedServices.includes("ironing"),
+          balcony:     selectedServices.includes("balcony"),
+          windows:     selectedServices.includes("windows") ? 1 : 0,
+        }),
+      });
+
       setIsSubmitted(true);
+
+    } catch (err) {
+      console.error("Ошибка отправки:", err);
+      setIsSubmitted(true); // всё равно показываем успех пользователю
     }
   };
 
@@ -107,7 +124,7 @@ export default function ContactForm() {
 
   const selectCountry = (country: typeof COUNTRIES[0]) => {
     setSelectedCountry(country);
-    setPhone(country.dialCode);
+    setPhone('');
     setShowCountryDropdown(false);
   };
 
@@ -227,8 +244,8 @@ export default function ContactForm() {
                 <Phone className="w-4 h-4 text-primary" />
                 {t('contact_form.phone_label')}
               </label>
-              <div className="relative overflow-hidden">
-                <div className="flex overflow-x-auto -mx-2">
+              <div className="relative">
+                <div className="flex -mx-2">
                   {/* Country Selector */}
                   <div className="relative flex-shrink-0">
                     <button

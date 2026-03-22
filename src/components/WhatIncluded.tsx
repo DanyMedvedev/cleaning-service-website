@@ -10,25 +10,25 @@ const tabs = [
     id: 'room', 
     label: 'In the room', 
     items: ['Dusting all surfaces', 'Floor vacuuming & mopping', 'Mirror cleaning', 'Tidying up things'],
-    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=1200'
+    image: '/images/in-the-room-cleaning.png'
   },
   { 
     id: 'hallway', 
     label: 'In the hallway', 
     items: ['Shoe arrangement', 'Dusting shelves', 'Floor mopping', 'Mirror cleaning'],
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=1200'
+    image: '/images/hallway-cleaning-up.png'
   },
   { 
     id: 'kitchen', 
     label: 'Kitchen', 
     items: ['Dish washing', 'Countertop cleaning', 'Sink disinfection', 'Fridge outside cleaning'],
-    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&q=80&w=1200'
+    image: '/images/kitchen-cleaning-up.png'
   },
   { 
     id: 'bathroom', 
     label: 'Bathroom', 
     items: ['Toilet disinfection', 'Shower/Tub cleaning', 'Mirror & Sink cleaning', 'Floor mopping'],
-    image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=1200'
+    image: '/images/bathroom-cleaning.png'
   },
 ];
 
@@ -240,29 +240,17 @@ export default function WhatIncluded() {
                         className="group flex items-center gap-4 p-5 rounded-2xl transition-all duration-500 hover:shadow-xl hover:bg-white bg-white/70 backdrop-blur-sm border border-white/50"
                         style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}
                       >
-                        <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-primary/10 transition-all duration-300 group-hover:bg-primary group-hover:scale-110">
-                          <CheckCircle2 className="w-5 h-5 text-primary group-hover:text-white" />
+                        <div className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0 bg-primary/10 transition-all duration-300 group-hover:bg-primary group-hover:scale-110">
+                          <CheckCircle2 className="w-7 h-7 text-primary group-hover:text-white" />
                         </div>
-                        <span className="font-medium text-base text-text">
+                        <span className="font-medium text-xl text-text">
                           {item}
                         </span>
                       </motion.div>
                     ))}
                   </div>
 
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4, duration: 0.4 }}
-                    className="mt-8"
-                  >
-                    <button 
-                      className="px-8 py-4 bg-primary text-white rounded-full font-medium shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/25 hover:scale-105 transition-all duration-500"
-                      style={{ fontFamily: 'DM Sans, sans-serif' }}
-                    >
-                      Book Now
-                    </button>
-                  </motion.div>
+
                 </div>
               </motion.div>
             </AnimatePresence>

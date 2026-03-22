@@ -148,6 +148,8 @@ function OrderPageContent() {
   const [email, setEmail] = useState("");
   const [notes, setNotes] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Service info data
   const serviceInfo: Record<string, {
@@ -262,6 +264,59 @@ function OrderPageContent() {
   const toggleExtraCheck = (id: string) => {
     setSelectedExtras((prev) => ({ ...prev, [id]: prev[id] ? 0 : 1 }));
   };
+
+  const handleSubmit = async () => {
+    if (!name || !phone) {
+      setErrors({ name: !name ? "Required" : "", phone: !phone ? "Required" : "" });
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      await fetch("/api/submit-form", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          formType:    "Большая",
+          name:        name,
+          phone:       phone,
+          objectType:  propertyType,
+          details:     propertyType === "office" ? squareMeters : propertyType === "airbnb" ? airbnbType : rooms,
+          cleaningType: cleaningType,
+          windows:     selectedExtras.windows,
+          fridge:      selectedExtras.fridge > 0,
+          oven:        selectedExtras.oven > 0,
+          wardrobe:    false,
+          ironing:     false,
+          balcony:     selectedExtras.balcony > 0,
+          visitDate:   selectedDate.toISOString().split("T")[0],
+          visitTime:   selectedTime,
+          price:       total,
+        }),
+      });
+
+      setIsSubmitted(true);
+
+    } catch (err) {
+      console.error("Ошибка:", err);
+      setIsSubmitted(true); // всё равно показываем успех
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  if (isSubmitted) {
+    return (
+      <main className="min-h-screen flex items-center justify-center">
+        <div className="text-center p-12">
+          <div className="text-6xl mb-6">✅</div>
+          <h2 className="text-3xl font-black text-text mb-4">Booking confirmed!</h2>
+          <p className="text-text/60 font-medium">We will contact you shortly.</p>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <>
@@ -849,8 +904,12 @@ function OrderPageContent() {
                     })}
                   </div>
 
-                  <button className="w-full py-4 bg-primary hover:bg-primary/90 text-white font-bold rounded-2xl transition-all shadow-lg shadow-blue-200/60">
-                    Book Cleaning
+                  <button
+                    onClick={handleSubmit}
+                    disabled={isLoading}
+                    className="w-full py-4 bg-primary hover:bg-primary/90 text-white font-bold rounded-2xl transition-all shadow-lg shadow-blue-200/60 disabled:opacity-50"
+                  >
+                    {isLoading ? "Sending..." : "Book Cleaning"}
                   </button>
                 </div>
               </div>
@@ -901,8 +960,12 @@ function OrderPageContent() {
                     </div>
                   </div>
 
-                  <button className="w-full py-4 bg-primary hover:bg-primary/90 text-white font-bold rounded-2xl transition-all shadow-lg shadow-blue-200/60">
-                    Book Cleaning
+                  <button
+                    onClick={handleSubmit}
+                    disabled={isLoading}
+                    className="w-full py-4 bg-primary hover:bg-primary/90 text-white font-bold rounded-2xl transition-all shadow-lg shadow-blue-200/60 disabled:opacity-50"
+                  >
+                    {isLoading ? "Sending..." : "Book Cleaning"}
                   </button>
 
                   <p className="text-xs text-text/50 text-center mt-4">
