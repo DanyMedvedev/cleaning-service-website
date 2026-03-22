@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { Globe, User, ChevronDown, Sparkles, Home, Building2, Square } from 'lucide-react';
+import { Globe, User, ChevronDown, Sparkles, Home, Building2, Square, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from '@/lib/i18n';
 
@@ -59,11 +59,8 @@ export default function Navbar() {
         {/* Left side */}
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-9 h-9 bg-primary/10 border border-primary/10 rounded-2xl flex items-center justify-center text-primary font-black text-lg">
-              CL
-            </div>
-            <span className="text-xl font-bold tracking-tight hidden sm:block text-text">
-              Cleanly
+            <span className="text-xl font-medium tracking-wide hidden sm:block text-text font-serif italic">
+              Czysty dom
             </span>
           </Link>
 
@@ -82,6 +79,16 @@ export default function Navbar() {
                 }`}
               />
             </button>
+
+            <a
+              href="tel:+48731751255"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-blue-100 bg-background text-text text-sm font-medium hover:bg-white hover:border-primary/40 hover:text-primary transition-colors"
+            >
+              <Phone className="w-4 h-4 text-primary" />
+              <span className="text-xs font-semibold">
+                +48 731 751 255
+              </span>
+            </a>
           </div>
         </div>
 
@@ -106,18 +113,6 @@ export default function Navbar() {
           >
             <Sparkles className="w-4 h-4" />
             {t('nav.cleaning')}
-          </Link>
-          <Link
-            href="#services"
-            className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-blue-50 transition-all text-sm font-medium whitespace-nowrap"
-          >
-            {t('nav.window_cleaning')}
-          </Link>
-          <Link
-            href="#services"
-            className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-blue-50 transition-all text-sm font-medium whitespace-nowrap"
-          >
-            {t('nav.upholstery')}
           </Link>
 
           <div className="h-6 w-px bg-blue-100 hidden md:block" />

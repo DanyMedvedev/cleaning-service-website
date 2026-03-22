@@ -195,7 +195,7 @@ function SuccessContent() {
             <div className="p-6 bg-gray-50" id="receipt">
               <div className="bg-white rounded-2xl p-6 border border-blue-100">
                 <div className="text-center mb-6 pb-6 border-b border-blue-100">
-                  <h4 className="text-xl font-black text-primary mb-2">Cleanly</h4>
+                  <h4 className="text-xl font-black text-primary mb-2">CzystyDom</h4>
                   <p className="text-sm text-text/60">Professional Cleaning Services</p>
                   <p className="text-xs text-text/40 mt-2">Order: {orderData.orderId}</p>
                   <p className="text-xs text-text/40">Date: {formattedOrderDate}</p>
@@ -229,7 +229,7 @@ function SuccessContent() {
                 
                 <div className="mt-6 pt-6 border-t border-blue-100 text-center">
                   <p className="text-xs text-text/40">
-                    Thank you for choosing Cleanly!<br />
+                    Thank you for choosing CzystyDom!<br />
                     See you on {orderData.selectedDate}
                   </p>
                 </div>
@@ -242,7 +242,7 @@ function SuccessContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="bg-white rounded-3xl border border-blue-100 p-6 mb-8"
+            className="bg-white rounded-3xl border border-blue-100 p-4 md:p-6 mb-8"
           >
             <div className="flex items-center gap-3 mb-4">
               <Mail className="w-5 h-5 text-primary" />

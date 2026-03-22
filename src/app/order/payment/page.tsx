@@ -196,7 +196,7 @@ function PaymentContent() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="bg-white rounded-3xl border border-blue-100 p-8 mb-8"
+              className="bg-white rounded-3xl border border-blue-100 p-4 md:p-8 mb-8"
             >
               <div className="flex items-center gap-3 mb-6">
                 <ShieldCheck className="w-5 h-5 text-green-600" />
@@ -257,7 +257,7 @@ function PaymentContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-white rounded-3xl border border-blue-100 p-6 mb-8"
+            className="bg-white rounded-3xl border border-blue-100 p-4 md:p-6 mb-8"
           >
             <h3 className="text-lg font-bold text-text mb-4">Order Summary</h3>
             <div className="space-y-3 text-sm">

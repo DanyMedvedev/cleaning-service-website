@@ -42,7 +42,7 @@ export default function Footer() {
                 CL
               </div>
               <span className="text-xl font-bold text-text tracking-tight">
-                Cleanly
+                CzystyDom
               </span>
             </Link>
             <p className="text-text/70 text-sm leading-relaxed max-w-xs">

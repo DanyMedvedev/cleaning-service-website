@@ -349,16 +349,49 @@ function OrderPageContent() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
               {/* Left column - Configuration */}
               <div className="lg:col-span-8 space-y-8">
-                {/* Property Type Selection */}
-                <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
+                {/* Contact Info */}
+                <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-4 md:p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
                   <h2 className="text-xl font-bold text-text mb-6 flex items-center gap-2">
                     <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
                       1
                     </span>
+                    Your contact details
+                  </h2>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-text/70 mb-2">Name</label>
+                      <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Your name"
+                        className="w-full px-4 py-3 rounded-xl border border-blue-100 bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-text/70 mb-2">Phone number</label>
+                      <input
+                        type="tel"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        placeholder="+48 123 456 789"
+                        className="w-full px-4 py-3 rounded-xl border border-blue-100 bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Property Type Selection */}
+                <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-4 md:p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
+                  <h2 className="text-xl font-bold text-text mb-6 flex items-center gap-2">
+                    <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
+                      2
+                    </span>
                     Property type
                   </h2>
 
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <button
                       onClick={() => setPropertyType("apartment")}
                       className={cn(
@@ -406,7 +439,7 @@ function OrderPageContent() {
 
                 {/* Apartment Options */}
                 {propertyType === "apartment" && (
-                  <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
+                  <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-4 md:p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
                     <h2 className="text-xl font-bold text-text mb-6 flex items-center gap-2">
                       <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
                         2
@@ -493,7 +526,7 @@ function OrderPageContent() {
 
                 {/* Office Options */}
                 {propertyType === "office" && (
-                  <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
+                  <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-4 md:p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
                     <h2 className="text-xl font-bold text-text mb-6 flex items-center gap-2">
                       <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
                         2
@@ -582,7 +615,7 @@ function OrderPageContent() {
 
                 {/* Airbnb Options */}
                 {propertyType === "airbnb" && (
-                  <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
+                  <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-4 md:p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
                     <h2 className="text-xl font-bold text-text mb-6 flex items-center gap-2">
                       <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
                         2
@@ -593,7 +626,7 @@ function OrderPageContent() {
                     {/* Bedroom Type */}
                     <div>
                       <span className="font-bold text-text/80 mb-4 block">Number of rooms</span>
-                      <div className="grid grid-cols-3 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <button
                           onClick={() => setAirbnbType("studio")}
                           className={cn(
@@ -648,7 +681,7 @@ function OrderPageContent() {
                 )}
 
                 {/* Additional Services */}
-                <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
+                <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-4 md:p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
                   <h2 className="text-xl font-bold text-text mb-6 flex items-center gap-2">
                     <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
                       {propertyType === "apartment" ? 3 : propertyType === "office" ? 3 : 3}
@@ -745,7 +778,7 @@ function OrderPageContent() {
                 </div>
 
                 {/* Date and Time Selection */}
-                <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
+                <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-4 md:p-8 shadow-xl shadow-blue-50/70 border border-blue-50">
                   <h2 className="text-xl font-bold text-text mb-6 flex items-center gap-2">
                     <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
                       {propertyType === "apartment" ? 4 : propertyType === "office" ? 4 : 4}
@@ -824,7 +857,7 @@ function OrderPageContent() {
 
               {/* Right column - Order Summary */}
               <div className="lg:col-span-4">
-                <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl shadow-blue-50/70 border border-blue-50 sticky top-32">
+                <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-4 md:p-8 shadow-xl shadow-blue-50/70 border border-blue-50 sticky top-32">
                   <h2 className="text-xl font-bold text-text mb-6">Order Summary</h2>
 
                   <div className="space-y-4 mb-6">

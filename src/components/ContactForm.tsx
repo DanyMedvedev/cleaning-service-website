@@ -113,12 +113,12 @@ export default function ContactForm() {
 
   if (isSubmitted) {
     return (
-      <section className="py-24 bg-gradient-to-br from-primary/5 via-background to-secondary/5 relative overflow-hidden">
+      <section className="relative overflow-hidden">
         <div className="max-w-2xl mx-auto px-4 relative">
           <motion.div 
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-white/95 backdrop-blur-sm rounded-[32px] shadow-2xl shadow-blue-200/60 border border-blue-50 p-12 text-center"
+            className="bg-white/95 backdrop-blur-sm rounded-[32px] shadow-2xl shadow-blue-200/60 border border-blue-50 p-6 md:p-12 text-center"
           >
             <motion.div
               initial={{ scale: 0 }}
@@ -356,6 +356,15 @@ export default function ContactForm() {
                 </motion.p>
               )}
             </div>
+
+            {/* Phone Button */}
+            <a
+              href="tel:+48731751255"
+              className="w-full py-4 bg-primary/10 hover:bg-primary/20 text-primary font-bold rounded-2xl transition-all flex items-center justify-center gap-3 group text-lg"
+            >
+              <Phone className="w-5 h-5" />
+              +48 731 751 255
+            </a>
 
             {/* Submit Button */}
             <motion.button
