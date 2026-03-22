@@ -4,7 +4,7 @@ export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
 
-        const res = await fetch("https://script.google.com/macros/s/AKfycbweI4FFvB5FE1M4TAkcZVjIkb1Q_amW_kw-waPBiOhcYc5cYD8I6ZwZv6tDtXvKR7Vs/exec", {
+        const res = await fetch("https://script.google.com/macros/s/AKfycbzIOsVZMLxAoz4Qzg6D-uLfmtDpAE9FFKjgVX0VC0KTKM_Y7-32QjnQ2Ecl2-JIL3N2/exec", {
             method: "POST",
             redirect: "follow",
             headers: { "Content-Type": "text/plain" },
