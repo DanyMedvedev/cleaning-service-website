@@ -18,7 +18,6 @@ import {
   Square,
   Minus,
   Plus,
-  MessageCircle,
 } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -293,7 +292,6 @@ function OrderPageContent() {
 
   const handleSubmit = async () => {
     if (!name || !phone) {
-      setErrors({ name: !name ? "Required" : "", phone: !phone ? "Required" : "" });
       return;
     }
 
