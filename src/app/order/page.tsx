@@ -327,6 +327,8 @@ function OrderPageContent() {
           balcony:     selectedExtras.balcony > 0,
           visitDate:   selectedDate.toISOString().split("T")[0],
           visitTime:   selectedTime,
+          tsaddress:   `${street}, ${houseNumber}${apartmentNumber ? '/' + apartmentNumber : ''}, ${postcode}, ${city}`,
+          comment:     notes,
           price:       total,
           city:        city,
           street:      street,
