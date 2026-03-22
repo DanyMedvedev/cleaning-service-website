@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Check, Sparkles, Home, ArrowRight } from "lucide-react";
+import { useTranslation } from "@/lib/i18n";
 
 const standardFeatures = [
   "Протирание пыли с мебели и поверхностей",
@@ -46,6 +47,7 @@ const pricing = {
 };
 
 export default function ApartmentServicePage() {
+  const { t } = useTranslation();
   return (
     <>
       <main className="min-h-screen">

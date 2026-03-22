@@ -125,5 +125,124 @@
     "receipt_sent": "Paragon wysłany na",
     "back_home": "Wróć do strony głównej",
     "book_again": "Zamów kolejne sprzątanie"
+  },
+  "order": {
+    "constructor": "Konstruktor zamówienia",
+    "cleaning_in": "Sprzątanie w",
+    "configure_cleaning": "Skonfiguruj sprzątanie, wybierz wygodną datę i czas, a koszt zobaczysz natychmiast.",
+    "supplies_included": "Środki w cenie",
+    "no_prepayment": "Bez przedpłaty",
+    "contact_details": "Twoje dane kontaktowe",
+    "name": "Imię",
+    "name_placeholder": "Twoje imię",
+    "phone_number": "Numer telefonu",
+    "property_type": "Typ nieruchomości",
+    "apartment": "Mieszkanie",
+    "office": "Biuro",
+    "airbnb": "Airbnb",
+    "apartment_details": "Szczegóły mieszkania",
+    "number_of_rooms": "Liczba pokoi",
+    "rooms": "pokoi",
+    "type_of_cleaning": "Rodzaj sprzątania",
+    "standard": "Standardowe",
+    "deep": "Gruntowne",
+    "office_details": "Szczegóły biura",
+    "office_area": "Powierzchnia biura (m²)",
+    "after_renovation": "Po remoncie",
+    "regular_office": "Regularne sprzątanie biura",
+    "deep_renovation": "Gruntowne sprzątanie po remoncie",
+    "airbnb_details": "Szczegóły Airbnb / Mieszkania",
+    "studio": "Kawalerka",
+    "1_bedroom": "1 pokój",
+    "2_bedrooms": "2 pokoje",
+    "additional_services": "Dodatkowe usługi",
+    "oven": "Piekarnik",
+    "fridge": "Lodówka",
+    "windows": "Okna",
+    "balcony": "Balkon",
+    "choose_date_time": "Wybierz datę i czas",
+    "address": "Adres",
+    "city": "Miasto",
+    "city_placeholder": "Warszawa",
+    "street": "Ulica",
+    "street_placeholder": "Nazwa ulicy",
+    "postcode": "Kod pocztowy",
+    "postcode_placeholder": "00-001",
+    "house_number": "Numer domu",
+    "house_number_placeholder": "12",
+    "apartment_number": "Numer mieszkania (opcjonalnie)",
+    "apartment_number_placeholder": "5",
+    "comments": "Komentarz (opcjonalnie)",
+    "comments_placeholder": "Jakieś specjalne uwagi lub notatki...",
+    "book_cleaning": "Zamów sprzątanie",
+    "sending": "Wysyłanie...",
+    "order_summary": "Podsumowanie zamówienia",
+    "room_cleaning": "pokojowe sprzątanie",
+    "standard_cleaning": "Sprzątanie standardowe",
+    "deep_cleaning": "Sprzątanie gruntowne",
+    "airbnb_turnover": "Sprzątanie Airbnb między gośćmi",
+    "additional_services_summary": "Dodatkowe usługi",
+    "total": "Suma",
+    "cancel_reschedule": "Bez przedpłaty • Możesz anulować lub zmienić termin",
+    "back_to_home": "Wróć do strony głównej",
+    "success_title": "Zamówienie złożone!",
+    "success_message": "Dziękujemy za rezerwację. Skontaktujemy się wkrótce w celu potwierdzenia."
+  },
+  "services_pages": {
+    "apartment": {
+      "hero": {
+        "subtitle": "Profesjonalne sprzątanie mieszkań w Warszawie. Standardowe i gruntowne sprzątanie dla komfortowego mieszkania.",
+        "cta": "Zamów sprzątanie"
+      },
+      "included": {
+        "title": "Co wchodzi w skład sprzątania",
+        "subtitle": "Robimy wszystko, żeby Twój dom błyszczał czystością"
+      },
+      "pricing": {
+        "standard_title": "Sprzątanie standardowe",
+        "standard_subtitle": "Do regularnego utrzymania czystości",
+        "deep_title": "Sprzątanie gruntowne",
+        "deep_subtitle": "Do dokładnego czyszczenia całego pomieszczenia",
+        "includes": "Co wchodzi:",
+        "cta_standard": "Zamów sprzątanie standardowe",
+        "cta_deep": "Zamów sprzątanie gruntowne"
+      },
+      "why": {
+        "title": "Dlaczego nas wybierają",
+        "subtitle": "Gwarantujemy jakościowe sprzątanie i indywidualne podejście do każdego klienta",
+        "reasons": [
+          { "title": "Doświadczeni sprzątacze", "desc": "Profesjonalni i zweryfikowani specjaliści" },
+          { "title": "Jakościowa chemia", "desc": "Bezpieczne i skuteczne środki" },
+          { "title": "Gwarancja jakości", "desc": "Przerobimy za darmo, jeśli coś się nie spodoba" }
+        ]
+      }
+    },
+    "airbnb": {
+      "hero": {
+        "subtitle": "Profesjonalne sprzątanie mieszkań Airbnb w Warszawie. Szybka zmiana między gośćmi.",
+        "cta": "Zamów sprzątanie"
+      },
+      "features": {
+        "title": "Dlaczego wybrać nasze sprzątanie Airbnb",
+        "fast": "Szybka zmiana",
+        "fast_desc": "Sprzątamy w 2-3 godziny",
+        "checkin": "Gotowi do zameldowania",
+        "checkin_desc": "Świeżą pościel i ręczniki",
+        "photos": "Zdjęcia przed/po",
+        "photos_desc": "Wysyłamy zdjęcia wyniku"
+      }
+    },
+    "office": {
+      "hero": {
+        "subtitle": "Profesjonalne sprzątanie biur w Warszawie. Sprzątamy biura dowolnej wielkości.",
+        "cta": "Zamów sprzątanie"
+      }
+    },
+    "extras": {
+      "hero": {
+        "subtitle": "Dodatkowe usługi sprzątania w Warszawie. Wybierz, czego potrzebujesz.",
+        "cta": "Zamów usługę"
+      }
+    }
   }
 }

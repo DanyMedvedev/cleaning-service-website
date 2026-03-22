@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
+import { useTranslation } from "@/lib/i18n";
 import {
   Check,
   ChevronLeft,
@@ -116,6 +117,7 @@ const TIME_SLOTS = [
 
 function OrderPageContent() {
   const searchParams = useSearchParams();
+  const { t } = useTranslation();
   const serviceParam = searchParams?.get("service");
 
   // Property type selection
@@ -462,23 +464,23 @@ function OrderPageContent() {
             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
               <div className="max-w-2xl">
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary/80 mb-3">
-                  Order constructor
+                  {t('order.constructor')}
                 </p>
                 <h1 className="text-4xl md:text-5xl font-black text-text">
-                  Cleaning in <span className="text-primary">{city}</span>
+                  {t('order.cleaning_in')} <span className="text-primary">{city}</span>
                 </h1>
                 <p className="text-text/60 font-medium mt-4">
-                  Configure your cleaning, choose a convenient date and time, and see the estimated cost instantly.
+                  {t('order.configure_cleaning')}
                 </p>
               </div>
 
               <div className="flex items-center gap-3">
                 <div className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/80 border border-blue-50 shadow-sm">
                   <span className="w-2 h-2 rounded-full bg-accent" />
-                  <span className="text-sm font-semibold text-text">Supplies included</span>
+                  <span className="text-sm font-semibold text-text">{t('order.supplies_included')}</span>
                 </div>
                 <div className="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/60 border border-blue-50">
-                  <span className="text-sm font-semibold text-text/70">No prepayment</span>
+                  <span className="text-sm font-semibold text-text/70">{t('order.no_prepayment')}</span>
                 </div>
               </div>
             </div>
@@ -497,22 +499,22 @@ function OrderPageContent() {
                     <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
                       1
                     </span>
-                    Your contact details
+                    {t('order.contact_details')}
                   </h2>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-text/70 mb-2">Name</label>
+                      <label className="block text-sm font-medium text-text/70 mb-2">{t('order.name')}</label>
                       <input
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        placeholder="Your name"
+                        placeholder={t('order.name_placeholder')}
                         className="w-full px-4 py-3 rounded-xl border border-blue-100 bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-text/70 mb-2">Phone number</label>
+                      <label className="block text-sm font-medium text-text/70 mb-2">{t('order.phone_number')}</label>
                       <div className="relative">
                         <div className="flex">
                           {/* Country Selector */}
@@ -574,7 +576,7 @@ function OrderPageContent() {
                     <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
                       2
                     </span>
-                    Property type
+                    {t('order.property_type')}
                   </h2>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -589,7 +591,7 @@ function OrderPageContent() {
                     >
                       <Home className={cn("w-8 h-8", propertyType === "apartment" ? "text-primary" : "text-text/50")} />
                       <span className={cn("font-bold", propertyType === "apartment" ? "text-primary" : "text-text")}>
-                        Apartment
+                        {t('order.apartment')}
                       </span>
                     </button>
                     <button

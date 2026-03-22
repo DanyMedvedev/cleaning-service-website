@@ -98,5 +98,124 @@
     "mission_desc": "To make every space shine while caring for the environment and our community.",
     "team": "Our Team",
     "team_desc": "Experienced cleaners who take pride in their work and treat your home with respect."
+  },
+  "order": {
+    "constructor": "Order constructor",
+    "cleaning_in": "Cleaning in",
+    "configure_cleaning": "Configure your cleaning, choose a convenient date and time, and see the estimated cost instantly.",
+    "supplies_included": "Supplies included",
+    "no_prepayment": "No prepayment",
+    "contact_details": "Your contact details",
+    "name": "Name",
+    "name_placeholder": "Your name",
+    "phone_number": "Phone number",
+    "property_type": "Property type",
+    "apartment": "Apartment",
+    "office": "Office",
+    "airbnb": "Airbnb",
+    "apartment_details": "Apartment details",
+    "number_of_rooms": "Number of rooms",
+    "rooms": "rooms",
+    "type_of_cleaning": "Type of cleaning",
+    "standard": "Standard",
+    "deep": "Deep",
+    "office_details": "Office details",
+    "office_area": "Office area (m²)",
+    "after_renovation": "After renovation",
+    "regular_office": "Regular office cleaning",
+    "deep_renovation": "Deep cleaning after renovation",
+    "airbnb_details": "Airbnb / Apartment details",
+    "studio": "Studio",
+    "1_bedroom": "1 Bedroom",
+    "2_bedrooms": "2 Bedrooms",
+    "additional_services": "Additional services",
+    "oven": "Oven",
+    "fridge": "Fridge",
+    "windows": "Windows",
+    "balcony": "Balcony",
+    "choose_date_time": "Choose date and time",
+    "address": "Address",
+    "city": "City",
+    "city_placeholder": "Warsaw",
+    "street": "Street",
+    "street_placeholder": "Street name",
+    "postcode": "Postcode",
+    "postcode_placeholder": "00-001",
+    "house_number": "House number",
+    "house_number_placeholder": "12",
+    "apartment_number": "Apartment number (optional)",
+    "apartment_number_placeholder": "5",
+    "comments": "Comments (optional)",
+    "comments_placeholder": "Any special instructions or notes...",
+    "book_cleaning": "Book Cleaning",
+    "sending": "Sending...",
+    "order_summary": "Order Summary",
+    "room_cleaning": "room cleaning",
+    "standard_cleaning": "Standard cleaning",
+    "deep_cleaning": "Deep cleaning",
+    "airbnb_turnover": "Airbnb turn-over cleaning",
+    "additional_services_summary": "Additional services",
+    "total": "Total",
+    "cancel_reschedule": "No prepayment required • You can cancel or reschedule",
+    "back_to_home": "Back to Home",
+    "success_title": "Order Submitted!",
+    "success_message": "Thank you for your booking. We will contact you shortly to confirm."
+  },
+  "services_pages": {
+    "apartment": {
+      "hero": {
+        "subtitle": "Professional apartment cleaning in Warsaw. Standard and deep cleaning for comfortable living.",
+        "cta": "Order cleaning"
+      },
+      "included": {
+        "title": "What's included in cleaning",
+        "subtitle": "We do everything to make your home shine"
+      },
+      "pricing": {
+        "standard_title": "Standard Cleaning",
+        "standard_subtitle": "For regular maintenance",
+        "deep_title": "Deep Cleaning",
+        "deep_subtitle": "For thorough cleaning of the entire premises",
+        "includes": "What's included:",
+        "cta_standard": "Order standard cleaning",
+        "cta_deep": "Order deep cleaning"
+      },
+      "why": {
+        "title": "Why choose us",
+        "subtitle": "We guarantee quality cleaning and individual approach to each client",
+        "reasons": [
+          { "title": "Experienced cleaners", "desc": "Professional and vetted specialists" },
+          { "title": "Quality chemistry", "desc": "Safe and effective products" },
+          { "title": "Quality guarantee", "desc": "We'll redo for free if something doesn't please" }
+        ]
+      }
+    },
+    "airbnb": {
+      "hero": {
+        "subtitle": "Professional cleaning for Airbnb apartments in Warsaw. Fast turnover between guests.",
+        "cta": "Order cleaning"
+      },
+      "features": {
+        "title": "Why choose our Airbnb cleaning",
+        "fast": "Fast turnover",
+        "fast_desc": "We clean within 2-3 hours",
+        "checkin": "Ready for check-in",
+        "checkin_desc": "Fresh linens and towels",
+        "photos": "Before/after photos",
+        "photos_desc": "We send photos of the result"
+      }
+    },
+    "office": {
+      "hero": {
+        "subtitle": "Professional office cleaning in Warsaw. We clean offices of any size.",
+        "cta": "Order cleaning"
+      }
+    },
+    "extras": {
+      "hero": {
+        "subtitle": "Additional cleaning services in Warsaw. Choose what you need.",
+        "cta": "Order service"
+      }
+    }
   }
 }
