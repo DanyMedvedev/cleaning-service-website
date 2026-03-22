@@ -6,7 +6,8 @@ export async function POST(req: NextRequest) {
 
         const res = await fetch("https://script.google.com/macros/s/AKfycbxWQmcUR0vq8BKenVOFCZeg53UtYAIghBO_6hWnhbyQUcug0nNQO9IBO9hSGraQZ-L0/exec", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            redirect: "follow",
+            headers: { "Content-Type": "text/plain" },
             body: JSON.stringify(body),
         });
 
