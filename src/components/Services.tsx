@@ -14,7 +14,7 @@ import { useTranslation } from '@/lib/i18n';
 
 const services = [
   {
-    id: 'regular',
+    id: 'apartment',
     title: 'Regular Cleaning',
     description: 'Perfect for routine maintenance. Includes dusting, vacuuming, mopping, and basic kitchen/bathroom cleaning.',
     icon: Home,
@@ -23,7 +23,7 @@ const services = [
     image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=600'
   },
   {
-    id: 'deep',
+    id: 'airbnb',
     title: 'Deep Cleaning',
     description: 'A thorough, intensive refresh for your home. Targets neglected areas and removes stubborn dirt.',
     icon: Sparkle,
@@ -32,7 +32,7 @@ const services = [
     image: '/images/deep-cleaning-card.png'
   },
   {
-    id: 'move',
+    id: 'extras',
     title: 'Move-out Cleaning',
     description: 'Ensures your old or new home is spotless. Designed to meet landlord inspection standards.',
     icon: Truck,

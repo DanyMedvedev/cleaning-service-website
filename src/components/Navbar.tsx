@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Globe, User, ChevronDown, Sparkles, Home, Building2, Square, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from '@/lib/i18n';
@@ -37,6 +38,7 @@ const servicesMenu = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const servicesRef = useRef<HTMLDivElement>(null);
@@ -100,7 +102,11 @@ export default function Navbar() {
               <Link
                 key={service.id}
                 href={service.href}
-                className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-blue-50 transition-all text-sm font-medium whitespace-nowrap"
+                className={`hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-blue-50 transition-all text-sm font-medium whitespace-nowrap ${
+                  pathname === service.href || pathname.startsWith(service.href + '/')
+                    ? 'text-primary underline underline-offset-4 decoration-2'
+                    : 'text-text'
+                }`}
               >
                 <span>{service.title}</span>
               </Link>
@@ -109,7 +115,11 @@ export default function Navbar() {
 
           <Link
             href="/order"
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-white shadow-md shadow-blue-200/60 hover:bg-primary/90 hover:shadow-lg transition-all text-xs md:text-sm font-bold whitespace-nowrap"
+            className={`flex items-center gap-2 px-4 py-2 rounded-full shadow-md shadow-blue-200/60 hover:shadow-lg transition-all text-xs md:text-sm font-bold whitespace-nowrap ${
+              pathname === '/order' || pathname.startsWith('/order/')
+                ? 'bg-primary text-white'
+                : 'bg-primary text-white hover:bg-primary/90'
+            }`}
           >
             <Sparkles className="w-4 h-4" />
             {t('nav.cleaning')}

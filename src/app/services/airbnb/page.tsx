@@ -33,9 +33,9 @@ export default function AirbnbServicePage() {
         {/* Hero Section */}
         <div className="pt-20 relative h-[500px]">
           <img 
-            src="https://images.unsplash.com/photo-1520637836862-4d197d17c155?auto=format&fit=crop&q=80&w=1600" 
+            src="/images/air-bnb-photo.png" 
             alt="Клининг для Airbnb"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover blur-sm"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
           <div className="absolute inset-0 flex items-center">

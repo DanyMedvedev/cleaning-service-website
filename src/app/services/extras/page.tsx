@@ -72,8 +72,9 @@ export default function ExtrasServicePage() {
         <div className="pt-20 relative h-[500px]">
           <img 
             src="/images/deep-cleaning-card.png" 
+            src="/images/additional-services.png"
             alt="Дополнительные услуги"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover blur-sm"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
           <div className="absolute inset-0 flex items-center">
