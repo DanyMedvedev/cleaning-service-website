@@ -182,7 +182,7 @@ export default function ContactForm() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-white/95 backdrop-blur-sm rounded-[32px] border border-blue-50 p-8 md:p-10"
+          className="bg-white/95 backdrop-blur-sm rounded-[32px] border border-blue-50 p-4 md:p-8 lg:p-10"
         >
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* Name Field */}
@@ -227,18 +227,18 @@ export default function ContactForm() {
                 <Phone className="w-4 h-4 text-primary" />
                 {t('contact_form.phone_label')}
               </label>
-              <div className="relative">
-                <div className="flex">
+              <div className="relative overflow-hidden">
+                <div className="flex overflow-x-auto -mx-2">
                   {/* Country Selector */}
-                  <div className="relative">
+                  <div className="relative flex-shrink-0">
                     <button
                       type="button"
                       onClick={() => setShowCountryDropdown(!showCountryDropdown)}
-                      className="flex items-center gap-2 px-4 py-4 rounded-l-2xl border-2 border-r-0 border-blue-50 bg-blue-50/30 hover:bg-blue-50 transition-colors"
+                      className="flex items-center gap-1 md:gap-2 px-2 md:px-4 py-3 md:py-4 rounded-l-2xl border-2 border-r-0 border-blue-50 bg-blue-50/30 hover:bg-blue-50 transition-colors"
                     >
-                      <span className="text-xl">{selectedCountry.flag}</span>
-                      <span className="text-sm font-bold text-text">{selectedCountry.dialCode}</span>
-                      <svg className="w-4 h-4 text-text/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <span className="text-lg md:text-xl">{selectedCountry.flag}</span>
+                      <span className="text-sm font-bold text-text hidden md:inline">{selectedCountry.dialCode}</span>
+                      <svg className="w-3 md:w-4 h-3 md:h-4 text-text/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
                     </button>
@@ -278,7 +278,7 @@ export default function ContactForm() {
                     onChange={handlePhoneChange}
                     placeholder={t('contact_form.phone_placeholder')}
                     className={cn(
-                      "flex-1 px-6 py-4 rounded-r-2xl border-2 border-l-0 bg-white/80 backdrop-blur-sm text-text placeholder:text-text/30 font-medium transition-all outline-none",
+                      "flex-1 px-3 md:px-6 py-3 md:py-4 rounded-r-2xl border-2 border-l-0 bg-white/80 backdrop-blur-sm text-text placeholder:text-text/30 font-medium transition-all outline-none min-w-0",
                       errors.phone 
                         ? "border-red-300 focus:border-red-400" 
                         : "border-blue-50 focus:border-primary"

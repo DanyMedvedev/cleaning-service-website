@@ -59,18 +59,18 @@ export default function Navbar() {
         {/* Left side */}
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center gap-2">
-            <span className="text-xl font-medium tracking-wide hidden sm:block text-text font-serif italic">
+            <span className="text-lg md:text-xl font-medium tracking-wide block text-text font-serif italic">
               Czysty dom
             </span>
           </Link>
 
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="flex items-center gap-2 md:gap-4">
             <button
               onClick={() => setIsLangOpen(!isLangOpen)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-blue-100 bg-background text-text text-sm font-medium hover:bg-white hover:border-primary/40 hover:text-primary transition-colors"
+              className="flex items-center gap-2 px-2 md:px-3 py-1.5 rounded-full border border-blue-100 bg-background text-text text-sm font-medium hover:bg-white hover:border-primary/40 hover:text-primary transition-colors"
             >
               <Globe className="w-4 h-4 text-primary" />
-              <span className="text-xs font-semibold uppercase tracking-widest">
+              <span className="text-xs font-semibold uppercase tracking-widest hidden md:inline">
                 {currentLang.flag} {currentLang.code}
               </span>
               <ChevronDown
@@ -82,10 +82,10 @@ export default function Navbar() {
 
             <a
               href="tel:+48731751255"
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-blue-100 bg-background text-text text-sm font-medium hover:bg-white hover:border-primary/40 hover:text-primary transition-colors"
+              className="flex items-center gap-1 md:gap-2 px-2 md:px-3 py-1.5 rounded-full border border-blue-100 bg-background text-text text-xs md:text-sm font-medium hover:bg-white hover:border-primary/40 hover:text-primary transition-colors"
             >
               <Phone className="w-4 h-4 text-primary" />
-              <span className="text-xs font-semibold">
+              <span className="hidden md:inline">
                 +48 731 751 255
               </span>
             </a>
@@ -93,7 +93,7 @@ export default function Navbar() {
         </div>
 
         {/* Right side: Navigation Links */}
-        <div className="flex items-center gap-2 md:gap-4 overflow-x-auto no-scrollbar text-text">
+        <div className="hidden lg:flex items-center gap-2 md:gap-4 overflow-x-auto no-scrollbar text-text">
           {/* Services - Horizontal inline */}
           <div className="flex items-center gap-1">
             {servicesMenu.map((service) => (
