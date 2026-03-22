@@ -34,6 +34,15 @@ function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+// Country codes with flags
+const COUNTRIES = [
+  { code: 'PL', name: 'Poland', flag: '🇵🇱', dialCode: '+48' },
+  { code: 'UA', name: 'Ukraine', flag: '🇺🇦', dialCode: '+380' },
+  { code: 'DE', name: 'Germany', flag: '🇩🇪', dialCode: '+49' },
+  { code: 'GB', name: 'United Kingdom', flag: '🇬🇧', dialCode: '+44' },
+  { code: 'RU', name: 'Russia', flag: '🇷🇺', dialCode: '+7' },
+];
+
 // New pricing structure
 type PropertyType = "apartment" | "office" | "airbnb";
 type CleaningType = "standard" | "deep";
@@ -153,6 +162,8 @@ function OrderPageContent() {
   const [apartmentNumber, setApartmentNumber] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState(COUNTRIES[0]);
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
   const [email, setEmail] = useState("");
   const [notes, setNotes] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -233,6 +244,22 @@ function OrderPageContent() {
     else if (service === "airbnb") setPropertyType("airbnb");
     else if (service === "office") setPropertyType("office");
   }, [searchParams]);
+
+  // Detect country based on phone number
+  useEffect(() => {
+    if (phone.startsWith('+')) {
+      const country = COUNTRIES.find(c => phone.startsWith(c.dialCode));
+      if (country) {
+        setSelectedCountry(country);
+      }
+    }
+  }, [phone]);
+
+  const selectCountry = (country: typeof COUNTRIES[0]) => {
+    setSelectedCountry(country);
+    setPhone('');
+    setShowCountryDropdown(false);
+  };
 
   // Calculate base price
   const basePrice = useMemo(() => {
@@ -501,13 +528,57 @@ function OrderPageContent() {
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-text/70 mb-2">Phone number</label>
-                      <input
-                        type="tel"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        placeholder="+48 123 456 789"
-                        className="w-full px-4 py-3 rounded-xl border border-blue-100 bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                      />
+                      <div className="relative">
+                        <div className="flex">
+                          {/* Country Selector */}
+                          <div className="relative">
+                            <button
+                              type="button"
+                              onClick={() => setShowCountryDropdown(!showCountryDropdown)}
+                              className="flex items-center gap-1 px-3 py-3 rounded-l-xl border-2 border-r-0 border-blue-100 bg-blue-50/30 hover:bg-blue-50 transition-colors"
+                            >
+                              <span className="text-lg">{selectedCountry.flag}</span>
+                              <span className="text-sm font-bold text-text hidden sm:inline">{selectedCountry.dialCode}</span>
+                              <svg className="w-3 h-3 text-text/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                              </svg>
+                            </button>
+                            
+                            {showCountryDropdown && (
+                              <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-2xl shadow-xl shadow-blue-200/60 border border-blue-50 z-50 max-h-60 overflow-y-auto">
+                                {COUNTRIES.map((country) => (
+                                  <button
+                                    key={country.code}
+                                    type="button"
+                                    onClick={() => selectCountry(country)}
+                                    className={cn(
+                                      "w-full flex items-center gap-3 px-4 py-3 hover:bg-blue-50 transition-colors text-left",
+                                      selectedCountry.code === country.code && "bg-primary/5"
+                                    )}
+                                  >
+                                    <span className="text-xl">{country.flag}</span>
+                                    <span className="text-sm font-medium text-text">{country.name}</span>
+                                    <span className="text-sm text-text/50 ml-auto">{country.dialCode}</span>
+                                  </button>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                          
+                          {/* Phone Input */}
+                          <input
+                            type="tel"
+                            value={phone}
+                            onChange={(e) => {
+                              if (/^[\d+]*$/.test(e.target.value)) {
+                                setPhone(e.target.value);
+                              }
+                            }}
+                            placeholder="123 456 789"
+                            className="flex-1 px-4 py-3 rounded-r-xl border-2 border-l-0 border-blue-100 bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all min-w-0"
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
