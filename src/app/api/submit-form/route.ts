@@ -1,15 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL!;
-
 export async function POST(req: NextRequest) {
-    const body = await req.json();
+    try {
+        const body = await req.json();
 
-    await fetch(SCRIPT_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-    });
+        const SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL;
 
-    return NextResponse.json({ status: "ok" });
+        // Проверка что переменная есть
+        if (!SCRIPT_URL) {
+            return NextResponse.json({ error: "GOOGLE_SCRIPT_URL is not set" }, { status: 500 });
+        }
+
+        const res = await fetch(SCRIPT_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+        });
+
+        const data = await res.json();
+        return NextResponse.json({ status: "ok", data });
+
+    } catch (err: any) {
+        return NextResponse.json({ error: err.message }, { status: 500 });
+    }
 }

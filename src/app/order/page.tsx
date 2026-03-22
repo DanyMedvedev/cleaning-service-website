@@ -18,6 +18,14 @@ import {
   Square,
   Minus,
   Plus,
+  ArrowRight,
+  ArrowLeft,
+  Clock,
+  Calendar,
+  MapPin,
+  User,
+  Phone,
+  Mail,
 } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -308,11 +316,72 @@ function OrderPageContent() {
 
   if (isSubmitted) {
     return (
-      <main className="min-h-screen flex items-center justify-center">
-        <div className="text-center p-12">
-          <div className="text-6xl mb-6">✅</div>
-          <h2 className="text-3xl font-black text-text mb-4">Booking confirmed!</h2>
-          <p className="text-text/60 font-medium">We will contact you shortly.</p>
+      <main className="min-h-screen bg-gradient-to-br from-primary/5 via-cream to-secondary/5 flex items-center justify-center">
+        <div className="max-w-lg mx-auto text-center p-8">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            className="w-32 h-32 mx-auto mb-8 bg-accent/10 rounded-full flex items-center justify-center"
+          >
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+            >
+              <Check className="w-16 h-16 text-accent" />
+            </motion.div>
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="text-4xl md:text-5xl font-black text-text mb-4"
+            style={{ fontFamily: 'DM Serif Display, serif' }}
+          >
+            Спасибо!
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="text-xl text-text/70 font-medium mb-8"
+          >
+            Мы свяжемся с вами в ближайшее время для подтверждения записи
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="flex justify-center gap-2"
+          >
+            {[...Array(5)].map((_, i) => (
+              <motion.div
+                key={i}
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.7 + i * 0.1, type: "spring" }}
+                className="w-3 h-3 bg-accent rounded-full"
+              />
+            ))}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="mt-12"
+          >
+            <a
+              href="/"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-2xl hover:bg-primary/90 transition-all shadow-lg shadow-blue-200/60"
+            >
+              На главную
+            </a>
+          </motion.div>
         </div>
       </main>
     );
