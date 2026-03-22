@@ -71,7 +71,6 @@ export default function ExtrasServicePage() {
         {/* Hero Section */}
         <div className="pt-20 relative h-[500px]">
           <img 
-            src="/images/deep-cleaning-card.png" 
             src="/images/additional-services.png"
             alt="Дополнительные услуги"
             className="absolute inset-0 w-full h-full object-cover blur-sm"
