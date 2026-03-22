@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Globe, User, ChevronDown, Sparkles, Home, Building2, Square, Phone } from 'lucide-react';
+import { Globe, User, ChevronDown, Sparkles, Home, Building2, Square, Phone, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from '@/lib/i18n';
 
@@ -89,6 +89,18 @@ export default function Navbar() {
               <Phone className="w-4 h-4 text-primary" />
               <span className="hidden md:inline">
                 +48 731 751 255
+              </span>
+            </a>
+
+            <a
+              href="https://wa.me/48731751255?text=Здравствуйте! Хочу заказать уборку."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 md:gap-2 px-2 md:px-3 py-1.5 rounded-full bg-green-500 hover:bg-green-600 transition-colors"
+            >
+              <MessageCircle className="w-4 h-4 text-white" />
+              <span className="text-white text-xs md:text-sm font-medium hidden md:inline">
+                WhatsApp
               </span>
             </a>
           </div>

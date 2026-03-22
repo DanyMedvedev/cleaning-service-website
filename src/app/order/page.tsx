@@ -18,14 +18,7 @@ import {
   Square,
   Minus,
   Plus,
-  ArrowRight,
-  ArrowLeft,
-  Clock,
-  Calendar,
-  MapPin,
-  User,
-  Phone,
-  Mail,
+  MessageCircle,
 } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -164,9 +157,7 @@ function OrderPageContent() {
   const [phone, setPhone] = useState("");
   const [selectedCountry, setSelectedCountry] = useState(COUNTRIES[0]);
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
-  const [email, setEmail] = useState("");
   const [notes, setNotes] = useState("");
-  const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -327,15 +318,9 @@ function OrderPageContent() {
           balcony:     selectedExtras.balcony > 0,
           visitDate:   selectedDate.toISOString().split("T")[0],
           visitTime:   selectedTime,
-          tsaddress:   `${street}, ${houseNumber}${apartmentNumber ? '/' + apartmentNumber : ''}, ${postcode}, ${city}`,
+          tsaddress:   `${city}, ${street} ${houseNumber}${apartmentNumber ? '/' + apartmentNumber : ''}, ${postcode}`,
           comment:     notes,
           price:       total,
-          city:        city,
-          street:      street,
-          postcode:    postcode,
-          houseNumber: houseNumber,
-          apartmentNumber: apartmentNumber,
-          notes:       notes,
         }),
       });
 
@@ -1219,3 +1204,5 @@ export default function OrderPage() {
     </Suspense>
   );
 }
+
+
