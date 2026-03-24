@@ -114,8 +114,8 @@ export default function ExtrasServicePage() {
                     <Check className="w-5 h-5 text-accent flex-shrink-0" />
                     <span className="text-text font-medium">{feature}</span>
                   </motion.div>
-                ))
-              )}
+                ));
+              })}
             </div>
           </div>
         </section>
