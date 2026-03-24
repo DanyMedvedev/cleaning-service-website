@@ -17,22 +17,22 @@ const languages = [
 const servicesMenu = [
   {
     id: 'apartment',
-    title: 'Уборка квартир',
+    titleKey: 'nav.apartment',
     href: '/services/apartment',
   },
   {
     id: 'airbnb',
-    title: 'Airbnb / Квартиры',
+    titleKey: 'nav.airbnb',
     href: '/services/airbnb',
   },
   {
     id: 'office',
-    title: 'Офисы',
+    titleKey: 'nav.office',
     href: '/services/office',
   },
   {
     id: 'extras',
-    title: 'Дополнительные',
+    titleKey: 'nav.extras',
     href: '/services/extras',
   },
 ];
@@ -100,7 +100,7 @@ export default function Navbar() {
             >
               <MessageCircle className="w-4 h-4 text-white" />
               <span className="text-white text-xs md:text-sm font-medium hidden md:inline">
-                WhatsApp
+                {t('nav.whatsapp')}
               </span>
             </a>
           </div>
@@ -120,7 +120,7 @@ export default function Navbar() {
                     : 'text-text'
                 }`}
               >
-                <span>{service.title}</span>
+                <span>{t(service.titleKey)}</span>
               </Link>
             ))}
           </div>

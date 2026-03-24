@@ -8,6 +8,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-montserrat)", "sans-serif"],
+        serif: ["var(--font-dm-serif)", "serif"],
+        body: ["var(--font-montserrat)", "sans-serif"],
+      },
       colors: {
         primary: "#2A9D8F",
         secondary: "#264653",

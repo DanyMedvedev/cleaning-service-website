@@ -15,39 +15,39 @@ import { useTranslation } from '@/lib/i18n';
 const services = [
   {
     id: 'apartment',
-    title: 'Regular Cleaning',
-    description: 'Perfect for routine maintenance. Includes dusting, vacuuming, mopping, and basic kitchen/bathroom cleaning.',
+    titleKey: 'services_cards.apartment.title',
+    descriptionKey: 'services_cards.apartment.description',
+    priceKey: 'services_cards.apartment.price',
+    features: ['services_cards.apartment.feature1', 'services_cards.apartment.feature2', 'services_cards.apartment.feature3'],
     icon: Home,
-    price: 'From 139 PLN',
-    features: ['Dusting all surfaces', 'Floor vacuuming & mopping', 'Kitchen & Bathroom cleaning'],
-    image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=600'
+    image: '/images/flats-cleaning.png'
   },
   {
     id: 'airbnb',
-    title: 'Deep Cleaning',
-    description: 'A thorough, intensive refresh for your home. Targets neglected areas and removes stubborn dirt.',
+    titleKey: 'services_cards.airbnb.title',
+    descriptionKey: 'services_cards.airbnb.description',
+    priceKey: 'services_cards.airbnb.price',
+    features: ['services_cards.airbnb.feature1', 'services_cards.airbnb.feature2', 'services_cards.airbnb.feature3'],
     icon: Sparkle,
-    price: 'From 249 PLN',
-    features: ['Steam cleaning carpets', 'Deep grout scrubbing', 'Inside cabinets & appliances'],
     image: '/images/deep-cleaning-card.png'
   },
   {
     id: 'extras',
-    title: 'Move-out Cleaning',
-    description: 'Ensures your old or new home is spotless. Designed to meet landlord inspection standards.',
+    titleKey: 'services_cards.extras.title',
+    descriptionKey: 'services_cards.extras.description',
+    priceKey: 'services_cards.extras.price',
+    features: ['services_cards.extras.feature1', 'services_cards.extras.feature2', 'services_cards.extras.feature3'],
     icon: Truck,
-    price: 'From 349 PLN',
-    features: ['Full disinfection', 'Inside all cupboards', 'Window washing included'],
-    image: '/images/move-out-cleaning.png'
+    image: '/images/additional-services.png'
   },
   {
     id: 'office',
-    title: 'Office Cleaning',
-    description: 'Keep your workspace productive and professional. Custom schedules for businesses of all sizes.',
+    titleKey: 'services_cards.office.title',
+    descriptionKey: 'services_cards.office.description',
+    priceKey: 'services_cards.office.price',
+    features: ['services_cards.office.feature1', 'services_cards.office.feature2', 'services_cards.office.feature3'],
     icon: Building2,
-    price: 'Custom Quote',
-    features: ['Desk & equipment cleaning', 'Common areas sanitation', 'Waste management'],
-    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=600'
+    image: '/images/office-cleaning.png'
   }
 ];
 
@@ -82,7 +82,7 @@ export default function Services() {
             viewport={{ once: true }}
             className="text-text/60 font-medium max-w-sm"
           >
-            We offer specialized solutions for every need, from one-room apartments to large commercial spaces.
+            {t('services.description')}
           </motion.p>
         </div>
 
@@ -109,25 +109,25 @@ export default function Services() {
               </div>
               <div className="p-6 flex flex-col flex-grow">
                 <h3 className="text-xl font-bold text-text mb-3 group-hover:text-primary transition-colors">
-                  {service.title}
+                  {t(service.titleKey)}
                 </h3>
                 <p className="text-sm text-text/60 font-medium leading-relaxed mb-8 flex-grow">
-                  {service.description}
+                  {t(service.descriptionKey)}
                 </p>
 
                 <ul className="space-y-3 mb-8">
                   {service.features.map((feature, idx) => (
                     <li key={idx} className="flex items-center gap-2 text-xs font-bold text-text/80">
                       <CheckCircle2 className="w-4 h-4 text-accent" />
-                      {feature}
+                      {t(feature)}
                     </li>
                   ))}
                 </ul>
 
                 <div className="pt-6 border-t border-blue-100 flex items-center justify-between">
-                  <span className="text-sm font-bold text-primary">{service.price}</span>
+                  <span className="text-sm font-bold text-primary">{t(service.priceKey)}</span>
                   <Link href={`/services/${service.id}`} className="text-xs font-black uppercase tracking-widest text-text hover:text-primary transition-colors">
-                    Details →
+                    {t('services_cards.details')} →
                   </Link>
                 </div>
               </div>

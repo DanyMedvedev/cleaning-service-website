@@ -632,12 +632,11 @@ function OrderPageContent() {
                       <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
                         2
                       </span>
-                      Apartment details
                     </h2>
 
                     {/* Number of Rooms */}
                     <div className="mb-8">
-                      <span className="font-bold text-text/80 mb-4 block">Number of rooms</span>
+                      <span className="font-bold text-text/80 mb-4 block">{t('order_form.number_of_rooms')}</span>
                       <div className="grid grid-cols-4 gap-3">
                         {[1, 2, 3, 4].map((room) => (
                           <button
@@ -653,7 +652,6 @@ function OrderPageContent() {
                             <span className={cn("block text-lg font-bold", rooms === room ? "text-primary" : "text-text")}>
                               {room}
                             </span>
-                            <span className="text-xs text-text/50">rooms</span>
                           </button>
                         ))}
                       </div>
@@ -661,7 +659,7 @@ function OrderPageContent() {
 
                     {/* Cleaning Type */}
                     <div>
-                      <span className="font-bold text-text/80 mb-4 block">Type of cleaning</span>
+                      <span className="font-bold text-text/80 mb-4 block">{t('order_form.type_of_cleaning')}</span>
                       <div className="grid grid-cols-2 gap-4">
                         <button
                           onClick={() => setCleaningType("standard")}
@@ -675,14 +673,14 @@ function OrderPageContent() {
                           <div className="flex items-center gap-2 mb-2">
                             <Check className={cn("w-5 h-5", cleaningType === "standard" ? "text-primary" : "text-text/30")} />
                             <span className={cn("font-bold text-lg", cleaningType === "standard" ? "text-primary" : "text-text")}>
-                              Standard
+                              {t('order_form.standard')}
                             </span>
                           </div>
                           <div className="text-2xl font-black text-text">
                             {PRICING.apartment.standard[rooms as keyof typeof PRICING.apartment.standard]} zł
                           </div>
                           <p className="text-xs text-text/50 mt-2">
-                            Dusting, vacuuming, mopping, kitchen & bathroom
+                            {t('order_form.standard_apartment_desc')}
                           </p>
                         </button>
                         <button
@@ -697,14 +695,14 @@ function OrderPageContent() {
                           <div className="flex items-center gap-2 mb-2">
                             <Sparkles className={cn("w-5 h-5", cleaningType === "deep" ? "text-primary" : "text-text/30")} />
                             <span className={cn("font-bold text-lg", cleaningType === "deep" ? "text-primary" : "text-text")}>
-                              Deep
+                              {t('order_form.deep')}
                             </span>
                           </div>
                           <div className="text-2xl font-black text-text">
                             {PRICING.apartment.deep[rooms as keyof typeof PRICING.apartment.deep]} zł
                           </div>
                           <p className="text-xs text-text/50 mt-2">
-                            Full kitchen, oven, fridge, bathroom tiles, baseboards
+                            {t('order_form.deep_apartment_desc')}
                           </p>
                         </button>
                       </div>
@@ -750,7 +748,7 @@ function OrderPageContent() {
 
                     {/* Cleaning Type */}
                     <div>
-                      <span className="font-bold text-text/80 mb-4 block">Type of cleaning</span>
+                      <span className="font-bold text-text/80 mb-4 block">{t('order_form.type_of_cleaning')}</span>
                       <div className="grid grid-cols-2 gap-4">
                         <button
                           onClick={() => setCleaningType("standard")}
@@ -764,14 +762,14 @@ function OrderPageContent() {
                           <div className="flex items-center gap-2 mb-2">
                             <Check className={cn("w-5 h-5", cleaningType === "standard" ? "text-primary" : "text-text/30")} />
                             <span className={cn("font-bold text-lg", cleaningType === "standard" ? "text-primary" : "text-text")}>
-                              Standard
+                              {t('order_form.standard')}
                             </span>
                           </div>
                           <div className="text-2xl font-black text-text">
                             {PRICING.office.standardRate.min}-{PRICING.office.standardRate.max} zł/m²
                           </div>
                           <p className="text-xs text-text/50 mt-2">
-                            Regular office cleaning
+                            {t('order_form.office_standard_desc')}
                           </p>
                         </button>
                         <button
@@ -786,14 +784,14 @@ function OrderPageContent() {
                           <div className="flex items-center gap-2 mb-2">
                             <Sparkles className={cn("w-5 h-5", cleaningType === "deep" ? "text-primary" : "text-text/30")} />
                             <span className={cn("font-bold text-lg", cleaningType === "deep" ? "text-primary" : "text-text")}>
-                              After renovation
+                              {t('order_form.office_deep')}
                             </span>
                           </div>
                           <div className="text-2xl font-black text-text">
                             {PRICING.office.deepRate.min}-{PRICING.office.deepRate.max} zł/m²
                           </div>
                           <p className="text-xs text-text/50 mt-2">
-                            Deep cleaning after renovation
+                            {t('order_form.office_deep_desc')}
                           </p>
                         </button>
                       </div>
@@ -808,12 +806,12 @@ function OrderPageContent() {
                       <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
                         2
                       </span>
-                      Airbnb / Apartment details
+                      {t('order_form.apartment_details')}
                     </h2>
 
                     {/* Bedroom Type */}
                     <div>
-                      <span className="font-bold text-text/80 mb-4 block">Number of rooms</span>
+                      <span className="font-bold text-text/80 mb-4 block">{t('order_form.number_of_rooms')}</span>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <button
                           onClick={() => setAirbnbType("studio")}
@@ -825,7 +823,7 @@ function OrderPageContent() {
                           )}
                         >
                           <span className={cn("block font-bold text-lg", airbnbType === "studio" ? "text-primary" : "text-text")}>
-                            Studio
+                            {t('order_form.studio')}
                           </span>
                           <div className="text-xl font-black text-text mt-2">
                             {PRICING.airbnb.studio.min}-{PRICING.airbnb.studio.max} zł
@@ -841,7 +839,7 @@ function OrderPageContent() {
                           )}
                         >
                           <span className={cn("block font-bold text-lg", airbnbType === "1bedroom" ? "text-primary" : "text-text")}>
-                            1 Bedroom
+                            t('order_form.1bedroom')
                           </span>
                           <div className="text-xl font-black text-text mt-2">
                             {PRICING.airbnb[airbnbType].min}-{PRICING.airbnb[airbnbType].max} zł
@@ -857,7 +855,7 @@ function OrderPageContent() {
                           )}
                         >
                           <span className={cn("block font-bold text-lg", airbnbType === "2bedroom" ? "text-primary" : "text-text")}>
-                            2 Bedrooms
+                            t('order_form.2bedrooms')
                           </span>
                           <div className="text-xl font-black text-text mt-2">
                             {PRICING.airbnb[airbnbType].min}-{PRICING.airbnb[airbnbType].max} zł
@@ -874,7 +872,7 @@ function OrderPageContent() {
                     <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
                       {propertyType === "apartment" ? 3 : propertyType === "office" ? 3 : 3}
                     </span>
-                    Additional services
+                    {t('order_form.additional_services')}
                   </h2>
 
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -889,7 +887,7 @@ function OrderPageContent() {
                     >
                       <ChefHat className={cn("w-6 h-6", selectedExtras.oven > 0 ? "text-primary" : "text-text/50")} />
                       <span className={cn("font-bold text-sm", selectedExtras.oven > 0 ? "text-primary" : "text-text")}>
-                        Oven
+                        {t('order_form.oven')}
                       </span>
                       <span className="text-xs font-bold text-text/50">
                         +{PRICING.extras.oven.price} zł
@@ -906,7 +904,7 @@ function OrderPageContent() {
                     >
                       <Archive className={cn("w-6 h-6", selectedExtras.fridge > 0 ? "text-primary" : "text-text/50")} />
                       <span className={cn("font-bold text-sm", selectedExtras.fridge > 0 ? "text-primary" : "text-text")}>
-                        Fridge
+                        {t('order_form.fridge')}
                       </span>
                       <span className="text-xs font-bold text-text/50">
                         +{PRICING.extras.fridge.price} zł
@@ -923,7 +921,7 @@ function OrderPageContent() {
                     >
                       <Square className={cn("w-6 h-6", selectedExtras.windows > 0 ? "text-primary" : "text-text/50")} />
                       <span className={cn("font-bold text-sm", selectedExtras.windows > 0 ? "text-primary" : "text-text")}>
-                        Windows
+                        {t('order_form.windows')}
                       </span>
                       <div className="flex items-center gap-1">
                         <button
@@ -942,7 +940,7 @@ function OrderPageContent() {
                         </button>
                       </div>
                       <span className="text-xs font-bold text-text/50">
-                        {selectedExtras.windows > 0 ? `${PRICING.extras.windows.price * selectedExtras.windows} zł` : `+${PRICING.extras.windows.price} zł/window`}
+                        {selectedExtras.windows > 0 ? `${PRICING.extras.windows.price * selectedExtras.windows} zł` : `+${PRICING.extras.windows.price} zł/${t('order_form.windows').toLowerCase()}`}
                       </span>
                     </button>
                     <button
@@ -956,7 +954,7 @@ function OrderPageContent() {
                     >
                       <Home className={cn("w-6 h-6", selectedExtras.balcony > 0 ? "text-primary" : "text-text/50")} />
                       <span className={cn("font-bold text-sm", selectedExtras.balcony > 0 ? "text-primary" : "text-text")}>
-                        Balcony
+                        {t('order_form.balcony')}
                       </span>
                       <span className="text-xs font-bold text-text/50">
                         +{PRICING.extras.balcony.price} zł
@@ -971,7 +969,7 @@ function OrderPageContent() {
                     <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
                       {propertyType === "apartment" ? 4 : propertyType === "office" ? 4 : 4}
                     </span>
-                    Choose date and time
+                    {t('order_form.choose_date')}
                   </h2>
 
                   <div className="flex items-center justify-between mb-4">
@@ -1044,12 +1042,12 @@ function OrderPageContent() {
                     <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm">
                       {propertyType === "apartment" ? 5 : propertyType === "office" ? 5 : 5}
                     </span>
-                    Address
+                    {t('order_form.address')}
                   </h2>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-text/70 mb-2">City</label>
+                      <label className="block text-sm font-medium text-text/70 mb-2">{t('order_form.city')}</label>
                       <input
                         type="text"
                         value={city}
@@ -1060,18 +1058,18 @@ function OrderPageContent() {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-text/70 mb-2">Street</label>
+                      <label className="block text-sm font-medium text-text/70 mb-2">{t('order_form.street')}</label>
                       <input
                         type="text"
                         value={street}
                         onChange={(e) => setStreet(e.target.value)}
-                        placeholder="Street name"
+                        placeholder={t('order_form.street_name')}
                         className="w-full px-4 py-3 rounded-xl border border-blue-100 bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                         suppressHydrationWarning
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-text/70 mb-2">Postcode</label>
+                      <label className="block text-sm font-medium text-text/70 mb-2">{t('order_form.postcode')}</label>
                       <input
                         type="text"
                         value={postcode}
@@ -1082,7 +1080,7 @@ function OrderPageContent() {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-text/70 mb-2">House number</label>
+                      <label className="block text-sm font-medium text-text/70 mb-2">{t('order_form.house_number')}</label>
                       <input
                         type="text"
                         value={houseNumber}
@@ -1095,7 +1093,7 @@ function OrderPageContent() {
                   </div>
 
                   <div className="mt-4">
-                    <label className="block text-sm font-medium text-text/70 mb-2">Apartment number (optional)</label>
+                    <label className="block text-sm font-medium text-text/70 mb-2">{t('order_form.apartment_number')}</label>
                     <input
                       type="text"
                       value={apartmentNumber}
@@ -1107,7 +1105,7 @@ function OrderPageContent() {
                   </div>
 
                   <div className="mt-4">
-                    <label className="block text-sm font-medium text-text/70 mb-2">Comments (optional)</label>
+                    <label className="block text-sm font-medium text-text/70 mb-2">{t('order_form.comments')}</label>
                     <textarea
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
@@ -1124,27 +1122,27 @@ function OrderPageContent() {
                   disabled={isLoading}
                   className="w-full py-4 bg-primary hover:bg-primary/90 text-white font-bold rounded-2xl transition-all shadow-lg shadow-blue-200/60 disabled:opacity-50"
                 >
-                  {isLoading ? "Sending..." : "Book Cleaning"}
+                  {isLoading ? t('order_form.sending') : t('order_form.submit_order')}
                 </button>
               </div>
 
               {/* Right column - Order Summary */}
               <div className="lg:col-span-4">
                 <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-4 md:p-8 shadow-xl shadow-blue-50/70 border border-blue-50 sticky top-32">
-                  <h2 className="text-xl font-bold text-text mb-6">Order Summary</h2>
+                  <h2 className="text-xl font-bold text-text mb-6">{t('order_form.order_summary')}</h2>
 
                   <div className="space-y-4 mb-6">
                     <div className="flex justify-between items-center pb-4 border-b border-blue-50">
                       <div>
                         <span className="font-bold text-text block">
-                          {propertyType === "apartment" && `${rooms}-room ${cleaningType} cleaning`}
+                          {propertyType === "apartment" && t(`order_form.${rooms}bedroom_cleaning`)}
                           {propertyType === "office" && `${squareMeters}m² ${cleaningType} cleaning`}
-                          {propertyType === "airbnb" && `${airbnbType} cleaning`}
+                          {propertyType === "airbnb" && t(`order_form.${airbnbType}_cleaning`)}
                         </span>
                         <span className="text-xs text-text/50">
-                          {propertyType === "apartment" && (cleaningType === "standard" ? "Standard cleaning" : "Deep cleaning")}
-                          {propertyType === "office" && (cleaningType === "standard" ? "Standard office cleaning" : "After renovation")}
-                          {propertyType === "airbnb" && "Airbnb turn-over cleaning"}
+                          {propertyType === "apartment" && (cleaningType === "standard" ? t('order_form.standard_cleaning') : t('order_form.deep_cleaning'))}
+                          {propertyType === "office" && (cleaningType === "standard" ? t('order_form.office_standard') : t('order_form.office_deep'))}
+                          {propertyType === "airbnb" && t('order_form.airbnb_turnover')}
                         </span>
                       </div>
                       <span className="font-bold text-lg text-text">{basePrice} zł</span>
@@ -1152,14 +1150,14 @@ function OrderPageContent() {
 
                     {extrasTotal > 0 && (
                       <div className="pb-4 border-b border-blue-50">
-                        <span className="font-bold text-text block mb-2">Additional services</span>
+                        <span className="font-bold text-text block mb-2">{t('order_form.additional_services')}</span>
                         <div className="space-y-1">
                           {Object.entries(selectedExtras).map(([id, qty]) => {
                             if (!qty) return null;
                             const extra = PRICING.extras[id as keyof typeof PRICING.extras];
                             return (
                               <div key={id} className="flex justify-between items-center text-sm">
-                                <span className="text-text/70">{extra?.label}</span>
+                                <span className="text-text/70">{t(`order_form.${id}`)}</span>
                                 <span className="font-bold text-text">+{extra?.price * qty} zł</span>
                               </div>
                             );
@@ -1169,7 +1167,7 @@ function OrderPageContent() {
                     )}
 
                     <div className="flex justify-between items-center pt-2">
-                      <span className="font-bold text-xl text-text">Total</span>
+                      <span className="font-bold text-xl text-text">{t('order_form.total')}</span>
                       <span className="font-black text-3xl text-primary">{total} zł</span>
                     </div>
                   </div>
@@ -1179,11 +1177,11 @@ function OrderPageContent() {
                     disabled={isLoading}
                     className="w-full py-4 bg-primary hover:bg-primary/90 text-white font-bold rounded-2xl transition-all shadow-lg shadow-blue-200/60 disabled:opacity-50"
                   >
-                    {isLoading ? "Sending..." : "Book Cleaning"}
+                    {isLoading ? t('order_form.sending') : t('order_form.submit_order')}
                   </button>
 
                   <p className="text-xs text-text/50 text-center mt-4">
-                    No prepayment required • You can cancel or reschedule
+                    {t('order_form.no_prepayment')}
                   </p>
                 </div>
               </div>

@@ -6,63 +6,34 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Check, ArrowRight, ChefHat, Archive, Square, Home } from "lucide-react";
+import { useTranslation } from "@/lib/i18n";
 
 const extras = [
   {
     id: "oven",
-    title: "Чистка духовки",
     price: "45 zł",
-    description: "Полная чистка духовки внутри и снаружи",
-    features: [
-      "Чистка внутренних поверхностей",
-      "Чистка противней и решёток",
-      "Удаление жира и нагара",
-      "Полировка стекла",
-    ],
     icon: ChefHat,
   },
   {
     id: "fridge",
-    title: "Чистка холодильника",
     price: "40 zł",
-    description: "Полная чистка холодильника внутри",
-    features: [
-      "Чистка всех полок",
-      "Чистка ящиков для овощей",
-      "Чистка дверных карманов",
-      "Удаление неприятных запахов",
-    ],
     icon: Archive,
   },
   {
     id: "windows",
-    title: "Мытьё окон",
     price: "40 zł/окно",
-    description: "Мытьё окон внутри",
-    features: [
-      "Мытьё стёкол",
-      "Чистка рам",
-      "Чистка подоконников",
-      "Удаление разводов",
-    ],
     icon: Square,
   },
   {
     id: "balcony",
-    title: "Уборка балкона",
     price: "35 zł",
-    description: "Полная уборка балкона или лоджии",
-    features: [
-      "Мытьё пола",
-      "Чистка перил",
-      "Уборка полок",
-      "Вынос мусора",
-    ],
     icon: Home,
   },
 ];
 
 export default function ExtrasServicePage() {
+  const { t } = useTranslation();
+
   return (
     <>
       <main className="min-h-screen">
@@ -72,7 +43,7 @@ export default function ExtrasServicePage() {
         <div className="pt-20 relative h-[500px]">
           <img 
             src="/images/additional-services.png"
-            alt="Дополнительные услуги"
+            alt={t('services_pages.extras.hero.title')}
             className="absolute inset-0 w-full h-full object-cover blur-sm"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
@@ -85,19 +56,19 @@ export default function ExtrasServicePage() {
               >
                 <div className="flex items-center gap-2 mb-4">
                   <Square className="w-6 h-6 text-accent" />
-                  <span className="text-accent font-bold uppercase tracking-widest text-sm">Услуги</span>
+                  <span className="text-accent font-bold uppercase tracking-widest text-sm">{t('services_pages.extras.hero.services')}</span>
                 </div>
                 <h1 className="text-5xl md:text-6xl font-black text-white mb-6">
-                  Дополнительные услуги
+                  {t('services_pages.extras.hero.title')}
                 </h1>
                 <p className="text-white/80 font-medium text-xl mb-8">
-                  Дополните основную уборку специальными услугами для полного комфорта.
+                  {t('services_pages.extras.hero.subtitle')}
                 </p>
                 <Link 
                   href="/order" 
                   className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-2xl hover:bg-primary/90 transition-all"
                 >
-                  Заказать с дополнительными услугами
+                  {t('services_pages.extras.hero.cta')}
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </motion.div>
@@ -115,16 +86,16 @@ export default function ExtrasServicePage() {
               className="text-center mb-12"
             >
               <h2 className="text-3xl md:text-4xl font-bold text-text mb-4">
-                Что входит в дополнительные услуги
+                {t('services_pages.extras.included.title')}
               </h2>
               <p className="text-text/60 max-w-2xl mx-auto">
-                Детальная уборка каждого элемента
+                {t('services_pages.extras.included.subtitle')}
               </p>
             </motion.div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
               {extras.flatMap((extra) =>
-                extra.features.map((feature, fIdx) => (
+                (t('services_pages.extras.' + extra.id + '.features') as unknown as string[]).map((feature, fIdx) => (
                   <motion.div
                     key={`${extra.id}-${fIdx}`}
                     initial={{ opacity: 0, y: 20 }}
@@ -152,14 +123,14 @@ export default function ExtrasServicePage() {
               className="text-center mb-12"
             >
               <h2 className="text-3xl md:text-4xl font-bold text-text mb-4">
-                Доступные услуги
+                {t('services_pages.extras.included.title')}
               </h2>
               <p className="text-text/60 max-w-2xl mx-auto">
-                Выберите дополнительные услуги при заказе уборки квартиры или офиса
+                {t('services_pages.extras.included.subtitle')}
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {extras.map((extra, idx) => (
                 <motion.div
                   key={extra.id}
@@ -167,81 +138,33 @@ export default function ExtrasServicePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
-                  className="bg-white rounded-3xl p-8 shadow-xl shadow-blue-50/70 border border-blue-50"
+                  className="bg-white rounded-2xl p-6 shadow-sm border border-blue-50"
                 >
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center">
-                        <extra.icon className="w-7 h-7 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-text">{extra.title}</h3>
-                        <p className="text-text/60 text-sm">{extra.description}</p>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-2xl font-black text-primary">{extra.price}</span>
-                    </div>
+                  <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mb-4">
+                    <extra.icon className="w-6 h-6 text-accent" />
                   </div>
-                  <ul className="space-y-2 mb-6">
-                    {extra.features.map((feature, fIdx) => (
-                      <li key={fIdx} className="flex items-center gap-2 text-sm text-text/80">
-                        <Check className="w-4 h-4 text-accent flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <Link 
-                    href="/order" 
-                    className="w-full py-3 border-2 border-primary text-primary font-bold rounded-xl hover:bg-primary hover:text-white transition-all block text-center"
-                  >
-                    Добавить к заказу
-                  </Link>
+                  <h3 className="text-xl font-bold text-text mb-2">
+                    {t('services_pages.extras.' + extra.id + '.title')}
+                  </h3>
+                  <p className="text-text/60 text-sm mb-4">
+                    {t('services_pages.extras.' + extra.id + '.description')}
+                  </p>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-2xl font-black text-primary">{extra.price}</span>
+                  </div>
                 </motion.div>
               ))}
             </div>
-          </div>
-        </section>
 
-        {/* Info Section */}
-        <section className="py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-background rounded-3xl p-8 md:p-12 border border-blue-50"
-            >
-              <h2 className="text-2xl font-bold text-text mb-6">
-                Как заказать дополнительные услуги?
-              </h2>
-              <div className="grid md:grid-cols-3 gap-8">
-                <div>
-                  <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary font-bold text-xl mb-4">1</div>
-                  <h3 className="font-bold text-text mb-2">Выберите услугу</h3>
-                  <p className="text-text/60 text-sm">Добавьте нужные услуги при оформлении заказа на уборку</p>
-                </div>
-                <div>
-                  <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary font-bold text-xl mb-4">2</div>
-                  <h3 className="font-bold text-text mb-2">Выберите время</h3>
-                  <p className="text-text/60 text-sm">Укажите удобную дату и время для проведения работ</p>
-                </div>
-                <div>
-                  <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary font-bold text-xl mb-4">3</div>
-                  <h3 className="font-bold text-text mb-2">Подтвердите заказ</h3>
-                  <p className="text-text/60 text-sm">Мы свяжемся с вами для подтверждения деталей</p>
-                </div>
-              </div>
-              <div className="mt-8 text-center">
-                <Link 
-                  href="/order" 
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-2xl hover:bg-primary/90 transition-all"
-                >
-                  Оформить заказ
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
-              </div>
-            </motion.div>
+            <div className="text-center mt-8">
+              <Link 
+                href="/order" 
+                className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-2xl hover:bg-primary/90 transition-all"
+              >
+                {t('services_pages.extras.hero.cta')}
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+            </div>
           </div>
         </section>
 

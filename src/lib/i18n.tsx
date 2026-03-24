@@ -25,8 +25,10 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLang] = useState('en');
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
     // Try to get saved language from localStorage
     const savedLang = localStorage.getItem('cleanly-lang');
     if (savedLang && dictionaries[savedLang]) {
@@ -59,8 +61,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     return current;
   };
 
+  // Return provider even when not mounted to ensure useTranslation works
   return (
-    <LanguageContext.Provider value={{ lang, setLang: handleSetLang, t }}>
+    <LanguageContext.Provider value={{ lang, setLang: handleSetLang, t: isMounted ? t : (key: string) => key }}>
       {children}
     </LanguageContext.Provider>
   );

@@ -6,7 +6,12 @@
     "more": "Więcej usług",
     "window_cleaning": "Mycie okien",
     "upholstery": "Tapicerka",
-    "account": "Konto"
+    "account": "Konto",
+    "apartment": "Sprzątanie mieszkań",
+    "airbnb": "Airbnb",
+    "office": "Biura",
+    "extras": "Dodatkowe",
+    "whatsapp": "WhatsApp"
   },
   "hero": {
     "title": "Usługi sprzątania w Warszawie",
@@ -33,11 +38,36 @@
   },
   "included": {
     "title": "Z czego składa się sprzątanie",
+    "subtitle": "Doświadcz różnicy profesjonalnego i dokładnego sprzątania",
     "tabs": {
       "room": "W pokoju",
       "hallway": "W przedpokoju",
       "kitchen": "Kuchnia",
       "bathroom": "Łazienka"
+    },
+    "room": {
+      "item1": "Przecieranie kurze ze wszystkich powierzchni",
+      "item2": "Odkurzanie i mycie podłogi",
+      "item3": "Czyszczenie luster",
+      "item4": "Porządkowanie rzeczy"
+    },
+    "hallway": {
+      "item1": "Układanie obuwia",
+      "item2": "Przecieranie kurze z półek",
+      "item3": "Mycie podłogi",
+      "item4": "Czyszczenie luster"
+    },
+    "kitchen": {
+      "item1": "Zmywanie naczyń",
+      "item2": "Czyszczenie blatu",
+      "item3": "Dezynfekcja zlewu",
+      "item4": "Czyszczenie lodówki na zewnątrz"
+    },
+    "bathroom": {
+      "item1": "Dezynfekcja toalety",
+      "item2": "Czyszczenie prysznica/wanny",
+      "item3": "Czyszczenie lustra i zlewu",
+      "item4": "Mycie podłogi"
     }
   },
   "faq": {
@@ -57,7 +87,63 @@
   },
   "services": {
     "title": "Profesjonalne usługi",
-    "subtitle": "Wybierz idealny plan sprzątania"
+    "subtitle": "Wybierz idealny plan sprzątania",
+    "description": "Oferujemy specjalistyczne rozwiązania na każdą potrzebę - od kawalerek po duże przestrzenie komercyjne."
+  },
+  "services_cards": {
+    "apartment": {
+      "title": "Regularne sprzątanie",
+      "description": "Idealne do regularnego utrzymania czystości. Obejmuje odkurzanie, mycie podłóg i podstawowe sprzątanie kuchni i łazienki.",
+      "price": "Od 139 PLN",
+      "feature1": "Przecieranie kurze ze wszystkich powierzchni",
+      "feature2": "Odkurzanie i mycie podłogi",
+      "feature3": "Sprzątanie kuchni i łazienki"
+    },
+    "airbnb": {
+      "title": "Generalne sprzątanie",
+      "description": "Dokładne i intensywne odświeżenie twojego domu. Dociera do zaniedbanych miejsc i usuwa uporczywy brud.",
+      "price": "Od 249 PLN",
+      "feature1": "Parnie czyszczenie dywanów",
+      "feature2": "Dokładne szorowanie fug",
+      "feature3": "Wnętrza szafek i sprzętów"
+    },
+    "extras": {
+      "title": "Dodatkowe usługi",
+      "description": "Dodatkowe usługi sprzątania dostosowane do Twoich potrzeb. Od czyszczenia lodówki po mycie okien.",
+      "price": "Do uzgodnienia",
+      "feature1": "Czyszczenie lodówki",
+      "feature2": "Mycie okien",
+      "feature3": "Wnętrza szafek"
+    },
+    "office": {
+      "title": "Sprzątanie biura",
+      "description": "Utrzymuj produktywność i profesjonalizm swojego miejsca pracy. Indywidualny grafik dla firm każdej wielkości.",
+      "price": "Indywidualna wycena",
+      "feature1": "Czyszczenie biurek i sprzętu",
+      "feature2": "Sanitacja stref wspólnych",
+      "feature3": "Zarządzanie odpadami"
+    },
+    "details": "Szczegóły"
+  },
+  "footer": {
+    "services": "Usługi",
+    "company": "Firma",
+    "contact_us": "Skontaktuj się z nami",
+    "regular_cleaning": "Regularne sprzątanie",
+    "deep_cleaning": "Generalne sprzątanie",
+    "moveout_cleaning": "Dodatkowe usługi",
+    "office_cleaning": "Sprzątanie biura",
+    "about_us": "O nas",
+    "contact": "Kontakt",
+    "faq": "FAQ",
+    "reviews": "Opinie",
+    "description": "Świadczenie wysokiej jakości usług sprzątania w Warszawie od 2024 roku. Twoje zadowolenie jest naszym priorytetem.",
+    "address": "ul. Marszałkowska 123<br />00-001 Warszawa, Polska",
+    "phone": "+48 123 456 789",
+    "email": "support@cleanapp.com",
+    "copyright": "© 2024 CleanApp. Wszystkie prawa zastrzeżone.",
+    "privacy": "Polityka prywatności",
+    "terms": "Regulamin"
   },
   "calculator": {
     "title": "Oblicz koszt sprzątania",
@@ -78,7 +164,7 @@
     "phone_placeholder": "123 456 789",
     "services_label": "Wybierz usługi",
     "submit": "Wyślij zgłoszenie",
-    "privacy": "Skontaktujemy się z Tobą w ciągu 24 godzin",
+    "privacy": "Skontaktujemy się z Tobą wkrótce",
     "errors": {
       "name_required": "Proszę wpisać imię",
       "phone_required": "Proszę wpisać numer telefonu",
@@ -191,6 +277,8 @@
   "services_pages": {
     "apartment": {
       "hero": {
+        "services": "Usługi",
+        "title": "Sprzątanie mieszkań",
         "subtitle": "Profesjonalne sprzątanie mieszkań w Warszawie. Standardowe i gruntowne sprzątanie dla komfortowego mieszkania.",
         "cta": "Zamów sprzątanie"
       },
@@ -203,26 +291,77 @@
         "standard_subtitle": "Do regularnego utrzymania czystości",
         "deep_title": "Sprzątanie gruntowne",
         "deep_subtitle": "Do dokładnego czyszczenia całego pomieszczenia",
+        "popular": "POPULARNE",
         "includes": "Co wchodzi:",
         "cta_standard": "Zamów sprzątanie standardowe",
-        "cta_deep": "Zamów sprzątanie gruntowne"
+        "cta_deep": "Zamów sprzątanie gruntowne",
+        "pricing_1room": "1-pokojowe",
+        "pricing_2room": "2-pokojowe",
+        "pricing_3room": "3-pokojowe",
+        "pricing_4room": "4-pokojowe"
       },
+      "standard": [
+        "Odkurzanie kurzu z mebli i powierzchni",
+        "Wycieranie parapetów",
+        "Czyszczenie stołów i szafek nocnych",
+        "Odkurzanie dywanów i podłóg",
+        "Mycie podłóg",
+        "Wynoszenie śmieci",
+        "Kuchnia: blaty, zlew, fronty, sprzęt zewnętrzny, kuchenka",
+        "Łazienka: toaleta, umywalka, wanna/prysznic, lustra"
+      ],
+      "deep": [
+        "Wszystko ze sprzątania standardowego",
+        "Pełne mycie kuchni (wewnątrz i na zewnątrz)",
+        "Czyszczenie piekarnika wewnątrz",
+        "Czyszczenie lodówki wewnątrz",
+        "Mycie szafek wewnątrz",
+        "Czyszczenie łazienki i kafelków",
+        "Kurz w trudno dostępnych miejscach",
+        "Listwy przypodłogowe i drzwi",
+        "Głębokie mycie podłóg"
+      ],
       "why": {
         "title": "Dlaczego nas wybierają",
         "subtitle": "Gwarantujemy jakościowe sprzątanie i indywidualne podejście do każdego klienta",
         "reasons": [
           { "title": "Doświadczeni sprzątacze", "desc": "Profesjonalni i zweryfikowani specjaliści" },
           { "title": "Jakościowa chemia", "desc": "Bezpieczne i skuteczne środki" },
-          { "title": "Gwarancja jakości", "desc": "Przerobimy za darmo, jeśli coś się nie spodoba" }
+          { "title": "Gwarancja jakości", "desc": "Przerobimy za darmo, jeśli coś się nie spodoba" },
+          { "title": "Pracujemy każdego dnia", "desc": "Od 8:00 do 20:00, bez dni wolnych" }
         ]
       }
     },
     "airbnb": {
       "hero": {
-        "subtitle": "Profesjonalne sprzątanie mieszkań Airbnb w Warszawie. Szybka zmiana między gośćmi.",
+        "services": "Usługi",
+        "title": "Sprzątanie Airbnb",
+        "subtitle": "Sprzątanie na wynajem. Szybka i jakościowa подготовка помещений для заселения гостей.",
         "cta": "Zamów sprzątanie"
       },
-      "features": {
+      "included": {
+        "title": "Co wchodzi w skład sprzątania",
+        "subtitle": "Robimy wszystko, żeby Twoi goście czuli się jak w domu"
+      },
+      "features": [
+        "Pełna dezynfekcja wszystkich powierzchni",
+        "Sprzątanie wszystkich pokoi",
+        "Zmiana pościeli",
+        "Świeże ręczniki dla gości",
+        "Przygotowanie do zameldowania gości",
+        "Sprzątanie kuchni i łazienki",
+        "Odkurzanie kurzu",
+        "Mycie podłóg"
+      ],
+      "pricing": {
+        "studio": "Studio",
+        "studio_desc": "do 30 m²",
+        "1bed": "1 sypialnia",
+        "1bed_desc": "30-50 m²",
+        "2bed": "2 sypialnie",
+        "2bed_desc": "50-80 m²"
+      },
+      "features_section": {
         "title": "Dlaczego wybrać nasze sprzątanie Airbnb",
         "fast": "Szybka zmiana",
         "fast_desc": "Sprzątamy w 2-3 godziny",
@@ -234,15 +373,105 @@
     },
     "office": {
       "hero": {
+        "services": "Usługi",
+        "title": "Sprzątanie biur",
         "subtitle": "Profesjonalne sprzątanie biur w Warszawie. Sprzątamy biura dowolnej wielkości.",
         "cta": "Zamów sprzątanie"
-      }
+      },
+      "included": {
+        "title": "Co wchodzi w skład sprzątania",
+        "subtitle": "Zadbamy o czystość Twojego miejsca pracy"
+      },
+      "features": [
+        "Sprzątanie biurek i krzeseł",
+        "Wycieranie półek i szafek",
+        "Czyszczenie komputerów i sprzętu",
+        "Mycie podłóg i dywanów",
+        "Sprzątanie kuchni i łazienki",
+        "Wynoszenie śmieci",
+        "Wycieranie drzwi i klamek",
+        "Dezynfekcja powierzchni"
+      ]
     },
     "extras": {
       "hero": {
+        "services": "Usługi",
+        "title": "Dodatkowe usługi",
         "subtitle": "Dodatkowe usługi sprzątania w Warszawie. Wybierz, czego potrzebujesz.",
         "cta": "Zamów usługę"
+      },
+      "included": {
+        "title": "Dodatkowe usługi",
+        "subtitle": "Oferujemy szeroki zakres dodatkowych usług"
+      },
+      "oven": {
+        "title": "Czyszczenie piekarnika",
+        "description": "Pełne czyszczenie piekarnika wewnątrz i na zewnątrz",
+        "features": ["Czyszczenie powierzchni wewnętrznych", "Czyszczenie blach i rusztów", "Usuwanie tłuszczu i przypaleń", "Polerowanie szkła"]
+      },
+      "fridge": {
+        "title": "Czyszczenie lodówki",
+        "description": "Pełne czyszczenie lodówki wewnątrz",
+        "features": ["Czyszczenie wszystkich półek", "Czyszczenie szuflad na warzywa", "Czyszczenie kieszeni drzwi", "Usuwanie nieprzyjemnych zapachów"]
+      },
+      "windows": {
+        "title": "Mycie okien",
+        "description": "Mycie okien wewnątrz",
+        "features": ["Mycie szyb", "Czyszczenie ram", "Czyszczenie parapetów", "Usuwanie smug"]
+      },
+      "balcony": {
+        "title": "Sprzątanie balkonu",
+        "description": "Pełne sprzątanie balkonu lub loggii",
+        "features": ["Mycie podłogi", "Czyszczenie poręczy", "Sprzątanie półek", "Wynoszenie śmieci"]
       }
     }
+  },
+  "order_form": {
+    "order_summary": "Podsumowanie zamówienia",
+    "total": "Suma",
+    "no_prepayment": "Bez przedpłaty • Możesz anulować lub przełożyć",
+    "submit_order": "Zamów sprzątanie",
+    "sending": "Wysyłanie...",
+    "studio_cleaning": "Sprzątanie studio",
+    "studio": "Studio",
+    "1bedroom": "1 sypialnia",
+    "2bedrooms": "2 sypialnie",
+    "standard_cleaning": "Sprzątanie standardowe",
+    "deep_cleaning": "Sprzątanie gruntowne",
+    "office_standard": "Standardowe sprzątanie biura",
+    "office_deep": "Po remoncie",
+    "airbnb_turnover": "Sprzątanie Airbnb między gośćmi",
+    "apartment_details": "Szczegóły mieszkania",
+    "number_of_rooms": "Liczba pokoi",
+    "choose_date": "Wybierz datę i czas",
+    "apartment_number": "Numer mieszkania (opcjonalnie)",
+    "1bedroom_cleaning": "Sprzątanie mieszkania 1-pokojowego",
+    "2bedroom_cleaning": "Sprzątanie mieszkania 2-pokojowego",
+    "3bedroom_cleaning": "Sprzątanie mieszkania 3-pokojowego",
+    "4bedroom_cleaning": "Sprzątanie mieszkania 4-pokojowego",
+    "additional_services": "Dodatkowe usługi",
+    "oven": "Czyszczenie piekarnika",
+    "fridge": "Czyszczenie lodówki",
+    "windows": "Mycie okien",
+    "balcony": "Sprzątanie balkonu",
+    "submit_order": "Zamów sprzątanie",
+    "sending": "Wysyłanie...",
+    "studio_cleaning": "Sprzątanie studio",
+    "type_of_cleaning": "Typ sprzątania",
+    "standard": "Standardowe",
+    "deep": "Gruntowne",
+    "rooms": "pokoi",
+    "standard_apartment_desc": "Odkurzanie, mycie podłóg, kuchnia i łazienka",
+    "deep_apartment_desc": "Pełna kuchnia, piekarnik, lodówka, kafelki w łazience, listwy",
+    "office_standard_desc": "Regularne sprzątanie biura",
+    "office_deep_desc": "Gruntowne sprzątanie po remoncie",
+    "address": "Adres",
+    "city": "Miasto",
+    "street": "Ulica",
+    "street_name": "Nazwa ulicy",
+    "postcode": "Kod pocztowy",
+    "house_number": "Numer domu",
+    "apartment_number": "Numer mieszkania",
+    "comments": "Komentarz (opcjonalnie)"
   }
 }

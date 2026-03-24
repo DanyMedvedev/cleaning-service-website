@@ -9,25 +9,25 @@ const tabs = [
   { 
     id: 'room', 
     label: 'In the room', 
-    items: ['Dusting all surfaces', 'Floor vacuuming & mopping', 'Mirror cleaning', 'Tidying up things'],
+    items: ['included.room.item1', 'included.room.item2', 'included.room.item3', 'included.room.item4'],
     image: '/images/in-the-room-cleaning.png'
   },
   { 
     id: 'hallway', 
     label: 'In the hallway', 
-    items: ['Shoe arrangement', 'Dusting shelves', 'Floor mopping', 'Mirror cleaning'],
+    items: ['included.hallway.item1', 'included.hallway.item2', 'included.hallway.item3', 'included.hallway.item4'],
     image: '/images/hallway-cleaning-up.png'
   },
   { 
     id: 'kitchen', 
     label: 'Kitchen', 
-    items: ['Dish washing', 'Countertop cleaning', 'Sink disinfection', 'Fridge outside cleaning'],
+    items: ['included.kitchen.item1', 'included.kitchen.item2', 'included.kitchen.item3', 'included.kitchen.item4'],
     image: '/images/kitchen-cleaning-up.png'
   },
   { 
     id: 'bathroom', 
     label: 'Bathroom', 
-    items: ['Toilet disinfection', 'Shower/Tub cleaning', 'Mirror & Sink cleaning', 'Floor mopping'],
+    items: ['included.bathroom.item1', 'included.bathroom.item2', 'included.bathroom.item3', 'included.bathroom.item4'],
     image: '/images/bathroom-cleaning.png'
   },
 ];
@@ -137,7 +137,7 @@ export default function WhatIncluded() {
             className="text-lg text-text/60 max-w-xl mx-auto"
             style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
-            Experience the difference of thorough, professional cleaning
+            {t('included.subtitle')}
           </motion.p>
         </div>
 
@@ -244,7 +244,7 @@ export default function WhatIncluded() {
                           <CheckCircle2 className="w-7 h-7 text-primary group-hover:text-white" />
                         </div>
                         <span className="font-medium text-xl text-text">
-                          {item}
+                          {t(item)}
                         </span>
                       </motion.div>
                     ))}

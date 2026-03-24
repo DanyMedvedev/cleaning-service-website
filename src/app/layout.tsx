@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
-import { Inter, DM_Serif_Display, DM_Sans } from "next/font/google";
+import { Montserrat, DM_Serif_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/lib/i18n";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-const inter = Inter({ subsets: ["latin"] });
+const montserrat = Montserrat({ 
+  subsets: ["latin"],
+  variable: "--font-montserrat"
+});
 const dmSerifDisplay = DM_Serif_Display({ 
   weight: "400",
   subsets: ["latin"],
@@ -28,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} ${dmSerifDisplay.variable} ${dmSans.variable}`}>
+      <body className={`${montserrat.className} ${dmSerifDisplay.variable} ${dmSans.variable}`}>
         <LanguageProvider>
           {children}
         </LanguageProvider>

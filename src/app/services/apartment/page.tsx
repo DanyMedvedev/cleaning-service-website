@@ -9,40 +9,40 @@ import { Check, Sparkles, Home, ArrowRight } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
 
 const standardFeatures = [
-  "Протирание пыли с мебели и поверхностей",
-  "Протирание подоконников",
-  "Уборка столов и тумбочек",
-  "Пылесос ковров и пола",
-  "Мытьё пола",
-  "Вынос мусора",
-  "Кухня: столешница, раковина, фасады, техника снаружи, плита",
-  "Ванная: унитаз, раковина, ванна/душ, зеркала",
+  "services_pages.apartment.standard.0",
+  "services_pages.apartment.standard.1",
+  "services_pages.apartment.standard.2",
+  "services_pages.apartment.standard.3",
+  "services_pages.apartment.standard.4",
+  "services_pages.apartment.standard.5",
+  "services_pages.apartment.standard.6",
+  "services_pages.apartment.standard.7",
 ];
 
 const deepFeatures = [
-  "Всё из стандартной уборки",
-  "Мытьё кухни полностью (внутри и снаружи)",
-  "Чистка духовки внутри",
-  "Чистка холодильника внутри",
-  "Мытьё шкафов внутри",
-  "Чистка ванной и плитки",
-  "Пыль в труднодоступных местах",
-  "Плинтусы и двери",
-  "Глубокая мойка пола",
+  "services_pages.apartment.deep.0",
+  "services_pages.apartment.deep.1",
+  "services_pages.apartment.deep.2",
+  "services_pages.apartment.deep.3",
+  "services_pages.apartment.deep.4",
+  "services_pages.apartment.deep.5",
+  "services_pages.apartment.deep.6",
+  "services_pages.apartment.deep.7",
+  "services_pages.apartment.deep.8",
 ];
 
 const pricing = {
   standard: [
-    { rooms: "1-комнатная", price: "170 zł" },
-    { rooms: "2-комнатная", price: "250 zł" },
-    { rooms: "3-комнатная", price: "300 zł" },
-    { rooms: "4-комнатная", price: "400 zł" },
+    { rooms: "pricing_1room", price: "170 zł" },
+    { rooms: "pricing_2room", price: "250 zł" },
+    { rooms: "pricing_3room", price: "300 zł" },
+    { rooms: "pricing_4room", price: "400 zł" },
   ],
   deep: [
-    { rooms: "1-комнатная", price: "510 zł" },
-    { rooms: "2-комнатная", price: "620 zł" },
-    { rooms: "3-комнатная", price: "770 zł" },
-    { rooms: "4-комнатная", price: "900 zł" },
+    { rooms: "pricing_1room", price: "510 zł" },
+    { rooms: "pricing_2room", price: "620 zł" },
+    { rooms: "pricing_3room", price: "770 zł" },
+    { rooms: "pricing_4room", price: "900 zł" },
   ],
 };
 
@@ -56,8 +56,8 @@ export default function ApartmentServicePage() {
         {/* Hero Section */}
         <div className="pt-20 relative h-[500px]">
           <img 
-            src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=1600" 
-            alt="Уборка квартир"
+            src="/images/flats-cleaning.png" 
+            alt={t('services_pages.apartment.hero.title')}
             className="absolute inset-0 w-full h-full object-cover blur-sm"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
@@ -70,19 +70,19 @@ export default function ApartmentServicePage() {
               >
                 <div className="flex items-center gap-2 mb-4">
                   <Home className="w-6 h-6 text-accent" />
-                  <span className="text-accent font-bold uppercase tracking-widest text-sm">Услуги</span>
+                  <span className="text-accent font-bold uppercase tracking-widest text-sm">{t('services_pages.apartment.hero.services')}</span>
                 </div>
                 <h1 className="text-5xl md:text-6xl font-black text-white mb-6">
-                  Уборка квартир
+                  {t('services_pages.apartment.hero.title')}
                 </h1>
                 <p className="text-white/80 font-medium text-xl mb-8">
-                  Профессиональная уборка квартир в Варшаве. Стандартная и генеральная уборка для комфортного проживания.
+                  {t('services_pages.apartment.hero.subtitle')}
                 </p>
                 <Link 
                   href="/order" 
                   className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-2xl hover:bg-primary/90 transition-all"
                 >
-                  Заказать уборку
+                  {t('services_pages.apartment.hero.cta')}
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </motion.div>
@@ -100,10 +100,10 @@ export default function ApartmentServicePage() {
               className="text-center mb-12"
             >
               <h2 className="text-3xl md:text-4xl font-bold text-text mb-4">
-                Что входит в уборку
+                {t('services_pages.apartment.included.title')}
               </h2>
               <p className="text-text/60 max-w-2xl mx-auto">
-                Мы делаем всё, чтобы ваш дом сиял чистотой
+                {t('services_pages.apartment.included.subtitle')}
               </p>
             </motion.div>
 
@@ -118,7 +118,7 @@ export default function ApartmentServicePage() {
                   className="bg-white rounded-2xl p-5 flex items-center gap-3 shadow-sm border border-blue-50"
                 >
                   <Check className="w-5 h-5 text-accent flex-shrink-0" />
-                  <span className="text-text font-medium">{feature}</span>
+                  <span className="text-text font-medium">{t(feature)}</span>
                 </motion.div>
               ))}
             </div>
@@ -141,24 +141,24 @@ export default function ApartmentServicePage() {
                     <Check className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-bold text-text">Стандартная уборка</h2>
-                    <p className="text-text/60">Для регулярного поддержания чистоты</p>
+                    <h2 className="text-2xl font-bold text-text">{t('services_pages.apartment.pricing.standard_title')}</h2>
+                    <p className="text-text/60">{t('services_pages.apartment.pricing.standard_subtitle')}</p>
                   </div>
                 </div>
                 <div className="space-y-4 mb-8">
                   {pricing.standard.map((item, idx) => (
                     <div key={idx} className="flex justify-between items-center py-3 border-b border-blue-50">
-                      <span className="font-medium text-text">{item.rooms}</span>
+                      <span className="font-medium text-text">{t('services_pages.apartment.pricing.' + item.rooms)}</span>
                       <span className="font-black text-2xl text-primary">{item.price}</span>
                     </div>
                   ))}
                 </div>
-                <h3 className="font-bold text-text mb-4">Что входит:</h3>
+                <h3 className="font-bold text-text mb-4">{t('services_pages.apartment.pricing.includes')}</h3>
                 <ul className="space-y-3">
                   {standardFeatures.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                      <span className="text-text/80 text-sm">{feature}</span>
+                      <span className="text-text/80 text-sm">{t(feature)}</span>
                     </li>
                   ))}
                 </ul>
@@ -166,7 +166,7 @@ export default function ApartmentServicePage() {
                   href="/order" 
                   className="mt-8 w-full py-4 bg-primary text-white font-bold rounded-2xl hover:bg-primary/90 transition-all block text-center"
                 >
-                  Заказать стандартную уборку
+                  {t('services_pages.apartment.pricing.cta_standard')}
                 </Link>
               </motion.div>
 
@@ -179,31 +179,31 @@ export default function ApartmentServicePage() {
                 className="bg-white rounded-3xl p-8 shadow-xl shadow-blue-50/70 border-2 border-primary relative overflow-hidden"
               >
                 <div className="absolute top-4 right-4 bg-accent text-white text-xs font-bold px-3 py-1 rounded-full">
-                  ПОПУЛЯРНО
+                  {t('services_pages.apartment.pricing.popular')}
                 </div>
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 bg-accent/10 rounded-2xl flex items-center justify-center">
                     <Sparkles className="w-6 h-6 text-accent" />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-bold text-text">Генеральная уборка</h2>
-                    <p className="text-text/60">Для тщательной очистки всего помещения</p>
+                    <h2 className="text-2xl font-bold text-text">{t('services_pages.apartment.pricing.deep_title')}</h2>
+                    <p className="text-text/60">{t('services_pages.apartment.pricing.deep_subtitle')}</p>
                   </div>
                 </div>
                 <div className="space-y-4 mb-8">
                   {pricing.deep.map((item, idx) => (
                     <div key={idx} className="flex justify-between items-center py-3 border-b border-blue-50">
-                      <span className="font-medium text-text">{item.rooms}</span>
+                      <span className="font-medium text-text">{t('services_pages.apartment.pricing.' + item.rooms)}</span>
                       <span className="font-black text-2xl text-accent">{item.price}</span>
                     </div>
                   ))}
                 </div>
-                <h3 className="font-bold text-text mb-4">Что входит:</h3>
+                <h3 className="font-bold text-text mb-4">{t('services_pages.apartment.pricing.includes')}</h3>
                 <ul className="space-y-3">
                   {deepFeatures.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                      <span className="text-text/80 text-sm">{feature}</span>
+                      <span className="text-text/80 text-sm">{t(feature)}</span>
                     </li>
                   ))}
                 </ul>
@@ -211,7 +211,7 @@ export default function ApartmentServicePage() {
                   href="/order" 
                   className="mt-8 w-full py-4 bg-accent text-white font-bold rounded-2xl hover:bg-accent/90 transition-all block text-center"
                 >
-                  Заказать генеральную уборку
+                  {t('services_pages.apartment.pricing.cta_deep')}
                 </Link>
               </motion.div>
             </div>
@@ -228,19 +228,19 @@ export default function ApartmentServicePage() {
               className="text-center mb-12"
             >
               <h2 className="text-3xl md:text-4xl font-bold text-text mb-4">
-                Почему выбирают нас
+                {t('services_pages.apartment.why.title')}
               </h2>
               <p className="text-text/60 max-w-2xl mx-auto">
-                Мы гарантируем качественную уборку и индивидуальный подход к каждому клиенту
+                {t('services_pages.apartment.why.subtitle')}
               </p>
             </motion.div>
 
             <div className="grid md:grid-cols-4 gap-6">
               {[
-                { title: "Опытные клинеры", desc: "Профессиональные и проверенные специалисты" },
-                { title: "Качественная химия", desc: "Безопасные и эффективные средства" },
-                { title: "Гарантия качества", desc: "Переделаем бесплатно, если что-то не понравится" },
-                { title: "Удобное время", desc: "Работаем с 8:00 до 18:00, без выходных" },
+                { title: t('services_pages.apartment.why.reasons.0.title'), desc: t('services_pages.apartment.why.reasons.0.desc') },
+                { title: t('services_pages.apartment.why.reasons.1.title'), desc: t('services_pages.apartment.why.reasons.1.desc') },
+                { title: t('services_pages.apartment.why.reasons.2.title'), desc: t('services_pages.apartment.why.reasons.2.desc') },
+                { title: t('services_pages.apartment.why.reasons.3.title'), desc: t('services_pages.apartment.why.reasons.3.desc') },
               ].map((item, idx) => (
                 <motion.div
                   key={idx}

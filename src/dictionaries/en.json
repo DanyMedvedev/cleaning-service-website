@@ -6,7 +6,12 @@
     "more": "More services",
     "window_cleaning": "Window cleaning",
     "upholstery": "Upholstery",
-    "account": "Account"
+    "account": "Account",
+    "apartment": "Apartment Cleaning",
+    "airbnb": "Airbnb",
+    "office": "Offices",
+    "extras": "Additional",
+    "whatsapp": "WhatsApp"
   },
   "hero": {
     "title": "Cleaning services in Warsaw",
@@ -33,11 +38,36 @@
   },
   "included": {
     "title": "What cleaning consists of",
+    "subtitle": "Experience the difference of thorough, professional cleaning",
     "tabs": {
       "room": "In the room",
       "hallway": "In the hallway",
       "kitchen": "Kitchen",
       "bathroom": "Bathroom"
+    },
+    "room": {
+      "item1": "Dusting all surfaces",
+      "item2": "Floor vacuuming & mopping",
+      "item3": "Mirror cleaning",
+      "item4": "Tidying up things"
+    },
+    "hallway": {
+      "item1": "Shoe arrangement",
+      "item2": "Dusting shelves",
+      "item3": "Floor mopping",
+      "item4": "Mirror cleaning"
+    },
+    "kitchen": {
+      "item1": "Dish washing",
+      "item2": "Countertop cleaning",
+      "item3": "Sink disinfection",
+      "item4": "Fridge outside cleaning"
+    },
+    "bathroom": {
+      "item1": "Toilet disinfection",
+      "item2": "Shower/Tub cleaning",
+      "item3": "Mirror & Sink cleaning",
+      "item4": "Floor mopping"
     }
   },
   "faq": {
@@ -57,7 +87,63 @@
   },
   "services": {
     "title": "Professional Services",
-    "subtitle": "Choose the perfect Cleaning Plan"
+    "subtitle": "Choose the perfect Cleaning Plan",
+    "description": "We offer specialized solutions for every need, from one-room apartments to large commercial spaces."
+  },
+  "services_cards": {
+    "apartment": {
+      "title": "Regular Cleaning",
+      "description": "Perfect for routine maintenance. Includes dusting, vacuuming, mopping, and basic kitchen/bathroom cleaning.",
+      "price": "From 139 PLN",
+      "feature1": "Dusting all surfaces",
+      "feature2": "Floor vacuuming & mopping",
+      "feature3": "Kitchen & Bathroom cleaning"
+    },
+    "airbnb": {
+      "title": "Deep Cleaning",
+      "description": "A thorough, intensive refresh for your home. Targets neglected areas and removes stubborn dirt.",
+      "price": "From 249 PLN",
+      "feature1": "Steam cleaning carpets",
+      "feature2": "Deep grout scrubbing",
+      "feature3": "Inside cabinets & appliances"
+    },
+    "extras": {
+      "title": "Additional Services",
+      "description": "Extra cleaning services tailored to your needs. From fridge cleaning to window washing.",
+      "price": "Negotiable",
+      "feature1": "Refrigerator cleaning",
+      "feature2": "Window washing",
+      "feature3": "Interior cabinet cleaning"
+    },
+    "office": {
+      "title": "Office Cleaning",
+      "description": "Keep your workspace productive and professional. Custom schedules for businesses of all sizes.",
+      "price": "Custom Quote",
+      "feature1": "Desk & equipment cleaning",
+      "feature2": "Common areas sanitation",
+      "feature3": "Waste management"
+    },
+    "details": "Details"
+  },
+  "footer": {
+    "services": "Services",
+    "company": "Company",
+    "contact_us": "Contact Us",
+    "regular_cleaning": "Regular Cleaning",
+    "deep_cleaning": "Deep Cleaning",
+    "moveout_cleaning": "Additional Services",
+    "office_cleaning": "Office Cleaning",
+    "about_us": "About Us",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "reviews": "Reviews",
+    "description": "Providing top-quality cleaning services in Warsaw since 2024. Your satisfaction is our priority.",
+    "address": "ul. Marszałkowska 123<br />00-001 Warsaw, Poland",
+    "phone": "+48 123 456 789",
+    "email": "support@cleanapp.com",
+    "copyright": "© 2024 CleanApp. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
   },
   "calculator": {
     "title": "Calculate the Cleaning Cost",
@@ -78,7 +164,7 @@
     "phone_placeholder": "123 456 789",
     "services_label": "Select Services",
     "submit": "Send Request",
-    "privacy": "We will contact you within 24 hours",
+    "privacy": "We will contact you shortly",
     "errors": {
       "name_required": "Please enter your name",
       "phone_required": "Please enter your phone number",
@@ -164,6 +250,8 @@
   "services_pages": {
     "apartment": {
       "hero": {
+        "services": "Services",
+        "title": "Apartment Cleaning",
         "subtitle": "Professional apartment cleaning in Warsaw. Standard and deep cleaning for comfortable living.",
         "cta": "Order cleaning"
       },
@@ -176,26 +264,77 @@
         "standard_subtitle": "For regular maintenance",
         "deep_title": "Deep Cleaning",
         "deep_subtitle": "For thorough cleaning of the entire premises",
+        "popular": "POPULAR",
         "includes": "What's included:",
         "cta_standard": "Order standard cleaning",
-        "cta_deep": "Order deep cleaning"
+        "cta_deep": "Order deep cleaning",
+        "pricing_1room": "1-room",
+        "pricing_2room": "2-room",
+        "pricing_3room": "3-room",
+        "pricing_4room": "4-room"
       },
+      "standard": [
+        "Dusting furniture and surfaces",
+        "Wiping window sills",
+        "Cleaning tables and nightstands",
+        "Vacuuming carpets and floors",
+        "Mopping floors",
+        "Taking out trash",
+        "Kitchen: countertop, sink, fronts, appliances exterior, stove",
+        "Bathroom: toilet, sink, bathtub/shower, mirrors"
+      ],
+      "deep": [
+        "Everything from standard cleaning",
+        "Full kitchen cleaning (inside and out)",
+        "Oven cleaning inside",
+        "Refrigerator cleaning inside",
+        "Cabinet cleaning inside",
+        "Bathroom and tile cleaning",
+        "Dust in hard-to-reach places",
+        "Baseboards and doors",
+        "Deep floor washing"
+      ],
       "why": {
         "title": "Why choose us",
         "subtitle": "We guarantee quality cleaning and individual approach to each client",
         "reasons": [
           { "title": "Experienced cleaners", "desc": "Professional and vetted specialists" },
           { "title": "Quality chemistry", "desc": "Safe and effective products" },
-          { "title": "Quality guarantee", "desc": "We'll redo for free if something doesn't please" }
+          { "title": "Quality guarantee", "desc": "We'll redo for free if something doesn't please" },
+          { "title": "We work every day", "desc": "From 8:00 to 20:00, no days off" }
         ]
       }
     },
     "airbnb": {
       "hero": {
-        "subtitle": "Professional cleaning for Airbnb apartments in Warsaw. Fast turnover between guests.",
+        "services": "Services",
+        "title": "Airbnb Cleaning",
+        "subtitle": "Cleaning for rental. Fast and quality preparation of premises for guest check-in.",
         "cta": "Order cleaning"
       },
-      "features": {
+      "included": {
+        "title": "What's included in cleaning",
+        "subtitle": "We do everything so your guests feel at home"
+      },
+      "features": [
+        "Full disinfection of all surfaces",
+        "Cleaning all rooms",
+        "Changing bed linens",
+        "Fresh towels for guests",
+        "Preparing for guest check-in",
+        "Kitchen and bathroom cleaning",
+        "Dusting",
+        "Mopping floors"
+      ],
+      "pricing": {
+        "studio": "Studio",
+        "studio_desc": "up to 30 m²",
+        "1bed": "1 bedroom",
+        "1bed_desc": "30-50 m²",
+        "2bed": "2 bedrooms",
+        "2bed_desc": "50-80 m²"
+      },
+      "features_section": {
         "title": "Why choose our Airbnb cleaning",
         "fast": "Fast turnover",
         "fast_desc": "We clean within 2-3 hours",
@@ -207,15 +346,105 @@
     },
     "office": {
       "hero": {
+        "services": "Services",
+        "title": "Office Cleaning",
         "subtitle": "Professional office cleaning in Warsaw. We clean offices of any size.",
         "cta": "Order cleaning"
-      }
+      },
+      "included": {
+        "title": "What's included in cleaning",
+        "subtitle": "We will ensure cleanliness of your workspace"
+      },
+      "features": [
+        "Cleaning desks and chairs",
+        "Wiping shelves and cabinets",
+        "Cleaning computers and equipment",
+        "Mopping floors and carpets",
+        "Cleaning kitchen and bathroom",
+        "Taking out trash",
+        "Wiping doors and handles",
+        "Surface disinfection"
+      ]
     },
     "extras": {
       "hero": {
+        "services": "Services",
+        "title": "Additional Services",
         "subtitle": "Additional cleaning services in Warsaw. Choose what you need.",
         "cta": "Order service"
+      },
+      "included": {
+        "title": "Additional Services",
+        "subtitle": "We offer a wide range of additional services"
+      },
+      "oven": {
+        "title": "Oven Cleaning",
+        "description": "Full oven cleaning inside and out",
+        "features": ["Cleaning interior surfaces", "Cleaning trays and grates", "Removing grease and burnt residue", "Polishing glass"]
+      },
+      "fridge": {
+        "title": "Refrigerator Cleaning",
+        "description": "Full refrigerator cleaning inside",
+        "features": ["Cleaning all shelves", "Cleaning vegetable drawers", "Cleaning door pockets", "Removing odors"]
+      },
+      "windows": {
+        "title": "Window Cleaning",
+        "description": "Interior window cleaning",
+        "features": ["Cleaning glass", "Cleaning frames", "Cleaning window sills", "Removing streaks"]
+      },
+      "balcony": {
+        "title": "Balcony Cleaning",
+        "description": "Full balcony or loggia cleaning",
+        "features": ["Floor washing", "Cleaning railings", "Shelf cleaning", "Taking out trash"]
       }
     }
+  },
+  "order_form": {
+    "order_summary": "Order Summary",
+    "total": "Total",
+    "no_prepayment": "No prepayment required • You can cancel or reschedule",
+    "number_of_rooms": "Number of rooms",
+    "submit_order": "Book Cleaning",
+    "sending": "Sending...",
+    "studio_cleaning": "Studio cleaning",
+    "studio": "Studio",
+    "1bedroom": "1 Bedroom",
+    "2bedrooms": "2 Bedrooms",
+    "standard_cleaning": "Standard Cleaning",
+    "deep_cleaning": "Deep Cleaning",
+    "office_standard": "Standard office cleaning",
+    "office_deep": "After renovation",
+    "airbnb_turnover": "Airbnb turn-over cleaning",
+    "apartment_details": "Apartment details",
+    "choose_date": "Choose date and time",
+    "apartment_number": "Apartment number (optional)",
+    "1bedroom_cleaning": "1 Bedroom apartment cleaning",
+    "2bedroom_cleaning": "2 Bedroom apartment cleaning",
+    "3bedroom_cleaning": "3 Bedroom apartment cleaning",
+    "4bedroom_cleaning": "4 Bedroom apartment cleaning",
+    "additional_services": "Additional services",
+    "oven": "Oven cleaning",
+    "fridge": "Fridge cleaning",
+    "windows": "Window cleaning",
+    "balcony": "Balcony cleaning",
+    "submit_order": "Book Cleaning",
+    "sending": "Sending...",
+    "studio_cleaning": "Studio cleaning",
+    "type_of_cleaning": "Type of cleaning",
+    "standard": "Standard",
+    "deep": "Deep",
+    "rooms": "rooms",
+    "standard_apartment_desc": "Dusting, vacuuming, mopping, kitchen & bathroom",
+    "deep_apartment_desc": "Full kitchen, oven, fridge, bathroom tiles, baseboards",
+    "office_standard_desc": "Regular office cleaning",
+    "office_deep_desc": "Deep cleaning after renovation",
+    "address": "Address",
+    "city": "City",
+    "street": "Street",
+    "street_name": "Street name",
+    "postcode": "Postcode",
+    "house_number": "House number",
+    "apartment_number": "Apartment number",
+    "comments": "Comments (optional)"
   }
 }
