@@ -11,7 +11,7 @@ type Dictionary = typeof en;
 const dictionaries: Record<string, Dictionary> = {
   en,
   pl,
-  ua: ua as Dictionary,
+  ua:
   ru,
 };
 
