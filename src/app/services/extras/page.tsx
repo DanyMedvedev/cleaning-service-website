@@ -33,6 +33,11 @@ const extras = [
 
 export default function ExtrasServicePage() {
   const { t } = useTranslation();
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  React.useEffect(() => setIsMounted(true), []);
+
+  if (!isMounted) return null;
 
   return (
     <>
@@ -94,8 +99,10 @@ export default function ExtrasServicePage() {
             </motion.div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {extras.flatMap((extra) =>
-                (t('services_pages.extras.' + extra.id + '.features') as unknown as string[]).map((feature, fIdx) => (
+              {extras.flatMap((extra) => {
+                const features = t('services_pages.extras.' + extra.id + '.features');
+                if (!Array.isArray(features)) return [];
+                return (features as string[]).map((feature, fIdx) => (
                   <motion.div
                     key={`${extra.id}-${fIdx}`}
                     initial={{ opacity: 0, y: 20 }}
