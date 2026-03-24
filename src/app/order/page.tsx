@@ -839,7 +839,7 @@ function OrderPageContent() {
                           )}
                         >
                           <span className={cn("block font-bold text-lg", airbnbType === "1bedroom" ? "text-primary" : "text-text")}>
-                            t('order_form.1bedroom')
+                            {t('order_form.1bedroom')}
                           </span>
                           <div className="text-xl font-black text-text mt-2">
                             {PRICING.airbnb[airbnbType].min}-{PRICING.airbnb[airbnbType].max} zł
@@ -855,7 +855,7 @@ function OrderPageContent() {
                           )}
                         >
                           <span className={cn("block font-bold text-lg", airbnbType === "2bedroom" ? "text-primary" : "text-text")}>
-                            t('order_form.2bedrooms')
+                            {t('order_form.2bedrooms')}
                           </span>
                           <div className="text-xl font-black text-text mt-2">
                             {PRICING.airbnb[airbnbType].min}-{PRICING.airbnb[airbnbType].max} zł
