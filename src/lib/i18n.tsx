@@ -11,7 +11,7 @@ type Dictionary = typeof en;
 const dictionaries: Record<string, Dictionary> = {
   en,
   pl,
-  ua,
+  ua: ua as Dictionary,
   ru,
 };
 
@@ -62,8 +62,10 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   };
 
   // Return provider even when not mounted to ensure useTranslation works
+  const translateFn = isMounted ? t : ((key: string) => key);
+  
   return (
-    <LanguageContext.Provider value={{ lang, setLang: handleSetLang, t: isMounted ? t : (key: string) => key }}>
+    <LanguageContext.Provider value={{ lang, setLang: handleSetLang, t: translateFn }}>
       {children}
     </LanguageContext.Provider>
   );
