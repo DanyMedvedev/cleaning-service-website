@@ -16,7 +16,11 @@
   "hero": {
     "title": "Usługi sprzątania w Warszawie",
     "subtitle": "Usługa obejmuje kuchnię, łazienkę, pokoje i przedpokój",
-    "calculate_btn": "Oblicz koszt"
+    "calculate_btn": "Oblicz koszt",
+    "feature1": "Standardowe sprzątanie mieszkania od 170 zł",
+    "feature2": "Gruntowne sprzątanie dla pełnej czystości",
+    "feature3": "Sprzątanie Airbnb dostępne",
+    "feature4": "Sprzątanie biura od 5 zł/m²"
   },
   "features": {
     "fixed_price": {
@@ -163,6 +167,16 @@
     "phone_label": "Numer telefonu",
     "phone_placeholder": "123 456 789",
     "services_label": "Wybierz usługi",
+    "services": {
+      "standard": "Sprzątanie standardowe",
+      "deep": "Sprzątanie gruntowne",
+      "fridge": "Wnętrze lodówki",
+      "oven": "Wnętrze piekarnika",
+      "cabinets": "Wnętrze szafek",
+      "windows": "Okna",
+      "ironing": "Prasowanie",
+      "balcony": "Balkon"
+    },
     "submit": "Wyślij zgłoszenie",
     "privacy": "Skontaktujemy się z Tobą wkrótce",
     "errors": {

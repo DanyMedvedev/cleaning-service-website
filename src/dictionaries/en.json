@@ -16,7 +16,11 @@
   "hero": {
     "title": "Cleaning services in Warsaw",
     "subtitle": "The service includes a kitchen, bathroom, rooms and a hallway",
-    "calculate_btn": "Calculate the cost"
+    "calculate_btn": "Calculate the cost",
+    "feature1": "Standard apartment cleaning from 170 zł",
+    "feature2": "Deep cleaning for thorough cleanliness",
+    "feature3": "Airbnb turn-over cleaning available",
+    "feature4": "Office cleaning from 5 zł/m²"
   },
   "features": {
     "fixed_price": {
@@ -163,6 +167,16 @@
     "phone_label": "Phone Number",
     "phone_placeholder": "123 456 789",
     "services_label": "Select Services",
+    "services": {
+      "standard": "Standard cleaning",
+      "deep": "Deep cleaning",
+      "fridge": "Inside Fridge",
+      "oven": "Inside Oven",
+      "cabinets": "Inside Cabinets",
+      "windows": "Windows",
+      "ironing": "Ironing",
+      "balcony": "Balcony"
+    },
     "submit": "Send Request",
     "privacy": "We will contact you shortly",
     "errors": {

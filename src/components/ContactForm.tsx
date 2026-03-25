@@ -344,7 +344,7 @@ export default function ContactForm() {
                       "text-xs font-bold text-center",
                       selectedServices.includes(service.id) ? "text-white" : "text-text"
                     )}>
-                      {service.label}
+                      {t('contact_form.services.' + service.id)}
                     </span>
                     {selectedServices.includes(service.id) && (
                       <div className="absolute top-2 right-2 w-5 h-5 bg-accent rounded-full flex items-center justify-center">

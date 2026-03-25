@@ -61,19 +61,19 @@ export default function Home() {
               >
                 <div className="flex items-center gap-3 text-white text-lg font-medium">
                   <span className="w-2 h-2 rounded-full bg-accent" />
-                  <span>Standard apartment cleaning from 170 zł</span>
+                  <span>{t('hero.feature1')}</span>
                 </div>
                 <div className="flex items-center gap-3 text-white text-lg font-medium">
                   <span className="w-2 h-2 rounded-full bg-accent" />
-                  <span>Deep cleaning for thorough cleanliness</span>
+                  <span>{t('hero.feature2')}</span>
                 </div>
                 <div className="flex items-center gap-3 text-white text-lg font-medium">
                   <span className="w-2 h-2 rounded-full bg-accent" />
-                  <span>Airbnb turn-over cleaning available</span>
+                  <span>{t('hero.feature3')}</span>
                 </div>
                 <div className="flex items-center gap-3 text-white text-lg font-medium">
                   <span className="w-2 h-2 rounded-full bg-accent" />
-                  <span>Office cleaning from 5 zł/m²</span>
+                  <span>{t('hero.feature4')}</span>
                 </div>
               </motion.div>
             </div>
