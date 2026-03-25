@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import Image from 'next/image';
 import Navbar from "@/components/Navbar";
 import ContactForm from "@/components/ContactForm";
 import Services from "@/components/Services";
@@ -22,10 +22,12 @@ export default function Home() {
       <section className="relative min-h-[110vh] -mt-24 overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
-          <img 
+          <Image 
             src="/images/HeroPhoto.png" 
-            alt="Clean modern home" 
-            className="w-full h-full object-cover blur-sm"
+            alt="CzystyDom - Profesjonalna firma sprzątająca Warszawa"
+            fill
+            className="object-cover blur-sm"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
         </div>

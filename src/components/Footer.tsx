@@ -17,10 +17,10 @@ export default function Footer() {
     {
       title: t('footer.services'),
       links: [
-        { label: t('footer.regular_cleaning'), href: '/services/apartment' },
-        { label: t('footer.deep_cleaning'), href: '/services/airbnb' },
-        { label: t('footer.moveout_cleaning'), href: '/services/extras' },
-        { label: t('footer.office_cleaning'), href: '/services/office' },
+        { label: t('footer.regular_cleaning'), href: '/sprzatanie-mieszkan-warszawa' },
+        { label: t('footer.deep_cleaning'), href: '/sprzatanie-airbnb-warszawa' },
+        { label: t('footer.moveout_cleaning'), href: '/dodatkowe-uslugi-sprzatania-warszawa' },
+        { label: t('footer.office_cleaning'), href: '/sprzatanie-biur-warszawa' },
       ],
     },
   ];

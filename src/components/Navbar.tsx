@@ -18,22 +18,22 @@ const servicesMenu = [
   {
     id: 'apartment',
     titleKey: 'nav.apartment',
-    href: '/services/apartment',
+    href: '/sprzatanie-mieszkan-warszawa',
   },
   {
     id: 'airbnb',
     titleKey: 'nav.airbnb',
-    href: '/services/airbnb',
+    href: '/sprzatanie-airbnb-warszawa',
   },
   {
     id: 'office',
     titleKey: 'nav.office',
-    href: '/services/office',
+    href: '/sprzatanie-biur-warszawa',
   },
   {
     id: 'extras',
     titleKey: 'nav.extras',
-    href: '/services/extras',
+    href: '/dodatkowe-uslugi-sprzatania-warszawa',
   },
 ];
 

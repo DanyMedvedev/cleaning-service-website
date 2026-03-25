@@ -23,7 +23,7 @@ const PRICING = {
     fridge: { label: 'Inside Fridge', price: 40, icon: Refrigerator },
     oven: { label: 'Inside Oven', price: 40, icon: Sparkles },
     cabinets: { label: 'Inside Cabinets', price: 50, icon: Layout },
-    windows: { label: 'Windows', price: 60, icon: Layout }, // Using Layout as fallback for Window
+    windows: { label: 'Windows', price: 60, icon: Layout },
     ironing: { label: 'Ironing', price: 50, icon: Wind },
     balcony: { label: 'Balcony', price: 40, icon: Trash2 },
   },
@@ -316,4 +316,3 @@ export default function Calculator() {
     </section>
   );
 }
-

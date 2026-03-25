@@ -20,7 +20,8 @@ const services = [
     priceKey: 'services_cards.apartment.price',
     features: ['services_cards.apartment.feature1', 'services_cards.apartment.feature2', 'services_cards.apartment.feature3'],
     icon: Home,
-    image: '/images/flats-cleaning.png'
+    image: '/images/flats-cleaning.png',
+    href: '/sprzatanie-mieszkan-warszawa'
   },
   {
     id: 'airbnb',
@@ -29,7 +30,8 @@ const services = [
     priceKey: 'services_cards.airbnb.price',
     features: ['services_cards.airbnb.feature1', 'services_cards.airbnb.feature2', 'services_cards.airbnb.feature3'],
     icon: Sparkle,
-    image: '/images/deep-cleaning-card.png'
+    image: '/images/deep-cleaning-card.png',
+    href: '/sprzatanie-airbnb-warszawa'
   },
   {
     id: 'extras',
@@ -38,7 +40,8 @@ const services = [
     priceKey: 'services_cards.extras.price',
     features: ['services_cards.extras.feature1', 'services_cards.extras.feature2', 'services_cards.extras.feature3'],
     icon: Truck,
-    image: '/images/additional-services.png'
+    image: '/images/additional-services.png',
+    href: '/dodatkowe-uslugi-sprzatania-warszawa'
   },
   {
     id: 'office',
@@ -47,7 +50,8 @@ const services = [
     priceKey: 'services_cards.office.price',
     features: ['services_cards.office.feature1', 'services_cards.office.feature2', 'services_cards.office.feature3'],
     icon: Building2,
-    image: '/images/office-cleaning.png'
+    image: '/images/office-cleaning.png',
+    href: '/sprzatanie-biur-warszawa'
   }
 ];
 
@@ -126,7 +130,7 @@ export default function Services() {
 
                 <div className="pt-6 border-t border-blue-100 flex items-center justify-between">
                   <span className="text-sm font-bold text-primary">{t(service.priceKey)}</span>
-                  <Link href={`/services/${service.id}`} className="text-xs font-black uppercase tracking-widest text-text hover:text-primary transition-colors">
+                  <Link href={service.href} className="text-xs font-black uppercase tracking-widest text-text hover:text-primary transition-colors">
                     {t('services_cards.details')} →
                   </Link>
                 </div>

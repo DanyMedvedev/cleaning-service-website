@@ -20,8 +20,47 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Modern Cleaning Service",
-  description: "Get your home clean and fresh with our professional services",
+  title: "CzystyDom - Profesjonalna firma sprzątająca Warszawa | Usługi sprzątania",
+  description: "Profesjonalne usługi sprzątania w Warszawie. Sprzątanie mieszkań, biur, apartamentów Airbnb. Cena od 170 zł. Zadzwoń: +48 731 751 255",
+  keywords: "firma sprzątająca Warszawa, sprzątanie mieszkań Warszawa, usługi sprzątania Warszawa, sprzątanie biur Warszawa, sprzątanie Airbnb Warszawa",
+  metadataBase: new URL('https://czystydom.online'),
+  alternates: {
+    canonical: "https://czystydom.online",
+    languages: {
+      'pl': 'https://czystydom.online',
+      'en': 'https://czystydom.online/en',
+    },
+  },
+  openGraph: {
+    title: "CzystyDom - Profesjonalna firma sprzątająca Warszawa",
+    description: "Profesjonalne usługi sprzątania w Warszawie. Sprzątanie mieszkań, biur, apartamentów Airbnb. Cena od 170 zł.",
+    url: "https://czystydom.online",
+    siteName: "CzystyDom",
+    locale: "pl_PL",
+    type: "website",
+    images: [
+      {
+        url: "/images/flats-cleaning.png",
+        width: 1200,
+        height: 630,
+        alt: "CzystyDom - Firma sprzątająca Warszawa",
+      },
+    ],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: "google-site-verification-code",
+  },
 };
 
 export default function RootLayout({

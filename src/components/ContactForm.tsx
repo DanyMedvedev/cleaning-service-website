@@ -15,7 +15,6 @@ function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-// Country codes with flags
 const COUNTRIES = [
   { code: 'PL', name: 'Poland', flag: '🇵🇱', dialCode: '+48' },
   { code: 'UA', name: 'Ukraine', flag: '🇺🇦', dialCode: '+380' },
@@ -45,7 +44,6 @@ export default function ContactForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<{ name?: string; phone?: string; services?: string }>({});
 
-  // Detect country based on phone number
   useEffect(() => {
     if (phone.startsWith('+')) {
       const country = COUNTRIES.find(c => phone.startsWith(c.dialCode));
@@ -110,13 +108,12 @@ export default function ContactForm() {
 
     } catch (err) {
       console.error("Ошибка отправки:", err);
-      setIsSubmitted(true); // всё равно показываем успех пользователю
+      setIsSubmitted(true);
     }
   };
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    // Allow only numbers and + sign
     if (/^[\d+]*$/.test(value)) {
       setPhone(value);
     }
@@ -202,7 +199,6 @@ export default function ContactForm() {
           className="bg-white/95 backdrop-blur-sm rounded-[32px] border border-blue-50 p-4 md:p-8 lg:p-10"
         >
           <form onSubmit={handleSubmit} className="space-y-8">
-            {/* Name Field */}
             <div className="space-y-3">
               <label className="text-sm font-bold text-text/80 uppercase tracking-wider flex items-center gap-2">
                 <User className="w-4 h-4 text-primary" />
@@ -238,7 +234,6 @@ export default function ContactForm() {
               )}
             </div>
 
-            {/* Phone Field */}
             <div className="space-y-3">
               <label className="text-sm font-bold text-text/80 uppercase tracking-wider flex items-center gap-2">
                 <Phone className="w-4 h-4 text-primary" />
@@ -246,7 +241,6 @@ export default function ContactForm() {
               </label>
               <div className="relative">
                 <div className="flex -mx-2">
-                  {/* Country Selector */}
                   <div className="relative flex-shrink-0">
                     <button
                       type="button"
@@ -288,7 +282,6 @@ export default function ContactForm() {
                     </AnimatePresence>
                   </div>
                   
-                  {/* Phone Input */}
                   <input
                     type="tel"
                     value={phone}
@@ -319,7 +312,6 @@ export default function ContactForm() {
               )}
             </div>
 
-            {/* Services Selection */}
             <div className="space-y-3">
               <label className="text-sm font-bold text-text/80 uppercase tracking-wider flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-primary" />
@@ -374,7 +366,6 @@ export default function ContactForm() {
               )}
             </div>
 
-            {/* Phone Button */}
             <a
               href="tel:+48731751255"
               className="w-full py-4 bg-primary/10 hover:bg-primary/20 text-primary font-bold rounded-2xl transition-all flex items-center justify-center gap-3 group text-lg"
@@ -383,7 +374,6 @@ export default function ContactForm() {
               +48 731 751 255
             </a>
 
-            {/* Submit Button */}
             <motion.button
               type="submit"
               whileHover={{ scale: 1.02 }}

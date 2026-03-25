@@ -1,9 +1,11 @@
-// SEO Metadata - Polish language with Warszawa
-// This is a Server Component - NO "use client" directive!
-export const metadata = {
+import type { Metadata } from "next";
+// @ts-ignore
+import OfficeServiceContent from "../services/office/OfficeServiceContent";
+
+export const metadata: Metadata = {
   title: "Sprzątanie biur Warszawa | Profesjonalna firma sprzątająca",
-  description: "Profesjonalne sprzątanie biur w Warszawie. Kompleksowe usługi dla biurowców i firm. Indywidualna wycena. Zadzwoń: +48 731 751 255",
-  keywords: "sprzątanie biur Warszawa, firma sprzątająca biura Warszawa, usługi sprzątania biurowców Warszawa, cleaning service office Warsaw",
+  description: "Profesjonalne sprzątanie biur w Warszawie. Kompleksowe usługi dla biurowców i firm. Indywidualna wycena.",
+  keywords: "sprzątanie biur Warszawa, firma sprzątająca biura Warszawa, usługi sprzątania biurowców Warszawa",
   alternates: {
     canonical: "https://czystydom.online/sprzatanie-biur-warszawa",
   },
@@ -16,9 +18,6 @@ export const metadata = {
     type: "website",
   },
 };
-
-// Server Component - handles metadata only
-import OfficeServiceContent from "./OfficeServiceContent";
 
 export default function OfficeServicePage() {
   return <OfficeServiceContent />;

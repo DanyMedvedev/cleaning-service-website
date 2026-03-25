@@ -29,7 +29,6 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     setIsMounted(true);
-    // Try to get saved language from localStorage
     const savedLang = localStorage.getItem('cleanly-lang');
     if (savedLang && dictionaries[savedLang]) {
       setLang(savedLang);
@@ -47,7 +46,6 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     
     for (const key of keys) {
       if (current[key] === undefined) {
-        // Fallback to English
         current = dictionaries.en;
         for (const k of keys) {
           if (current[k] === undefined) return path;
@@ -61,7 +59,6 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     return current;
   };
 
-  // Return provider even when not mounted to ensure useTranslation works
   const translateFn = isMounted ? t : ((key: string) => key);
   
   return (
