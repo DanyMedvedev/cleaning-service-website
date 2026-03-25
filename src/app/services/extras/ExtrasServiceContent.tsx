@@ -91,10 +91,7 @@ export default function ExtrasServiceContent() {
                 animate={{ opacity: 1, y: 0 }}
                 className="max-w-2xl"
               >
-                <div className="flex items-center gap-2 mb-4">
-                  <Square className="w-6 h-6 text-accent" />
-                  <span className="text-accent font-bold uppercase tracking-widest text-sm">{t('services_pages.extras.hero.services')}</span>
-                </div>
+
                 <h1 className="text-5xl md:text-6xl font-black text-white mb-6">
                   {t('services_pages.extras.hero.title')} Warszawa
                 </h1>
