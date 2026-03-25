@@ -2,7 +2,7 @@
 // This is a Server Component - NO "use client" directive!
 export const metadata = {
   title: "Sprzątanie Airbnb Warszawa | Profesjonalna firma sprzątająca",
-  description: "Profesjonalne sprzątanie mieszkań na wynajem w Warszawie. Szybka realizacja 2-3 godziny. Świeża pościel i ręczniki. Cena od 120 zł.",
+  description: "Profesjonalne sprzątanie mieszkań w Warszawie – kuchnia, łazienka, pokoje i przedpokój. Standardowe usługi już od 170 zł. Gwarantujemy dokładność i komfort w Twoim domu. 📞 Zadzwoń: +48 731 751 255",
   keywords: "sprzątanie Airbnb Warszawa, sprzątanie mieszkania na wynajem Warszawa, cleaning service Warsaw, sprzątanie apartamentów Warszawa",
   alternates: {
     canonical: "https://czystydom.online/sprzatanie-airbnb-warszawa",

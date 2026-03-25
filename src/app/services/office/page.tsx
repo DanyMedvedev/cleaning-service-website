@@ -2,7 +2,7 @@
 // This is a Server Component - NO "use client" directive!
 export const metadata = {
   title: "Sprzątanie biur Warszawa | Profesjonalna firma sprzątająca",
-  description: "Profesjonalne sprzątanie biur w Warszawie. Kompleksowe usługi dla biurowców i firm. Indywidualna wycena. Zadzwoń: +48 731 751 255",
+  description: "Profesjonalne sprzątanie mieszkań w Warszawie – kuchnia, łazienka, pokoje i przedpokój. Standardowe usługi już od 170 zł. Gwarantujemy dokładność i komfort w Twoim domu. 📞 Zadzwoń: +48 731 751 255",
   keywords: "sprzątanie biur Warszawa, firma sprzątająca biura Warszawa, usługi sprzątania biurowców Warszawa, cleaning service office Warsaw",
   alternates: {
     canonical: "https://czystydom.online/sprzatanie-biur-warszawa",

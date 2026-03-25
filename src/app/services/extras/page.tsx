@@ -2,7 +2,7 @@
 // This is a Server Component - NO "use client" directive!
 export const metadata = {
   title: "Dodatkowe usługi sprzątania Warszawa | Mycie okien, piekarnika, lodówki",
-  description: "Dodatkowe usługi sprzątania w Warszawie. Mycie okien, czyszczenie piekarnika, lodówki, sprzątanie balkonu. Profesjonalna firma sprzątająca.",
+  description: "Profesjonalne sprzątanie mieszkań w Warszawie – kuchnia, łazienka, pokoje i przedpokój. Standardowe usługi już od 170 zł. Gwarantujemy dokładność i komfort w Twoim domu. 📞 Zadzwoń: +48 731 751 255",
   keywords: "dodatkowe usługi sprzątania Warszawa, mycie okien Warszawa, czyszczenie piekarnika Warszawa, sprzątanie balkonu Warszawa",
   alternates: {
     canonical: "https://czystydom.online/dodatkowe-uslugi-sprzatania-warszawa",

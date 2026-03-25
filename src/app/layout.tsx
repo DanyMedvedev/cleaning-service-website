@@ -21,7 +21,7 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: "CzystyDom - Profesjonalna firma sprzątająca Warszawa | Usługi sprzątania",
-  description: "Profesjonalne usługi sprzątania w Warszawie. Sprzątanie mieszkań, biur, apartamentów Airbnb. Cena od 170 zł. Zadzwoń: +48 731 751 255",
+  description: "Profesjonalne sprzątanie mieszkań w Warszawie – kuchnia, łazienka, pokoje i przedpokój. Standardowe usługi już od 170 zł. Gwarantujemy dokładność i komfort w Twoim domu. 📞 Zadzwoń: +48 731 751 255",
   keywords: "firma sprzątająca Warszawa, sprzątanie mieszkań Warszawa, usługi sprzątania Warszawa, sprzątanie biur Warszawa, sprzątanie Airbnb Warszawa",
   metadataBase: new URL('https://czystydom.online'),
   alternates: {
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "CzystyDom - Profesjonalna firma sprzątająca Warszawa",
-    description: "Profesjonalne usługi sprzątania w Warszawie. Sprzątanie mieszkań, biur, apartamentów Airbnb. Cena od 170 zł.",
+    description: "Profesjonalne sprzątanie mieszkań w Warszawie – kuchnia, łazienka, pokoje i przedpokój. Standardowe usługi już od 170 zł. Gwarantujemy dokładność i komfort w Twoim domu.",
     url: "https://czystydom.online",
     siteName: "CzystyDom",
     locale: "pl_PL",
