@@ -1,15 +1,26 @@
 "use client";
 
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import Navbar from "@/components/Navbar";
 import ContactForm from "@/components/ContactForm";
-import Services from "@/components/Services";
 import Footer from "@/components/Footer";
-import Features from "@/components/Features";
-import WhatIncluded from "@/components/WhatIncluded";
-import FAQ from "@/components/FAQ";
 import { useTranslation } from "@/lib/i18n";
 import { motion } from 'framer-motion';
+
+// Lazy load components below the fold
+const Services = dynamic(() => import("@/components/Services"), { 
+  loading: () => <div className="h-96" /> 
+});
+const FAQ = dynamic(() => import("@/components/FAQ"), { 
+  loading: () => <div className="h-64" /> 
+});
+const Features = dynamic(() => import("@/components/Features"), { 
+  loading: () => <div className="h-64" /> 
+});
+const WhatIncluded = dynamic(() => import("@/components/WhatIncluded"), { 
+  loading: () => <div className="h-64" /> 
+});
 
 export default function Home() {
   const { t } = useTranslation();

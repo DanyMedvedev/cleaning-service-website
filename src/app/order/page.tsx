@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
@@ -415,10 +416,12 @@ function OrderPageContent() {
         {/* Service Info Banner */}
         {currentServiceInfo && (
           <div className="pt-20 relative h-64">
-            <img 
+            <Image 
               src={currentServiceInfo.image} 
               alt={currentServiceInfo.title}
-              className="absolute inset-0 w-full h-full object-cover"
+              fill
+              className="object-cover"
+              sizes="100vw"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30" />
             <div className="absolute inset-0 flex items-center">

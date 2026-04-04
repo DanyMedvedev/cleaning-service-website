@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from '@/lib/i18n';
 import { CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -194,10 +195,12 @@ export default function WhatIncluded() {
                     className="relative h-[300px] md:h-[400px] lg:h-[500px] rounded-[40px] overflow-hidden shadow-2xl"
                     style={{ clipPath: 'polygon(0 0, 100% 0, 100% 85%, 92% 100%, 0 100%)' }}
                   >
-                    <img 
+                    <Image 
                       src={activeTabData.image}
                       alt={activeTabData.label}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/15 to-transparent" />
                     

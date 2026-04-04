@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const galleryImages = [
@@ -70,10 +71,12 @@ export default function Gallery() {
               className={`relative rounded-3xl overflow-hidden group ${image.colSpan || ''}`}
             >
               <div className={image.colSpan ? 'h-full min-h-[300px]' : 'h-48 md:h-56'}>
-                <img 
+                <Image 
                   src={image.src} 
                   alt={image.alt}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
                 />
               </div>
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
