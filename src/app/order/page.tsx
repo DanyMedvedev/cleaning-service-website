@@ -415,7 +415,7 @@ function OrderPageContent() {
 
         {/* Service Info Banner */}
         {currentServiceInfo && (
-          <div className="pt-20 relative h-64">
+          <div className="pt-20 relative h-96">
             <Image 
               src={currentServiceInfo.image} 
               alt={currentServiceInfo.title}

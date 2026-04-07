@@ -186,9 +186,9 @@ export default function WhatIncluded() {
                   duration: 0.45, 
                   ease: [0.25, 0.46, 0.45, 0.94]
                 }}
-                className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center"
+                className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center"
               >
-                <div className="order-1 relative">
+                <div className="order-1 relative lg:col-span-7">
                   <div className="absolute -z-10 w-full h-full rounded-[40px] opacity-15 transform translate-x-4 translate-y-4 bg-primary" />
                   
                   <div
@@ -200,7 +200,7 @@ export default function WhatIncluded() {
                       alt={activeTabData.label}
                       fill
                       className="object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 60vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/15 to-transparent" />
                     
@@ -231,7 +231,7 @@ export default function WhatIncluded() {
                   </div>
                 </div>
 
-                <div className="order-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                <div className="order-2 lg:col-span-5" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                   <div className="space-y-3">
                     {activeTabData.items.map((item, index) => (
                       <motion.div

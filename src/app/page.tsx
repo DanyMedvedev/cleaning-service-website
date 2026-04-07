@@ -30,7 +30,7 @@ export default function Home() {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative min-h-[110vh] -mt-24 overflow-hidden">
+      <section className="relative min-h-[120vh] -mt-24 overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image 
